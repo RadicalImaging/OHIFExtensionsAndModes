@@ -1,68 +1,60 @@
 import { hotkeys } from '@ohif/core';
 import toolbarButtons from './toolbarButtons.js';
 import { id } from './id.js';
-import initToolGroups from './initToolGroups.js';
+import initToolGroups, { toolGroupIds } from './initToolGroups.js';
 
 const ohif = {
   layout: '@ohif/extension-default.layoutTemplateModule.viewerLayout',
   sopClassHandler: '@ohif/extension-default.sopClassHandlerModule.stack',
   hangingProtocols: '@ohif/extension-default.hangingProtocolModule.default',
+  measurements: '@ohif/extension-default.panelModule.measure',
+  thumbnailList: '@ohif/extension-default.panelModule.seriesList',
 };
 
-const tracked = {
-  measurements:
-    '@ohif/extension-measurement-tracking.panelModule.trackedMeasurements',
-  thumbnailList: '@ohif/extension-measurement-tracking.panelModule.seriesList',
-  viewport:
-    '@ohif/extension-measurement-tracking.viewportModule.cornerstone-tracked',
+const cs3d = {
+  viewport: '@ohif/extension-cornerstone.viewportModule.cornerstone',
 };
 
-const dicomsr = {
-  sopClassHandler:
-    '@ohif/extension-cornerstone-dicom-sr.sopClassHandlerModule.dicom-sr',
-  viewport: '@ohif/extension-cornerstone-dicom-sr.viewportModule.dicom-sr',
-};
-
-const dicomvideo = {
-  sopClassHandler:
-    '@ohif/extension-dicom-video.sopClassHandlerModule.dicom-video',
-  viewport: '@ohif/extension-dicom-video.viewportModule.dicom-video',
-};
-
-const dicompdf = {
-  sopClassHandler: '@ohif/extension-dicom-pdf.sopClassHandlerModule.dicom-pdf',
-  viewport: '@ohif/extension-dicom-pdf.viewportModule.dicom-pdf',
+const tmtv = {
+  hangingProtocols: '@ohif/extension-tmtv.hangingProtocolModule.ptCT',
+  petSUV: '@ohif/extension-tmtv.panelModule.petSUV',
+  ROIThresholdPanel: '@ohif/extension-tmtv.panelModule.ROIThresholdSeg',
 };
 
 const extensionDependencies = {
   // Can derive the versions at least process.env.from npm_package_version
   '@ohif/extension-default': '^3.0.0',
-  '@ohif/extension-cornerstone-3d': '^3.0.0',
-  '@ohif/extension-measurement-tracking': '^3.0.0',
-  '@ohif/extension-cornerstone-dicom-sr': '^3.0.0',
-  '@ohif/extension-dicom-pdf': '^3.0.1',
-  '@ohif/extension-dicom-video': '^3.0.1',
+  '@ohif/extension-cornerstone': '^3.0.0',
+  '@ohif/extension-tmtv': '^3.0.0',
 };
 
+let unsubscriptions = [];
 function modeFactory({ modeConfiguration }) {
   return {
     // TODO: We're using this as a route segment
     // We should not be.
     id,
-    routeName: 'themeable',
-    displayName: 'Themeable Viewer',
+    routeName: 'mpr',
+    displayName: 'Multi Planar',
     /**
      * Lifecycle hooks
      */
-    onModeEnter: ({ servicesManager, extensionManager }) => {
-      const { ToolBarService, ToolGroupService } = servicesManager.services;
+    onModeEnter: ({ servicesManager, extensionManager, commandsManager }) => {
+      const {
+        ToolBarService,
+        ToolGroupService,
+      } = servicesManager.services;
+
+      const utilityModule = extensionManager.getModuleEntry(
+        '@ohif/extension-cornerstone.utilityModule.tools'
+      );
+
+      const { toolNames, Enums } = utilityModule.exports;
 
       // Init Default and SR ToolGroups
-      initToolGroups(extensionManager, ToolGroupService);
+      initToolGroups(toolNames, Enums, ToolGroupService, commandsManager);
 
-      let unsubscribe;
-
-      const activateTool = () => {
+      const activateWindowLevel = () => {
         ToolBarService.recordInteraction({
           groupId: 'WindowLevel',
           itemId: 'WindowLevel',
@@ -71,47 +63,84 @@ function modeFactory({ modeConfiguration }) {
             {
               commandName: 'setToolActive',
               commandOptions: {
-                toolName: 'WindowLevel',
+                toolName: toolNames.WindowLevel,
+                toolGroupId: toolGroupIds.CT,
               },
-              context: 'CORNERSTONE3D',
+              context: 'CORNERSTONE',
+            },
+            {
+              commandName: 'setToolActive',
+              commandOptions: {
+                toolName: toolNames.WindowLevel,
+                toolGroupId: toolGroupIds.PT,
+              },
+              context: 'CORNERSTONE',
+            },
+            {
+              commandName: 'setToolActive',
+              commandOptions: {
+                toolName: toolNames.WindowLevel,
+                toolGroupId: toolGroupIds.Fusion,
+              },
+              context: 'CORNERSTONE',
             },
           ],
         });
-
-        // We don't need to reset the active tool whenever a viewport is getting
-        // added to the toolGroup.
-        unsubscribe();
       };
 
       // Since we only have one viewport for the basic cs3d mode and it has
       // only one hanging protocol, we can just use the first viewport
-      ({ unsubscribe } = ToolGroupService.subscribe(
+      const { unsubscribe } = ToolGroupService.subscribe(
         ToolGroupService.EVENTS.VIEWPORT_ADDED,
-        activateTool
-      ));
+        () => {
+          activateWindowLevel();
+          // For fusion toolGroup we need to add the volumeIds for the crosshairs
+          // since in the fusion viewport we don't want both PT and CT to render MIP
+          // when slabThickness is modified
+          // const matches = HangingProtocolService.getDisplaySetsMatchDetails();
 
+          // setCrosshairsConfiguration(
+          //   matches,
+          //   toolNames,
+          //   ToolGroupService,
+          //   DisplaySetService
+          // );
+
+          // setEllipticalROIConfiguration(
+          //   matches,
+          //   toolNames,
+          //   ToolGroupService,
+          //   DisplaySetService
+          // );
+        }
+      );
+
+      unsubscriptions.push(unsubscribe);
       ToolBarService.init(extensionManager);
       ToolBarService.addButtons(toolbarButtons);
       ToolBarService.createButtonSection('primary', [
         'MeasurementTools',
         'Zoom',
         'WindowLevel',
+        'Crosshairs',
         'Pan',
-        'Capture',
-        'Layout',
-        'MoreTools',
+        // 'RectangleROIStartEndThreshold',
+        // 'fusionPTColormap',
       ]);
     },
     onModeExit: ({ servicesManager }) => {
       const {
         ToolGroupService,
+        SyncGroupService,
         MeasurementService,
         ToolBarService,
       } = servicesManager.services;
 
+      unsubscriptions.forEach(unsubscribe => unsubscribe());
       ToolBarService.reset();
       MeasurementService.clearMeasurements();
       ToolGroupService.destroy();
+      SyncGroupService.destroy();
     },
     validationTags: {
       study: [],
@@ -119,13 +148,16 @@ function modeFactory({ modeConfiguration }) {
     },
     isValidMode: ({ modalities }) => {
       const modalities_list = modalities.split('\\');
+      const invalidModalities = ['SM'];
 
-      // Slide Microscopy modality not supported by basic mode yet
-      return !modalities_list.includes('SM');
+      // there should be both CT and PT modalities and the modality should not be SM
+      return (
+        !invalidModalities.some(modality => modalities_list.includes(modality))
+      );
     },
     routes: [
       {
-        path: 'longitudinal',
+        path: 'mpr',
         /*init: ({ servicesManager, extensionManager }) => {
           //defaultViewerRouteInit
         },*/
@@ -133,25 +165,12 @@ function modeFactory({ modeConfiguration }) {
           return {
             id: ohif.layout,
             props: {
-              leftPanels: [tracked.thumbnailList],
-              // TODO: Should be optional, or required to pass empty array for slots?
-              rightPanels: [tracked.measurements],
+              leftPanels: [],
+              rightPanels: [],
               viewports: [
                 {
-                  namespace: tracked.viewport,
+                  namespace: cs3d.viewport,
                   displaySetsToDisplay: [ohif.sopClassHandler],
-                },
-                {
-                  namespace: dicomsr.viewport,
-                  displaySetsToDisplay: [dicomsr.sopClassHandler],
-                },
-                {
-                  namespace: dicomvideo.viewport,
-                  displaySetsToDisplay: [dicomvideo.sopClassHandler],
-                },
-                {
-                  namespace: dicompdf.viewport,
-                  displaySetsToDisplay: [dicompdf.sopClassHandler],
                 },
               ],
             },
@@ -160,17 +179,8 @@ function modeFactory({ modeConfiguration }) {
       },
     ],
     extensions: extensionDependencies,
-    hangingProtocols: [ohif.hangingProtocols],
-    // Order is important in sop class handlers when two handlers both use
-    // the same sop class under different situations.  In that case, the more
-    // general handler needs to come last.  For this case, the dicomvideo must
-    // come first to remove video transfer syntax before ohif uses images
-    sopClassHandlers: [
-      dicomvideo.sopClassHandler,
-      ohif.sopClassHandler,
-      dicompdf.sopClassHandler,
-      dicomsr.sopClassHandler,
-    ],
+    hangingProtocols: [ohif.hangingProtocols, ],
+    sopClassHandlers: [ohif.sopClassHandler],
     hotkeys: [...hotkeys.defaults.hotkeyBindings],
   };
 }
