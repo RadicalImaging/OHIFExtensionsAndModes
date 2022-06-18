@@ -1,5 +1,5 @@
 {
-  "name": "mpr-extension",
+  "name": "@radical/mpr-extension",
   "version": "3.0.0",
   "description": "Extension to define support for basic MPR",
   "author": "Bill Wallace",

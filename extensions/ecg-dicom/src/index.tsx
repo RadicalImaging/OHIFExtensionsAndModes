@@ -57,18 +57,6 @@ export default {
   },
 
   /**
-   * ToolbarModule should provide a list of tool buttons that will be available in OHIF
-   * for Modes to consume and use in the toolbar. Each tool button is defined by
-   * {name, defaultComponent, clickHandler }. Examples include radioGroupIcons and
-   * splitButton toolButton that the default extension is providing.
-   */
-  getToolbarModule: ({
-    servicesManager,
-    commandsManager,
-    extensionManager,
-  }) => { },
-
-  /**
    * SopClassHandlerModule should provide a list of sop class handlers that will be
    * available in OHIF for Modes to consume and use to create displaySets from Series.
    * Each sop class handler is defined by a { name, sopClassUids, getDisplaySetsFromSeries}.

@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import WaveformView from './WaveformView';
+import GridPattern from './GridPattern';
 
 const convertBuffer = (dataSrc, numberOfChannels, numberOfSamples, bits, type) => {
   const ret = [];
@@ -77,10 +78,9 @@ function EcgViewport(props) {
   } = waveform;
 
   const secondsWidth = 150;
-  const itemHeight = 250;
+  const defaultItemHeight = 250;
   const pxWidth = Math.ceil(NumberOfWaveformSamples * secondsWidth / SamplingFrequency);
-  const pxHeight = NumberOfWaveformChannels * itemHeight;
-  const extraHeight = 4;
+  const extraHeight = 5;
 
   useEffect(() => {
     getChannelData(WaveformData, NumberOfWaveformChannels, NumberOfWaveformSamples, WaveformBitsAllocated, WaveformSampleInterpretation).then(res => {
@@ -88,21 +88,34 @@ function EcgViewport(props) {
     })
   }, [WaveformData])
 
-  console.log('ECG on', waveform);
-
   const groups = [];
+  const scaleRange = 4000;
+  const scale = defaultItemHeight / scaleRange;
+
+  const subProps = {...props, scale, scaleRange, secondsWidth, defaultItemHeight, pxWidth, extraHeight};
+  
+  let pxHeight = 0;
   for (let i = 0; i < NumberOfWaveformChannels; i++) {
+    const data = channelData[i];
+    if( !data ) continue;
+    const min = data.reduce( (prev, curr) => Math.min(prev,curr), 0);
+    const max = data.reduce( (prev, curr) => Math.max(prev,curr), 0);;
+    const itemHeight = (max-min)*scale*1.25;
+    pxHeight += itemHeight + extraHeight;
+    console.log("translate", pxHeight+min*scale, "pxHeight", pxHeight);
     groups.push(
-      <g key={i} transform={`translate(0,${i * (itemHeight + extraHeight) - itemHeight / 2})`}>
+        <g key={i} transform={`translate(0,${pxHeight + min*scale})`}>
         {WaveformView({
           secondsWidth, itemHeight, pxWidth,
-          data: channelData[i],
+          data, scale, min, max,
           channelDefinition: ChannelDefinitionSequence[i],
         })}
       </g>
     );
   }
 
+  subProps.pxHeight = pxHeight;
+  
   // Need to copies of the source to fix a firefox bug
   return (
     <div className="bg-primary-black w-full h-full overflow-hidden ohif-scrollbar">
@@ -114,6 +127,7 @@ function EcgViewport(props) {
         viewBox={`0 0 ${pxWidth} ${pxHeight}`}
       >
         <title>ECG</title>
+        {GridPattern(subProps)}
         {groups}
       </svg>
     </div>

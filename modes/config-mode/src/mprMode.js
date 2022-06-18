@@ -2,12 +2,12 @@ import { hotkeys } from '@ohif/core';
 import toolbarButtons from './toolbarButtons.js';
 import { id } from './id.js';
 import initToolGroups from './initToolGroups.js';
-import ConfigPoint from "config-point";
 
 const ohif = {
   layout: '@ohif/extension-default.layoutTemplateModule.viewerLayout',
   sopClassHandler: '@ohif/extension-default.sopClassHandlerModule.stack',
   hangingProtocols: '@ohif/extension-default.hangingProtocolModule.default',
+  hangingProtocolsMpr: '@ohif/extension-default.hangingProtocolModule.mpr',
 };
 
 const tracked = {
@@ -30,11 +30,6 @@ const dicomvideo = {
   viewport: '@ohif/extension-dicom-video.viewportModule.dicom-video',
 };
 
-const ecgdicom = {
-  sopClassHandler: '@radical/ecg-dicom.sopClassHandlerModule.ecg-dicom',
-  viewport: '@radical/ecg-dicom.viewportModule.ecg-dicom',
-};
-
 const dicompdf = {
   sopClassHandler: '@ohif/extension-dicom-pdf.sopClassHandlerModule.dicom-pdf',
   viewport: '@ohif/extension-dicom-pdf.viewportModule.dicom-pdf',
@@ -48,24 +43,15 @@ const extensionDependencies = {
   '@ohif/extension-cornerstone-dicom-sr': '^3.0.0',
   '@ohif/extension-dicom-pdf': '^3.0.1',
   '@ohif/extension-dicom-video': '^3.0.1',
-  '@radical/ecg-dicom': '^3.0.0',
 };
 
-
-function modeFactory() {
-  return this;
-}
-
-function bindFactory(mode) {
-  // perform any extension loads required
-  return modeFactory.bind(mode);
-}
-
-const modeData = {
+function modeFactory({ modeConfiguration }) {
+  return {
+    // TODO: We're using this as a route segment
     // We should not be.
     id,
-    routeName: 'Unspecified',
-    displayName: 'Unspecified',
+    routeName: 'mpr',
+    displayName: 'MPR',
     
     /**
      * Lifecycle hooks
@@ -138,8 +124,8 @@ const modeData = {
     isValidMode: ({ modalities }) => {
       const modalities_list = modalities.split('\\');
 
-      // Slide Microscopy modality not supported by basic mode yet
-      return !!modalities_list.filter(modality => modality !='SM').length;
+      // Slide Microscopy and ECG modality not supported by basic mode yet
+      return !modalities_list.includes('SM') && !modalities_list.includes('ECG');
     },
     routes: [
       {
@@ -171,10 +157,6 @@ const modeData = {
                   namespace: dicompdf.viewport,
                   displaySetsToDisplay: [dicompdf.sopClassHandler],
                 },
-                {
-                  namespace: ecgdicom.viewport,
-                  displaySetsToDisplay: [ecgdicom.sopClassHandler],
-                },
               ],
             },
           };
@@ -182,13 +164,12 @@ const modeData = {
       },
     ],
     extensions: extensionDependencies,
-    hangingProtocols: [ohif.hangingProtocols],
+    hangingProtocols: [ohif.hangingProtocolsMpr, ohif.hangingProtocols],
     // Order is important in sop class handlers when two handlers both use
     // the same sop class under different situations.  In that case, the more
     // general handler needs to come last.  For this case, the dicomvideo must
     // come first to remove video transfer syntax before ohif uses images
     sopClassHandlers: [
-      ecgdicom.sopClassHandler,
       dicomvideo.sopClassHandler,
       ohif.sopClassHandler,
       dicompdf.sopClassHandler,
@@ -196,11 +177,12 @@ const modeData = {
     ],
     hotkeys: [...hotkeys.defaults.hotkeyBindings],
   };
+}
 
-const mode = ConfigPoint.createConfiguration("configMode", {
-  ...modeData,
-  bindFactory,
+const mode = {
+  id,
+  modeFactory,
   extensionDependencies,
-});
+};
 
 export default mode;

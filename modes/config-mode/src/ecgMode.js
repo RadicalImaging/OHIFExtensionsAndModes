@@ -51,21 +51,13 @@ const extensionDependencies = {
   '@radical/ecg-dicom': '^3.0.0',
 };
 
-
-function modeFactory() {
-  return this;
-}
-
-function bindFactory(mode) {
-  // perform any extension loads required
-  return modeFactory.bind(mode);
-}
-
-const modeData = {
+function modeFactory({ modeConfiguration }) {
+  return {
+    // TODO: We're using this as a route segment
     // We should not be.
     id,
-    routeName: 'Unspecified',
-    displayName: 'Unspecified',
+    routeName: 'ecg',
+    displayName: 'ECG',
     
     /**
      * Lifecycle hooks
@@ -138,8 +130,8 @@ const modeData = {
     isValidMode: ({ modalities }) => {
       const modalities_list = modalities.split('\\');
 
-      // Slide Microscopy modality not supported by basic mode yet
-      return !!modalities_list.filter(modality => modality !='SM').length;
+      // Slide Microscopy and ECG modality not supported by basic mode yet
+      return modalities_list.includes('ECG');
     },
     routes: [
       {
@@ -196,11 +188,14 @@ const modeData = {
     ],
     hotkeys: [...hotkeys.defaults.hotkeyBindings],
   };
+}
 
-const mode = ConfigPoint.createConfiguration("configMode", {
-  ...modeData,
-  bindFactory,
+const mode = ConfigPoint.createConfiguration("ecgMode", {
+  id,
+  modeFactory,
   extensionDependencies,
 });
+
+
 
 export default mode;
