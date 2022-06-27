@@ -30,18 +30,15 @@ const config = {
   module: {
     rules: [
       {
-        test: /(\.jsx|\.js|\.tsx|\.ts)$/,
-        loader: 'babel-loader',
-        exclude: /(node_modules|bower_components)/,
-        resolve: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx',],
-        },
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
     ],
   },
   resolve: {
     modules: [path.resolve('./node_modules'), path.resolve('./src')],
-    extensions: ['.json', '.js', '.jsx'],
+    extensions: ['.json', '.js', '.jsx', '.tsx', '.ts'],
   },
 };
 

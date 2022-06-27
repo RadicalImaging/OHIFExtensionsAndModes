@@ -3,7 +3,7 @@ const pkg = require('../package.json');
 
 const outputFile = 'index.umd.js';
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, '../dist');
+const outputFolder = path.join(__dirname, '../public/umd', pkg.name);
 
 const config = {
   mode: 'production',
@@ -25,23 +25,47 @@ const config = {
         commonjs: 'react',
         amd: 'react',
       },
+      '@ohif/core': {
+        commonjs2: '@ohif/core',
+        commonjs: '@ohif/core',
+        amd: '@ohif/core',
+        root: '@ohif/core',
+      },
+      '@ohif/ui': {
+        commonjs2: '@ohif/ui',
+        commonjs: '@ohif/ui',
+        amd: '@ohif/ui',
+        root: '@ohif/ui',
+      },
+      '@ohif/mode-longitudinal': {
+        commonjs2: '@ohif/mode-longitudinal',
+        commonjs: '@ohif/mode-longitudinal',
+        amd: '@ohif/mode-longitudinal',
+        root: '@ohif/mode-longitudinal',
+      },
+      'config-point': {
+        commonjs2: 'config-point',
+        commonjs: 'config-point',
+        amd: 'config-point',
+        root: 'config-point',
+      },
     },
   ],
   module: {
     rules: [
       {
-        test: /(\.jsx|\.js)$/,
+        test: /(\.jsx|\.js|\.tsx|\.ts)$/,
         loader: 'babel-loader',
         exclude: /(node_modules|bower_components)/,
         resolve: {
-          extensions: ['.js', '.jsx'],
+          extensions: ['.js', '.jsx', '.ts', '.tsx',],
         },
       },
     ],
   },
   resolve: {
     modules: [path.resolve('./node_modules'), path.resolve('./src')],
-    extensions: ['.json', '.js', '.jsx'],
+    extensions: ['.json', '.js', '.jsx', '.tsx', '.ts',],
   },
 };
 
