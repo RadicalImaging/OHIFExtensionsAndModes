@@ -1,0 +1,74 @@
+.microscopyTable
+  background-color: var(--primary-background-color)
+  height: 100%
+  width: 100%
+  display: flex
+  flex-direction: column
+
+.microscopyItem
+  .rowActions
+      margin-left: -1px;
+      background-color: var(--ui-gray-darker)
+      height: 0
+      overflow: hidden
+      transition: all 0.3s ease
+      visibility: hidden
+      padding-left: 14px
+
+      .btnAction
+        background-color: transparent;
+        border: none;
+        color: var(--default-color)
+        cursor: pointer
+        line-height: 35px
+        height: 35px
+        transition: color 0.3s ease
+
+        &:hover, &:active
+          color: var(--text-primary-color)
+
+        i
+          margin-right: 4px;
+
+  &.selected
+    .rowActions
+      height: auto;
+      visibility: visible
+
+  .measurementDisplayText
+    display: inline-block;
+    margin-top: 9px;
+    padding-left: 9px;
+    width: 90px;
+    border-left: 1px solid var(--text-secondary-color);
+    color: var(--text-primary-color);
+
+.microscopyTableFooter
+  padding: 10px
+  color: #fff
+  text-align: center
+  z-index: 1
+
+  .saveBtn,.rejectBtn
+    border: 1px solid var(--ui-border-color-active)
+    border-radius: 25px
+    background-color: var(--active-color)
+    color: var(--ui-gray-dark)
+    line-height: 25px
+    padding: 0 20px
+    outline: none
+    cursor: pointer
+
+    &:hover, &:active
+      background-color: var(--ui-sky-blue)
+
+    svg
+      margin-right: 4px
+      position: relative
+      top: 2px
+
+  .rejectBtn
+    background-color: red;
+    color: white;
+    border: none;
+    margin-top: 5px;

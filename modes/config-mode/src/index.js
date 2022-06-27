@@ -1,184 +1,83 @@
-import { hotkeys } from '@ohif/core';
-import toolbarButtons from './toolbarButtons.js';
-import { id } from './id.js';
-import initToolGroups from './initToolGroups.js';
+import "./ecgMode";
+import createDerivativeMode from "./createDerivativeMode";
+import configMode from "./configMode";
 
-const ohif = {
-  layout: '@ohif/extension-default.layoutTemplateModule.viewerLayout',
-  sopClassHandler: '@ohif/extension-default.sopClassHandlerModule.stack',
-  hangingProtocols: '@ohif/extension-default.hangingProtocolModule.default',
-};
+import ConfigPoint, {loadSearchConfigPoint} from "config-point";
 
-const tracked = {
-  measurements:
-    '@ohif/extension-measurement-tracking.panelModule.trackedMeasurements',
-  thumbnailList: '@ohif/extension-measurement-tracking.panelModule.seriesList',
-  viewport:
-    '@ohif/extension-measurement-tracking.viewportModule.cornerstone-tracked',
-};
+const ConfigurableModes = ConfigPoint.createConfiguration("ConfigurableModes", {
+  modes: {
+    configOperation: "sort",
+    sortKey: "priority",
+  },
+  
+  // umdExtensions is an ordered set of extensions which can be loaded via the 
+  // script element tag as a umd extension element.
+  umdExtensions: [
+   {id: '@radical/mpr-extension', src: '/umd/@radical/mpr-extension/index.umd.js'},
+  ],
+});
 
-const dicomsr = {
-  sopClassHandler:
-    '@ohif/extension-cornerstone-dicom-sr.sopClassHandlerModule.dicom-sr',
-  viewport: '@ohif/extension-cornerstone-dicom-sr.viewportModule.dicom-sr',
-};
-
-const dicomvideo = {
-  sopClassHandler:
-    '@ohif/extension-dicom-video.sopClassHandlerModule.dicom-video',
-  viewport: '@ohif/extension-dicom-video.viewportModule.dicom-video',
-};
-
-const dicompdf = {
-  sopClassHandler: '@ohif/extension-dicom-pdf.sopClassHandlerModule.dicom-pdf',
-  viewport: '@ohif/extension-dicom-pdf.viewportModule.dicom-pdf',
-};
-
-const extensionDependencies = {
-  // Can derive the versions at least process.env.from npm_package_version
-  '@ohif/extension-default': '^3.0.0',
-  '@ohif/extension-cornerstone-3d': '^3.0.0',
-  '@ohif/extension-measurement-tracking': '^3.0.0',
-  '@ohif/extension-cornerstone-dicom-sr': '^3.0.0',
-  '@ohif/extension-dicom-pdf': '^3.0.1',
-  '@ohif/extension-dicom-video': '^3.0.1',
-};
-
-function modeFactory({ modeConfiguration }) {
-  return {
-    // TODO: We're using this as a route segment
-    // We should not be.
-    id,
-    routeName: 'themeable',
-    displayName: 'Themeable Viewer',
-    /**
-     * Lifecycle hooks
-     */
-    onModeEnter: ({ servicesManager, extensionManager }) => {
-      const { ToolBarService, ToolGroupService } = servicesManager.services;
-
-      // Init Default and SR ToolGroups
-      initToolGroups(extensionManager, ToolGroupService);
-
-      let unsubscribe;
-
-      const activateTool = () => {
-        ToolBarService.recordInteraction({
-          groupId: 'WindowLevel',
-          itemId: 'WindowLevel',
-          interactionType: 'tool',
-          commands: [
-            {
-              commandName: 'setToolActive',
-              commandOptions: {
-                toolName: 'WindowLevel',
-              },
-              context: 'CORNERSTONE3D',
-            },
-          ],
-        });
-
-        // We don't need to reset the active tool whenever a viewport is getting
-        // added to the toolGroup.
-        unsubscribe();
-      };
-
-      // Since we only have one viewport for the basic cs3d mode and it has
-      // only one hanging protocol, we can just use the first viewport
-      ({ unsubscribe } = ToolGroupService.subscribe(
-        ToolGroupService.EVENTS.VIEWPORT_ADDED,
-        activateTool
-      ));
-
-      ToolBarService.init(extensionManager);
-      ToolBarService.addButtons(toolbarButtons);
-      ToolBarService.createButtonSection('primary', [
-        'MeasurementTools',
-        'Zoom',
-        'WindowLevel',
-        'Pan',
-        'Capture',
-        'Layout',
-        'MoreTools',
-      ]);
-    },
-    onModeExit: ({ servicesManager }) => {
-      const {
-        ToolGroupService,
-        MeasurementService,
-        ToolBarService,
-      } = servicesManager.services;
-
-      ToolBarService.reset();
-      MeasurementService.clearMeasurements();
-      ToolGroupService.destroy();
-    },
-    validationTags: {
-      study: [],
-      series: [],
-    },
-    isValidMode: ({ modalities }) => {
-      const modalities_list = modalities.split('\\');
-
-      // Slide Microscopy modality not supported by basic mode yet
-      return !modalities_list.includes('SM');
-    },
-    routes: [
-      {
-        path: 'longitudinal',
-        /*init: ({ servicesManager, extensionManager }) => {
-          //defaultViewerRouteInit
-        },*/
-        layoutTemplate: ({ location, servicesManager }) => {
-          return {
-            id: ohif.layout,
-            props: {
-              leftPanels: [tracked.thumbnailList],
-              // TODO: Should be optional, or required to pass empty array for slots?
-              rightPanels: [tracked.measurements],
-              viewports: [
-                {
-                  namespace: tracked.viewport,
-                  displaySetsToDisplay: [ohif.sopClassHandler],
-                },
-                {
-                  namespace: dicomsr.viewport,
-                  displaySetsToDisplay: [dicomsr.sopClassHandler],
-                },
-                {
-                  namespace: dicomvideo.viewport,
-                  displaySetsToDisplay: [dicomvideo.sopClassHandler],
-                },
-                {
-                  namespace: dicompdf.viewport,
-                  displaySetsToDisplay: [dicompdf.sopClassHandler],
-                },
-              ],
-            },
-          };
-        },
-      },
-    ],
-    extensions: extensionDependencies,
-    hangingProtocols: [ohif.hangingProtocols],
-    // Order is important in sop class handlers when two handlers both use
-    // the same sop class under different situations.  In that case, the more
-    // general handler needs to come last.  For this case, the dicomvideo must
-    // come first to remove video transfer syntax before ohif uses images
-    sopClassHandlers: [
-      dicomvideo.sopClassHandler,
-      ohif.sopClassHandler,
-      dicompdf.sopClassHandler,
-      dicomsr.sopClassHandler,
-    ],
-    hotkeys: [...hotkeys.defaults.hotkeyBindings],
-  };
+function importModule(moduleDefn) {
+  const script = document.createElement("script");
+  script.src = moduleDefn.src;
+  document.documentElement.appendChild(script);
+  return new Promise((resolve,reject) => {
+    window.define.amd[moduleDefn.id] = {resolve,reject};
+    // TODO - add exception handler if the resolve never happens
+  })
 }
 
-const mode = {
-  id,
-  modeFactory,
-  extensionDependencies,
+/**
+ * Loads the umd extensions list
+ */
+const loadUmdExtensions = async (umdExtensions, ret = []) => {
+  window.define = function(path,child,t) {
+    console.log("amd define", path, child, t);
+    try {
+      const module = t();
+      window.define.modules[path] = module;
+      window.define.amd[path].resolve(module);
+    } catch(e) {
+      console.log("Couldn't load", e);
+      window.amd[path].reject(e);
+    }
+  }
+  window.define.amd = {};
+  window.define.modules = {};
+  for(const umd of umdExtensions) {
+    console.log("Trying to import", umd.id, umd.src);
+    ret.push((await importModule(umd)).default)
+    console.log("Imported", umd.id);
+  }
+  return ret;
+}
+
+/** Load method for dynamic loading of modes and extensions. */
+const modesFactory = async (modes, extensions) => {
+  // Load themes from the "theme" parameter on the URL before returning the modes
+  await loadSearchConfigPoint("theme", "/theme", "theme");
+
+  // TODO - iterate over the set of actual modes, and import only the required ones once.
+  // Creates a mode called configPoint-base-@ohif/mode-longitudinal
+  createDerivativeMode(await import("@ohif/mode-longitudinal"));
+
+  if( ConfigurableModes.clearDefaultModes ) modes.splice(0,modes.length);
+  
+  console.log("Trying to load umd extensions list", ConfigurableModes.umdExtensions, extensions.length);
+  await loadUmdExtensions(ConfigurableModes.umdExtensions, extensions);
+  console.log("Done waiting for extensions to load:", extensions.length);
+  console.log("Extensions after is", extensions);
+
+  const useModes = ConfigurableModes.modes.map(modeRef => {
+    // getConfig will just return an object if provided one, or will get the referenced mode value
+    const mode = ConfigPoint.getConfig(modeRef);
+    console.log("Mapping mode", mode.id);
+      return mode.bindFactory ? {...mode, modeFactory: mode.bindFactory(mode)} : mode;
+  });
+  console.log('useModes=', useModes);
+  return useModes;
 };
 
-export default mode;
+export {configMode};
+
+export default modesFactory;

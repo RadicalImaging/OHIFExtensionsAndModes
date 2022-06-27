@@ -3,7 +3,7 @@ const pkg = require('../package.json');
 
 const outputFile = 'index.umd.js';
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, '../dist/umd', pkg.name);
+const outputFolder = path.join(__dirname, '../public/umd', pkg.name);
 
 const config = {
   mode: 'production',
@@ -42,6 +42,12 @@ const config = {
         commonjs: '@ohif/mode-longitudinal',
         amd: '@ohif/mode-longitudinal',
         root: '@ohif/mode-longitudinal',
+      },
+      'config-point': {
+        commonjs2: 'config-point',
+        commonjs: 'config-point',
+        amd: 'config-point',
+        root: 'config-point',
       },
     },
   ],
