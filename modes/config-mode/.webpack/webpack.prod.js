@@ -43,6 +43,12 @@ const config = {
         amd: '@ohif/mode-longitudinal',
         root: '@ohif/mode-longitudinal',
       },
+      '@ohif/mode-tmtv': {
+        commonjs2: '@ohif/mode-tmtv',
+        commonjs: '@ohif/mode-tmtv',
+        amd: '@ohif/mode-tmtv',
+        root: '@ohif/mode-tmtv',
+      },
     },
   ],
   module: {

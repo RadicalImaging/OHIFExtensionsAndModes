@@ -21,12 +21,12 @@ const createDerivativeMode = (importedMode) => {
           _layoutTemplate: route.layoutTemplate(props),
           layoutTemplate: {
             configOperation: 'bind',
-            value: function() { return this._layoutTemplate; },
+            value: function () { return this._layoutTemplate; },
           },
         }));
-        ConfigPoint.createConfiguration(configPointBaseId, { 
-          ...parentMode, 
-          id: configPointBaseId, 
+        ConfigPoint.createConfiguration(configPointBaseId, {
+          ...parentMode,
+          id: configPointBaseId,
           routes,
         });
         console.log("Returning this with extensions for the mode", this.id, this.extensions);

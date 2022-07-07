@@ -1,5 +1,6 @@
 import { id } from './id';
 import getHangingProtocolModule from './getHangingProtocolModule.ts';
+import initialScaling from './initialScale';
 
 console.log("Loading mprExtension - should be as umd module");
 
@@ -12,6 +13,17 @@ export default {
    * You ID can be anything you want, but it should be unique.
    */
   id,
+
+  /**
+   * Register the hanging protocol handlers
+   * @param param0 
+   */
+  preRegistration: ({
+    servicesManager,
+  }) => {
+    const { HangingProtocolService } = servicesManager.services;
+    HangingProtocolService.addCustomViewportSetting('initialScale', "Set initial scaling", initialScaling);
+  },
 
   /**
    * HangingProtocolModule should provide a list of hanging protocols that will be
