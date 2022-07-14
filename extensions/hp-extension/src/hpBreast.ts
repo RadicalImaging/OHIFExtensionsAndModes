@@ -148,6 +148,11 @@ export default {
             background: [127,127,0],
             initialCenter: [0,0],
             canvasCenter: [0,0],
+            customViewportOptions: {
+              zoomPan: {
+                flipHorizontal: true,
+              },
+            },
             syncGroups: [
               {
                 type: 'cameraPosition',
@@ -173,31 +178,11 @@ export default {
             background: [0,0,127],
             initialCenter: [1,0],
             canvasCenter: [1,0],
-            syncGroups: [
-              {
-                type: 'cameraPosition',
-                id: 'axialSync',
-                source: true,
-                target: true,
+            customViewportOptions: {
+              zoomPan: {
+                flipVertical: true,
               },
-            ],
-            // initialImageOptions: {
-            //   index: 180,
-            //   preset: 'middle', // 'first', 'last', 'middle'
-            // },
-          },
-          displaySets: [
-            {
-              id: 'LMLO',
             },
-          ],
-        },
-        {
-          viewportOptions: {
-            toolGroupId: 'default',
-            background: [0,127,0],
-            initialCenter: [0,0],
-            canvasCenter: [0,0],
             syncGroups: [
               {
                 type: 'cameraPosition',
@@ -214,6 +199,36 @@ export default {
           displaySets: [
             {
               id: 'RMLO',
+            },
+          ],
+        },
+        {
+          viewportOptions: {
+            toolGroupId: 'default',
+            background: [0,127,0],
+            initialCenter: [0,0],
+            canvasCenter: [0,0],
+            customViewportOptions: {
+              zoomPan: {
+                flipHorizontal: true,
+              },
+            },
+            syncGroups: [
+              {
+                type: 'cameraPosition',
+                id: 'axialSync',
+                source: true,
+                target: true,
+              },
+            ],
+            // initialImageOptions: {
+            //   index: 180,
+            //   preset: 'middle', // 'first', 'last', 'middle'
+            // },
+          },
+          displaySets: [
+            {
+              id: 'LMLO',
             },
           ],
         },

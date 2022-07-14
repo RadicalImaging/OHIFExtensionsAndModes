@@ -1,5 +1,8 @@
 export default (id,value,viewport) => {
-  const {zoom,pan} = value;
-  viewport.setZoom(zoom);
-  viewport.setCanvasPan(pan);
+  const {zoom,pan, flipHorizontal, flipVertical} = value;
+  if( zoom && zoom!==1 ) viewport.setZoom(zoom);
+  if( pan ) viewport.setCanvasPan(pan);
+  if( flipHorizontal || flipVertical ) {
+    viewport.flip(value);
+  }
 }
