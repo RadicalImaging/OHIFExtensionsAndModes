@@ -1,18 +1,16 @@
 export default {
-  id: 'LV Function Heart',
+  id: 'MGBreastScreening',
   hasUpdatedPriorsInformation: false,
-  name: 'Default',
-  createdDate: '2021-02-23T19:22:08.894Z',
-  modifiedDate: '2021-02-23T19:22:08.894Z',
+  name: 'Mammography Breast Screening',
   availableTo: {},
   editableBy: {},
   protocolMatchingRules: [
     {
-      id: 'LVFunction',
+      id: 'Mammography',
       weight: 150,
-      attribute: 'StudyDescription',
+      attribute: 'ModalitiesInStudy',
       constraint: {
-        contains: 'LV Function',
+        contains: 'MG',
       },
       required: true,
     },
@@ -31,106 +29,88 @@ export default {
       },
       displaySets: [
         {
-          id: 'displaySetCineLax4',
+          id: 'LCC',
           // Matches displaysets, NOT series
           seriesMatchingRules: [
             {
               weight: 10,
-              attribute: 'SeriesDescription',
+              attribute: 'ViewCode',
               constraint: {
-                contains: 'CINE',
+                contains: 'SCT:399162004',
               },
             },
             {
               weight: 10,
-              attribute: 'SeriesDescription',
+              attribute: 'PatientOrientation',
               constraint: {
-                contains: 'LAX',
+                contains: 'L',
               },
+              required: true,
+            },
+          ],
+        },
+        {
+          id: 'RCC',
+          // Matches displaysets, NOT series
+          seriesMatchingRules: [
+            {
+              weight: 10,
+              attribute: 'ViewCode',
+              constraint: {
+                contains: 'SCT:399162004',
+              },
+              required: true,
             },
             {
               weight: 10,
-              attribute: 'SeriesDescription',
+              attribute: 'PatientOrientation',
               constraint: {
-                contains: '4Ch',
+                contains: 'R',
               },
+              required: true,
+            },
+          ],
+        },
+        {
+          id: 'LMLO',
+          seriesMatchingRules: [
+            {
+              weight: 10,
+              attribute: 'ViewCode',
+              constraint: {
+                contains: 'SCT:399368009',
+              },
+              required: true,
+            },
+            {
+              weight: 10,
+              attribute: 'PatientOrientation',
+              constraint: {
+                contains: 'L',
+              },
+              required: true,
             },
           ],
           studyMatchingRules: [],
         },
         {
-          id: 'displaySetCineLax3',
-          // Matches displaysets, NOT series
+          id: 'RMLO',
           seriesMatchingRules: [
             {
               weight: 10,
-              attribute: 'SeriesDescription',
+              attribute: 'ViewCode',
               constraint: {
-                contains: 'CINE',
+                contains: 'SCT:399368009',
               },
+              required: true,
             },
             {
               weight: 10,
-              attribute: 'SeriesDescription',
+              attribute: 'PatientOrientation',
               constraint: {
-                contains: 'LAX',
+                contains: 'R',
               },
-            },
-            {
-              weight: 10,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: '3Ch',
-              },
-            },
-          ],
-          studyMatchingRules: [],
-        },
-        {
-          id: 'displaySetCineLax2',
-          // Matches displaysets, NOT series
-          seriesMatchingRules: [
-            {
-              weight: 10,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: 'CINE',
-              },
-            },
-            {
-              weight: 10,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: 'LAX',
-              },
-            },
-            {
-              weight: 10,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: '2Ch',
-              },
-            },
-          ],
-          studyMatchingRules: [],
-        },
-        {
-          id: 'displaySetCineSax',
-          // Matches displaysets, NOT series
-          seriesMatchingRules: [
-            {
-              weight: 10,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: 'CINE',
-              },
-            },
-            {
-              weight: 10,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: 'SAX',
-              },
+              required: true,
             },
           ],
           studyMatchingRules: [],
@@ -141,7 +121,8 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             background: [127,0,127],
-            initialRange: [0.6,0.6],
+            initialCenter: [1,0],
+            canvasCenter: [1,0],
             syncGroups: [
               {
                 type: 'cameraPosition',
@@ -157,7 +138,7 @@ export default {
           },
           displaySets: [
             {
-              id: 'displaySetCineLax4',
+              id: 'RCC',
             },
           ],
         },
@@ -165,7 +146,8 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             background: [127,127,0],
-            initialRange: [0.6,0.6],
+            initialCenter: [0,0],
+            canvasCenter: [0,0],
             syncGroups: [
               {
                 type: 'cameraPosition',
@@ -181,7 +163,7 @@ export default {
           },
           displaySets: [
             {
-              id: 'displaySetCineLax3',
+              id: 'LCC',
             },
           ],
         },
@@ -189,7 +171,8 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             background: [0,0,127],
-            initialRange: [0.6,0.6],
+            initialCenter: [1,0],
+            canvasCenter: [1,0],
             syncGroups: [
               {
                 type: 'cameraPosition',
@@ -205,7 +188,7 @@ export default {
           },
           displaySets: [
             {
-              id: 'displaySetCineLax2',
+              id: 'LMLO',
             },
           ],
         },
@@ -213,7 +196,8 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             background: [0,127,0],
-            initialRange: [0.6,0.6],
+            initialCenter: [0,0],
+            canvasCenter: [0,0],
             syncGroups: [
               {
                 type: 'cameraPosition',
@@ -229,12 +213,11 @@ export default {
           },
           displaySets: [
             {
-              id: 'displaySetCineSax',
+              id: 'RMLO',
             },
           ],
         },
       ],
-      createdDate: '2021-02-23T18:32:42.850Z',
     },
   ],
   numberOfPriorsReferenced: -1,

@@ -101,19 +101,11 @@ function modeFactory({ modeConfiguration }) {
       ToolBarService.init(extensionManager);
       ToolBarService.addButtons(toolbarButtons);
       ToolBarService.createButtonSection('primary', [
-        'MeasurementTools',
-        'Zoom',
-        'WindowLevel',
-        'Pan',
-        'Capture',
-        'Layout',
-        'MoreTools',
       ]);
     },
     onModeExit: ({ servicesManager }) => {
       const {
         ToolGroupService,
-        SyncGroupService,
         MeasurementService,
         ToolBarService,
       } = servicesManager.services;
@@ -121,7 +113,6 @@ function modeFactory({ modeConfiguration }) {
       ToolBarService.reset();
       MeasurementService.clearMeasurements();
       ToolGroupService.destroy();
-      SyncGroupService.destroy();
     },
     validationTags: {
       study: [],

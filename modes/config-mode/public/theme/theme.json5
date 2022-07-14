@@ -18,6 +18,7 @@
 
     hangingProtocols: [
       '@radical/hp-extension.hangingProtocolModule.heart',
+      '@radical/hp-extension.hangingProtocolModule.breast',
       '@radical/hp-extension.hangingProtocolModule.MN',
       '@ohif/extension-default.hangingProtocolModule.default',
       ],

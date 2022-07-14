@@ -1,12 +1,17 @@
 import mpr from './mpr';
 import hpHeart from './hpHeart';
 import hpMN from './hpMN';
+import hpBreast from './hpBreast';
 
 const hangingProtocols = {
   hangingProtocols:[
   {
     name: 'mpr',
     protocols: [mpr],
+  },
+  {
+    name: 'breast',
+    protocols: [hpBreast],
   },
   {
     name: 'heart',
@@ -20,6 +25,5 @@ const hangingProtocols = {
 };
 
 export default function getHangingProtocolModule() {
-  console.log("getHangingProtocolModule returning", hangingProtocols.hangingProtocols);
   return hangingProtocols.hangingProtocols;
 }
