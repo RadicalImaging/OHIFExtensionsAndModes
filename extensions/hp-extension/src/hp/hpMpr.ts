@@ -1,5 +1,4 @@
-
-const mpr = {
+export default {
   id: 'mpr',
   locked: true,
   hasUpdatedPriorsInformation: false,
@@ -14,13 +13,22 @@ const mpr = {
   imageLoadStrategy: 'interleaveTopToBottom', // "default" , "interleaveTopToBottom",  "interleaveCenter"
   protocolMatchingRules: [
     {
-      id: 'wauZK2QNEfDPwcAQo',
+      id: 'ctModality',
       weight: 100,
       attribute: 'ModalitiesInStudy',
       constraint: {
         contains: "CT",
       },
-      required: true,
+      required: false,
+    },
+    {
+      id: 'mrModality',
+      weight: 100,
+      attribute: 'ModalitiesInStudy',
+      constraint: {
+        contains: "MR",
+      },
+      required: false,
     },
   ],
   stages: [
@@ -60,12 +68,12 @@ const mpr = {
           imageMatchingRules: [],
           seriesMatchingRules: [
             {
-              id: 'NumberOfSeriesRelatedInstances>300',
+              id: 'numImageFrames>25',
               weight: 10,
-              attribute: 'NumberOfSeriesRelatedInstances',
+              attribute: 'numImageFrames',
               constraint: {
                 greaterThan: {
-                  value: 67,
+                  value: 25,
                 },
               },
               required: true,
@@ -166,17 +174,3 @@ const mpr = {
   ],
   numberOfPriorsReferenced: -1,
 };
-
-const hangingProtocols = {
-  hangingProtocols:[
-  {
-    name: 'mpr',
-    protocols: [mpr],
-  },
-],
-};
-
-export default function getHangingProtocolModule() {
-  console.log("getHangingProtocolModule returning", hangingProtocols.hangingProtocols);
-  return hangingProtocols.hangingProtocols;
-}

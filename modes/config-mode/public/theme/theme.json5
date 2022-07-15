@@ -4,12 +4,24 @@
 
   ConfigurableModes: {
     modes: {
-      "@ohif/longitudinal": "@ohif/mode-longitudinal",
+      "hpMode": "hpMode",
       "ecgMode": { configOperation: "reference", source: "ecgMode"},
       "mprMode": { configOperation: "reference", source: "mprMode"},
       "microscopyMode": { configOperation: "reference", source: "microscopyMode"},
+      "@ohif/mode-tmtv": "@ohif/mode-tmtv",
     },
     clearDefaultModes: true,
+  },
+
+  hpMode: {
+    configBase: "@ohif/mode-longitudinal",
+
+    hangingProtocols: [
+      '@radical/hp-extension.hangingProtocolModule.heart',
+      '@radical/hp-extension.hangingProtocolModule.breast',
+      '@radical/hp-extension.hangingProtocolModule.MN',
+      '@ohif/extension-default.hangingProtocolModule.default',
+      ],
   },
 
   mprMode: {
@@ -20,7 +32,7 @@
     routeName: "mpr",
     displayName: "Volume",
     hangingProtocols: [
-      '@radical/mpr-extension.hangingProtocolModule.mpr',
+      '@radical/hp-extension.hangingProtocolModule.mpr',
       '@ohif/extension-default.hangingProtocolModule.default',
       ],
   },

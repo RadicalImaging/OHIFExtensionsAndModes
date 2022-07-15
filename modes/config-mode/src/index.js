@@ -13,7 +13,7 @@ const ConfigurableModes = ConfigPoint.createConfiguration("ConfigurableModes", {
   // umdExtensions is an ordered set of extensions which can be loaded via the 
   // script element tag as a umd extension element.
   umdExtensions: [
-   {id: '@radical/mpr-extension', src: '/umd/@radical/mpr-extension/index.umd.js'},
+   {id: '@radical/hp-extension', src: '/umd/@radical/hp-extension/index.umd.js'},
   ],
 });
 
@@ -60,21 +60,17 @@ const modesFactory = async (modes, extensions) => {
   // TODO - iterate over the set of actual modes, and import only the required ones once.
   // Creates a mode called configPoint-base-@ohif/mode-longitudinal
   createDerivativeMode(await import("@ohif/mode-longitudinal"));
+  createDerivativeMode(await import("@ohif/mode-tmtv"));
 
   if( ConfigurableModes.clearDefaultModes ) modes.splice(0,modes.length);
   
-  console.log("Trying to load umd extensions list", ConfigurableModes.umdExtensions, extensions.length);
   await loadUmdExtensions(ConfigurableModes.umdExtensions, extensions);
-  console.log("Done waiting for extensions to load:", extensions.length);
-  console.log("Extensions after is", extensions);
 
   const useModes = ConfigurableModes.modes.map(modeRef => {
     // getConfig will just return an object if provided one, or will get the referenced mode value
     const mode = ConfigPoint.getConfig(modeRef);
-    console.log("Mapping mode", mode.id);
       return mode.bindFactory ? {...mode, modeFactory: mode.bindFactory(mode)} : mode;
   });
-  console.log('useModes=', useModes);
   return useModes;
 };
 

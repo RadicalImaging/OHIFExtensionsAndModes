@@ -1,5 +1,5 @@
 {
-  "name": "@radical/mpr-extension",
+  "name": "@radical/hp-extension",
   "version": "3.0.0",
   "description": "Extension to define support for basic MPR",
   "author": "Bill Wallace",
@@ -12,7 +12,7 @@
   "keywords": [
     "ohif-extension"
   ],
-  "main": "dist/umd/@radical/mpr-extension/index.umd.js",
+  "main": "public/umd/@radical/hp-extension/index.umd.js",
   "module": "src/index.tsx",
   "engines": {
     "node": ">=14",
@@ -42,7 +42,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
-    "config-point": "^0.4.8"
+    "config-point": "^0.4.8",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",

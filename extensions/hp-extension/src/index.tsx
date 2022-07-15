@@ -1,7 +1,8 @@
 import { id } from './id';
-import getHangingProtocolModule from './getHangingProtocolModule.ts';
-
-console.log("Loading mprExtension - should be as umd module");
+import getHangingProtocolModule from './hp';
+import setViewportZoomPan from './custom-viewport/setViewportZoomPan';
+import viewCodeAttribute from './custom-attribute/viewCode';
+import lateralityAttribute from './custom-attribute/laterality';
 
 /**
  * Adds extensions for various hanging protocols, including 2x2 mode and MPR modes.
@@ -12,6 +13,18 @@ export default {
    * You ID can be anything you want, but it should be unique.
    */
   id,
+
+  /**
+   * Register the hanging protocol handlers
+   */
+  preRegistration: ({
+    servicesManager,
+  }) => {
+    const { HangingProtocolService } = servicesManager.services;
+    HangingProtocolService.addCustomViewportSetting('zoomPan', "Set initial zoom, WITH camera event", setViewportZoomPan);
+    HangingProtocolService.addCustomAttribute('ViewCode', 'View Code Designator:Value', viewCodeAttribute);
+    HangingProtocolService.addCustomAttribute('Laterality', 'Laterality of object', lateralityAttribute);
+  },
 
   /**
    * HangingProtocolModule should provide a list of hanging protocols that will be

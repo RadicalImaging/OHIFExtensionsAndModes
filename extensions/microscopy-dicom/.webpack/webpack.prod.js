@@ -25,6 +25,24 @@ const config = {
         commonjs: 'react',
         amd: 'react',
       },
+      '@ohif/core': {
+        commonjs2: '@ohif/core',
+        commonjs: '@ohif/core',
+        amd: '@ohif/core',
+        root: '@ohif/core',
+      },
+      '@ohif/ui': {
+        commonjs2: '@ohif/ui',
+        commonjs: '@ohif/ui',
+        amd: '@ohif/ui',
+        root: '@ohif/ui',
+      },
+      'config-point': {
+        commonjs2: 'config-point',
+        commonjs: 'config-point',
+        amd: 'config-point',
+        root: 'config-point',
+      },
     },
   ],
   module: {

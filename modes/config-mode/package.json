@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
-    "config-point": "^0.4.7"
+    "config-point": "^0.4.8"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",

@@ -2007,10 +2007,10 @@ concat-stream@^1.5.0:
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
-config-point@^0.4.7:
-  version "0.4.7"
-  resolved "https://registry.yarnpkg.com/config-point/-/config-point-0.4.7.tgz#a88d85e712534499bcfcc5cf66fb3d2de51dbfec"
-  integrity sha512-ZMLInJCgc8H8zwt6KkNxa6C3Omzle8+bFhItvzTI8MZs8MBQEXRu+RGi3x5TqQN8DB5jUtKWl1EAOtAOJUDvMQ==
+config-point@^0.4.8:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/config-point/-/config-point-0.4.8.tgz#51864ef9e9e3d7ab2b42c410dd15b2fcb58fd905"
+  integrity sha512-h2nUOYFQE1CLJeb44TZN0msSH4419I5nvZRiKedsGAq8NZc0uGOrd/jhDfSEmqLsfg3QReerIKPKghsysOz5cQ==
   dependencies:
     "@babel/runtime" "^7.14.6"
     json5 "^2.2.0"
