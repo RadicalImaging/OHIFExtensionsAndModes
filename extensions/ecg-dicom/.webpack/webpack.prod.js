@@ -25,6 +25,12 @@ const config = {
         commonjs: 'react',
         amd: 'react',
       },
+      'config-point': {
+        commonjs2: 'config-point',
+        commonjs: 'config-point',
+        amd: 'config-point',
+        root: 'config-point',
+      },
     },
   ],
   module: {
