@@ -1,4 +1,4 @@
-import mpr from './mpr';
+import hpMpr from './hpMpr';
 import hpHeart from './hpHeart';
 import hpMN from './hpMN';
 import hpBreast from './hpBreast';
@@ -8,7 +8,7 @@ const hangingProtocols =
     hangingProtocols: [
       {
         name: 'mpr',
-        protocols: [mpr],
+        protocols: [hpMpr],
       },
       {
         name: 'breast',

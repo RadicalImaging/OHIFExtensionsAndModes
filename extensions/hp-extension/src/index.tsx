@@ -1,6 +1,6 @@
 import { id } from './id';
-import getHangingProtocolModule from './getHangingProtocolModule';
-import setViewportZoomPan from './setViewportZoomPan';
+import getHangingProtocolModule from './hp';
+import setViewportZoomPan from './custom-viewport/setViewportZoomPan';
 import viewCodeAttribute from './custom-attribute/viewCode';
 import lateralityAttribute from './custom-attribute/laterality';
 
@@ -16,7 +16,6 @@ export default {
 
   /**
    * Register the hanging protocol handlers
-   * @param param0 
    */
   preRegistration: ({
     servicesManager,
