@@ -123,18 +123,6 @@ export default {
             background: [127,0,127],
             initialCenter: [1,0],
             canvasCenter: [1,0],
-            syncGroups: [
-              {
-                type: 'cameraPosition',
-                id: 'axialSync',
-                source: true,
-                target: true,
-              },
-            ],
-              // initialImageOptions: {
-            //   index: 180,
-            //   preset: 'middle', // 'first', 'last', 'middle'
-            // },
           },
           displaySets: [
             {
@@ -153,18 +141,6 @@ export default {
                 flipHorizontal: true,
               },
             },
-            syncGroups: [
-              {
-                type: 'cameraPosition',
-                id: 'axialSync',
-                source: true,
-                target: true,
-              },
-            ],
-            // initialImageOptions: {
-            //   index: 180,
-            //   preset: 'middle', // 'first', 'last', 'middle'
-            // },
           },
           displaySets: [
             {
@@ -183,18 +159,6 @@ export default {
                 flipVertical: true,
               },
             },
-            syncGroups: [
-              {
-                type: 'cameraPosition',
-                id: 'axialSync',
-                source: true,
-                target: true,
-              },
-            ],
-            // initialImageOptions: {
-            //   index: 180,
-            //   preset: 'middle', // 'first', 'last', 'middle'
-            // },
           },
           displaySets: [
             {
@@ -213,18 +177,6 @@ export default {
                 flipHorizontal: true,
               },
             },
-            syncGroups: [
-              {
-                type: 'cameraPosition',
-                id: 'axialSync',
-                source: true,
-                target: true,
-              },
-            ],
-            // initialImageOptions: {
-            //   index: 180,
-            //   preset: 'middle', // 'first', 'last', 'middle'
-            // },
           },
           displaySets: [
             {

@@ -9,8 +9,8 @@ export default {
   protocolMatchingRules: [
     {
       id: 'TwoOrMoreSeries',
-      weight: 50,
-      attribute: 'NumberOfStudyRelatedSeries',
+      weight: 25,
+      attribute: 'numberOfDisplaySets',
       constraint: {
         greaterThan: 1,
       },
@@ -19,9 +19,88 @@ export default {
   ],
   toolGroupIds: ['default'],
   stages: [
+    // {
+    //   id: '2x2',
+    //   name: 'default',
+    //   viewportStructure: {
+    //     type: 'grid',
+    //     properties: {
+    //       rows: 2,
+    //       columns: 2,
+    //     },
+    //   },
+    //   displaySets: [
+    //     {
+    //       id: 'displaySet',
+    //       findAll: true,
+    //       studyMatchingRules: [
+    //         {
+    //           id: 'ThreeOrMoreSeries',
+    //           attribute: 'numberOfDisplaySets',
+    //           constraint: {
+    //             greaterThan: 2,
+    //           },
+    //         },        
+    //       ],
+    //       seriesMatchingRules: [
+    //         {
+    //           attribute: 'numImageFrames',
+    //           constraint: {
+    //             greaterThan: 0,
+    //           },
+    //         },
+    //       ],
+    //     },
+    //   ],
+    //   viewports: [
+    //     {
+    //       viewportOptions: {
+    //         toolGroupId: 'default',
+    //       },
+    //       displaySets: [
+    //         {
+    //           id: 'displaySet',
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       viewportOptions: {
+    //         toolGroupId: 'default',
+    //       },
+    //       displaySets: [
+    //         {
+    //           displaySetIndex: 1,
+    //           id: 'displaySet',
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       viewportOptions: {
+    //         toolGroupId: 'default',
+    //       },
+    //       displaySets: [
+    //         {
+    //           displaySetIndex: 2,
+    //           id: 'displaySet',
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       viewportOptions: {
+    //         toolGroupId: 'default',
+    //       },
+    //       displaySets: [
+    //         {
+    //           displaySetIndex: 3,
+    //           id: 'displaySet',
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
     {
-      id: 'hYbmMy3b7pz7GLiaT',
-      name: 'default',
+      id: '2x1',
+      name: '2x1',
       viewportStructure: {
         type: 'grid',
         properties: {
@@ -36,7 +115,6 @@ export default {
           // Matches displaysets, NOT series
           seriesMatchingRules: [
             {
-              weight: 10,
               attribute: 'numImageFrames',
               constraint: {
                 greaterThan: 0,
@@ -49,10 +127,6 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            // initialImageOptions: {
-            //   index: 180,
-            //   preset: 'middle', // 'first', 'last', 'middle'
-            // },
           },
           displaySets: [
             {
@@ -63,10 +137,6 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            // initialImageOptions: {
-            //   index: 180,
-            //   preset: 'middle', // 'first', 'last', 'middle'
-            // },
           },
           displaySets: [
             {
@@ -76,7 +146,6 @@ export default {
           ],
         },
       ],
-      createdDate: '2021-02-23T18:32:42.850Z',
     },
   ],
   numberOfPriorsReferenced: -1,

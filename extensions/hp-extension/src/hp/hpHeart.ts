@@ -8,11 +8,26 @@ export default {
   editableBy: {},
   protocolMatchingRules: [
     {
-      id: 'LVFunction',
-      weight: 150,
-      attribute: 'StudyDescription',
+      id: 'MR',
+      weight: 50,
+      attribute: 'ModalitiesInStudy',
       constraint: {
-        contains: 'LV Function',
+        contains: 'MR',
+      },
+    },
+    {
+      id: 'SAX',
+      attribute: 'seriesDescriptions',
+      constraint: {
+        contains: 'SAX',
+      },
+      required: true,
+    },
+    {
+      id: 'LAX',
+      attribute: 'seriesDescriptions',
+      constraint: {
+        contains: 'LAX',
       },
       required: true,
     },
@@ -35,14 +50,17 @@ export default {
           // Matches displaysets, NOT series
           seriesMatchingRules: [
             {
-              weight: 10,
-              attribute: 'SeriesDescription',
+              id: 'numImageFrames 20-40',
+              weight: 1,
+              attribute: 'numImageFrames',
               constraint: {
-                contains: 'CINE',
+                betweeen: {
+                  value: [20,40],
+                },
               },
             },
             {
-              weight: 10,
+              weight: 20,
               attribute: 'SeriesDescription',
               constraint: {
                 contains: 'LAX',
@@ -52,25 +70,26 @@ export default {
               weight: 10,
               attribute: 'SeriesDescription',
               constraint: {
-                contains: '4Ch',
+                contains: '4',
               },
             },
           ],
-          studyMatchingRules: [],
         },
         {
           id: 'displaySetCineLax3',
           // Matches displaysets, NOT series
           seriesMatchingRules: [
             {
-              weight: 10,
-              attribute: 'SeriesDescription',
+              id: 'numImageFrames>25',
+              attribute: 'numImageFrames',
               constraint: {
-                contains: 'CINE',
+                betweeen: {
+                  value: [20,40],
+                },
               },
             },
             {
-              weight: 10,
+              weight: 20,
               attribute: 'SeriesDescription',
               constraint: {
                 contains: 'LAX',
@@ -80,7 +99,7 @@ export default {
               weight: 10,
               attribute: 'SeriesDescription',
               constraint: {
-                contains: '3Ch',
+                contains: '3',
               },
             },
           ],
@@ -91,14 +110,16 @@ export default {
           // Matches displaysets, NOT series
           seriesMatchingRules: [
             {
-              weight: 10,
-              attribute: 'SeriesDescription',
+              id: 'numImageFrames>25',
+              attribute: 'numImageFrames',
               constraint: {
-                contains: 'CINE',
+                betweeen: {
+                  value: [20,40],
+                },
               },
             },
             {
-              weight: 10,
+              weight: 20,
               attribute: 'SeriesDescription',
               constraint: {
                 contains: 'LAX',
@@ -108,7 +129,7 @@ export default {
               weight: 10,
               attribute: 'SeriesDescription',
               constraint: {
-                contains: '2Ch',
+                contains: '2',
               },
             },
           ],
@@ -119,14 +140,16 @@ export default {
           // Matches displaysets, NOT series
           seriesMatchingRules: [
             {
-              weight: 10,
-              attribute: 'SeriesDescription',
+              id: 'numImageFrames>25',
+              attribute: 'numImageFrames',
               constraint: {
-                contains: 'CINE',
+                betweeen: {
+                  value: [20,40],
+                },
               },
             },
             {
-              weight: 10,
+              weight: 20,
               attribute: 'SeriesDescription',
               constraint: {
                 contains: 'SAX',
@@ -141,12 +164,14 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             initialRange: [0.6,0.6],
+            initialCenter: [0.5,0.3],
+            displaySetGroup: 'displaySetCineLax4',            
             syncGroups: [
               {
                 type: 'cameraPosition',
                 id: 'axialSync',
-                source: true,
-                target: true,
+                source: false,
+                target: false,
               },
             ],
           },
@@ -160,12 +185,13 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             initialRange: [0.6,0.6],
+            displaySetGroup: 'displaySetCineLax3',            
             syncGroups: [
               {
                 type: 'cameraPosition',
                 id: 'axialSync',
-                source: true,
-                target: true,
+                source: false,
+                target: false,
               },
             ],
           },
@@ -178,13 +204,15 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            initialRange: [0.6,0.6],
+            initialRange: [0.5,0.5],
+            initialCenter: [0.5, 0.4],
+            displaySetGroup: 'displaySetCineLax2',            
             syncGroups: [
               {
                 type: 'cameraPosition',
                 id: 'axialSync',
-                source: true,
-                target: true,
+                source: false,
+                target: false,
               },
             ],
           },
@@ -197,18 +225,12 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            initialRange: [0.6,0.6],
-            syncGroups: [
-              {
-                type: 'cameraPosition',
-                id: 'axialSync',
-                source: true,
-                target: true,
-              },
-            ],
+            initialRange: [0.4,0.4],
+            displaySetGroup: 'displaySetCineSax',            
           },
           displaySets: [
             {
+              displaySetIndex: 4,
               id: 'displaySetCineSax',
             },
           ],
