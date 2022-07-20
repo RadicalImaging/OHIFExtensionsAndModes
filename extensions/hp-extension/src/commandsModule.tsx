@@ -1,4 +1,4 @@
-const commandsModule = ({ servicesManager, commandsManager }) => {
+const commandsModule = ({ servicesManager }) => {
   const {
     DisplaySetService,
     ViewportGridService,
@@ -14,7 +14,7 @@ const commandsModule = ({ servicesManager, commandsManager }) => {
       HangingProtocolService.previousProtocolStage();
     },
 
-    updateViewportDisplaySet: ({ direction, circular, sortSource }) => {
+    updateViewportDisplaySet: ({ direction, circular }) => {
       const {
         activeViewportIndex,
         viewports = [],

@@ -24,10 +24,18 @@ export default {
       required: true,
     },
     {
-      id: 'LAX',
+      id: '4',
       attribute: 'seriesDescriptions',
       constraint: {
-        contains: 'LAX',
+        contains: '4',
+      },
+      required: true,
+    },
+    {
+      id: '3',
+      attribute: 'seriesDescriptions',
+      constraint: {
+        contains: '3',
       },
       required: true,
     },
