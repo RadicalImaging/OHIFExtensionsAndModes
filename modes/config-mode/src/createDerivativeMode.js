@@ -1,5 +1,8 @@
 import ConfigPoint from "config-point";
 
+function returnLayoutTemplate() {
+  return this._layoutTemplate;
+}
 
 const createDerivativeMode = (importedMode) => {
   if (!importedMode) return undefined;
@@ -21,7 +24,7 @@ const createDerivativeMode = (importedMode) => {
           _layoutTemplate: route.layoutTemplate(props),
           layoutTemplate: {
             configOperation: 'bind',
-            value: function () { return this._layoutTemplate; },
+            value: returnLayoutTemplate,
           },
         }));
         ConfigPoint.createConfiguration(configPointBaseId, {

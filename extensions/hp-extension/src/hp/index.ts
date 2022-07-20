@@ -20,7 +20,7 @@ const hangingProtocols =
       },
       {
         name: 'MN',
-        protocols: [hpMN],
+        protocols: hpMN,
       },
     ],
   };
