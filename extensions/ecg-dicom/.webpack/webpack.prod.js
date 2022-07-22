@@ -3,7 +3,7 @@ const pkg = require('../package.json');
 
 const outputFile = 'index.umd.js';
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, '../dist');
+const outputFolder = path.join(__dirname, '../public/umd/@radical/ecg-dicom/');
 
 const config = {
   mode: 'production',
@@ -13,9 +13,9 @@ const config = {
     path: outputFolder,
     filename: outputFile,
     library: pkg.name,
+    publicPath: '/umd/@radical/ecg-dicom/',
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    globalObject: "typeof self !== 'undefined' ? self : this",
   },
   externals: [
     {

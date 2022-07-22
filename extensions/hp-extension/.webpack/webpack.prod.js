@@ -15,7 +15,6 @@ const config = {
     library: pkg.name,
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    globalObject: "typeof self !== 'undefined' ? self : this",
   },
   externals: [
     {

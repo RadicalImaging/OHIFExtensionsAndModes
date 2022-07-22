@@ -49,6 +49,9 @@ const config = {
         amd: '@ohif/mode-tmtv',
         root: '@ohif/mode-tmtv',
       },
+      'config-point': {
+        amd: 'config-point',
+      },
     },
   ],
   module: {

@@ -1,3 +1,4 @@
+console.log("Start of load dicom microscopy extension");
 import DicomMicroscopySopClassHandler from './DicomMicroscopySopClassHandler';
 import { id } from './id';
 import React, { Suspense } from "react";
@@ -132,3 +133,5 @@ export default {
   //   extensionManager,
   // }) => {},
 };
+
+console.log("Microscopy index.tsx loaded");
