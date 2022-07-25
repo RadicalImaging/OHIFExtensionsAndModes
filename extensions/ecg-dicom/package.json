@@ -12,7 +12,7 @@
   "keywords": [
     "ohif-extension"
   ],
-  "main": "dist/index.umd.js",
+  "main": "public/umd/@radical/ecg-dicom/index.umd.js",
   "module": "src/index.tsx",
   "engines": {
     "node": ">=14",

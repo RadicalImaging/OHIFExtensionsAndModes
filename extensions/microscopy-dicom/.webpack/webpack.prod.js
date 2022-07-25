@@ -3,7 +3,7 @@ const pkg = require('../package.json');
 
 const outputFile = 'index.umd.js';
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, '../dist');
+const outputFolder = path.join(__dirname, '../public/umd/@radical/microscopy-dicom/');
 
 const config = {
   mode: 'production',
@@ -15,7 +15,6 @@ const config = {
     library: pkg.name,
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    globalObject: "typeof self !== 'undefined' ? self : this",
   },
   externals: [
     {
@@ -37,26 +36,27 @@ const config = {
         amd: '@ohif/ui',
         root: '@ohif/ui',
       },
-      'config-point': {
-        commonjs2: 'config-point',
-        commonjs: 'config-point',
-        amd: 'config-point',
-        root: 'config-point',
-      },
     },
   ],
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
+        test: /(\.jsx|\.js|\.tsx|\.ts)$/,
+        loader: 'babel-loader',
+        exclude: /(node_modules|bower_components)/,
+        resolve: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx',],
+        },
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
   resolve: {
     modules: [path.resolve('./node_modules'), path.resolve('./src')],
-    extensions: ['.json', '.js', '.jsx', '.tsx', '.ts'],
+    extensions: ['.json', '.js', '.jsx', '.tsx', '.ts',],
   },
 };
 

@@ -2,8 +2,9 @@ import hpMpr from './hpMpr';
 import hpHeart from './hpHeart';
 import hpMN from './hpMN';
 import hpBreast from './hpBreast';
+import ConfigPoint from "config-point";
 
-const hangingProtocols = 
+const hangingProtocols = ConfigPoint.createConfiguration("hpExtensionHangingProtocols",
   {
     hangingProtocols: [
       {
@@ -23,7 +24,7 @@ const hangingProtocols =
         protocols: hpMN,
       },
     ],
-  };
+  });
 
 export default function getHangingProtocolModule() {
   return hangingProtocols.hangingProtocols;

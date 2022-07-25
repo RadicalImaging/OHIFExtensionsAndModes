@@ -1,8 +1,8 @@
 import "./ecgMode";
 import createDerivativeMode from "./createDerivativeMode";
 import configMode from "./configMode";
-
 import ConfigPoint, {loadSearchConfigPoint} from "config-point";
+
 
 const ConfigurableModes = ConfigPoint.createConfiguration("ConfigurableModes", {
   modes: {
@@ -14,43 +14,89 @@ const ConfigurableModes = ConfigPoint.createConfiguration("ConfigurableModes", {
   // script element tag as a umd extension element.
   umdExtensions: [
    {id: '@radical/hp-extension', src: '/umd/@radical/hp-extension/index.umd.js'},
+   {id: '@radical/site-finding', src: '/umd/@radical/site-finding/index.umd.js'},
+   {id: '@radical/ecg-dicom', src: '/umd/@radical/ecg-dicom/index.umd.js'},
+  //  {id: '@radical/microscopy-dicom', src: '/umd/@radical/microscopy-dicom/index.umd.js'},
+  ],
+
+  umdLibraries: [
+    {id: 'config-point', src: '/umd/config-point/index.umd.js'},
   ],
 });
+
+
+const amd = {};
+const modules = {};
+let counter = 0;
+
+function defineGlobal(...args) {
+  let path, child,t;
+  if( args.length==3 ) {
+    [path,child,t] = args;
+    console.log("amd define 3 argument", path, child, t);
+  } else {
+    [child,t] = args;
+    path = "undefinedName"+counter;
+    counter += 1;
+    console.log("***** amd args of length !=3", args,  path, child, t);
+  }
+  try {
+    const args = child.map(key => {
+      const ret = modules[key];
+      if( !ret ) {
+        console.log("Rejecting", key, "as it was not found", amd[path]);
+        amd[path].reject(`Module ${key} required by ${path} not found`)
+      }
+      console.log("Import reference", key, ret);
+      return ret;
+    })
+    const module = t(...args);
+    modules[path] = module;
+    amd[path].resolve(module);
+  } catch(e) {
+    console.log("Couldn't load", e);
+    amd[path].reject(e);
+  }
+}
 
 function importModule(moduleDefn) {
   const script = document.createElement("script");
   script.src = moduleDefn.src;
   document.documentElement.appendChild(script);
   return new Promise((resolve,reject) => {
-    window.define.amd[moduleDefn.id] = {resolve,reject};
-    // TODO - add exception handler if the resolve never happens
+    amd[moduleDefn.id] = {resolve,reject};
   })
+}
+
+async function loadExternals() {
+  modules['config-point'] = await import("config-point");
+  modules['react'] = await import("react");
+  modules['@ohif/core'] = await import("@ohif/core");
 }
 
 /**
  * Loads the umd extensions list
  */
 const loadUmdExtensions = async (umdExtensions, ret = []) => {
-  window.define = function(path,child,t) {
-    console.log("amd define", path, child, t);
-    try {
-      const module = t();
-      window.define.modules[path] = module;
-      window.define.amd[path].resolve(module);
-    } catch(e) {
-      console.log("Couldn't load", e);
-      window.amd[path].reject(e);
-    }
+  if( !window.define ) {
+    window.define = defineGlobal;
+    await loadExternals();
   }
-  window.define.amd = {};
-  window.define.modules = {};
+  console.log("List of extensions to load:", umdExtensions);
   for(const umd of umdExtensions) {
     console.log("Trying to import", umd.id, umd.src);
-    ret.push((await importModule(umd)).default)
-    console.log("Imported", umd.id);
+    try {
+      ret.push((await importModule(umd)).default)
+      console.log("Imported", umd.id);
+    } catch(e) {
+      console.warn("Unable to import umd.id", e);
+    }
   }
+  console.log("Loaded extensions:", umdExtensions, ret);
   return ret;
 }
+
+defineGlobal.amd = amd;
 
 /** Load method for dynamic loading of modes and extensions. */
 const modesFactory = async (modes, extensions) => {

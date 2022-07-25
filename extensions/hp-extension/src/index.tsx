@@ -52,4 +52,3 @@ export default {
   getCommandsModule,
 };
 
-console.log("Loaded mpr extension umd module");
