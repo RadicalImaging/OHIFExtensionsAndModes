@@ -171,8 +171,9 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            initialRange: [0.6,0.6],
-            initialCenter: [0.5,0.3],
+            initialDisplayArea: [0.6,0.6],
+            imageCanvasPoint: [0.5,0.3],
+            
             displaySetGroup: 'displaySetCineLax4',            
             syncGroups: [
               {
@@ -192,7 +193,7 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            initialRange: [0.6,0.6],
+            initialDisplayArea: [0.6,0.6],
             displaySetGroup: 'displaySetCineLax3',            
             syncGroups: [
               {
@@ -212,8 +213,8 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            initialRange: [0.5,0.5],
-            initialCenter: [0.5, 0.4],
+            initialDisplayArea: [0.5,0.5],
+            imageCanvasPoint: [0.5, 0.4],
             displaySetGroup: 'displaySetCineLax2',            
             syncGroups: [
               {
@@ -233,7 +234,7 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            initialRange: [0.4,0.4],
+            initialDisplayArea: [0.4,0.4],
             displaySetGroup: 'displaySetCineSax',            
           },
           displaySets: [
