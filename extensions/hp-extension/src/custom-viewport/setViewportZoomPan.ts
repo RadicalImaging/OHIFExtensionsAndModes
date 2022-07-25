@@ -5,64 +5,47 @@
  * @param value 
  * @param viewport 
  */
-const setViewportZoomPan = (id,value,viewport) => {
-  const {zoom,pan, flipHorizontal, flipVertical} = value;
-  const {imageCanvasPoint,initialDisplayArea} = value;
-  if( flipHorizontal || flipVertical ) {
-    viewport.flip(value);
-  }
+const setViewportZoomPan = (id, value, viewport) => {
+  const { zoom, pan, flipHorizontal, flipVertical } = value;
+  const { imageCanvasPoint, initialDisplayArea } = value;
 
   const camera = viewport.getCamera();
   console.log("Camera=", JSON.stringify(camera));
 
-  // if (widthWorld && heightWorld) {
-  //   const camera = this.getCamera();
-  //   const activeCamera = this.getVtkActiveCamera();
-  //   const { viewPlaneNormal, focalPoint, position, viewUp } = camera;
-  //   const distanceVec = vec3.subtract(vec3.create(), position, focalPoint);
+  // Set the base values - assume height fits for now
+  let initialZoom = 1;
+  if (initialDisplayArea) {
+    // TODO - use the correct calculation to actually fit things properly
+    // such that both initialDisplayArea's fit
+    initialZoom = 1 / Math.min(initialDisplayArea[0], initialDisplayArea[1]);
+    viewport.setZoom(initialZoom, true);
+  }
 
-  //   const { imageCanvasPoint = [0.5, 0.5] } = this.options;
-  //   if (imageCanvasPoint.length == 2) {
-  //     imageCanvasPoint.push(0.5, 0.5);
-  //   }
-  //   if (!focalPoint || focalPoint[0] === null) return;
+  const imageData = viewport.getImageData();
 
-  //   // The focal point is currently the center of the image
-  //   // It needs to be adjusted by the sum of:
-  //   // vector between the two imageCanvasPoint values.
-  //   if (imageCanvasPoint[0] !== 0.5) {
-  //     const delta = 0.5 - imageCanvasPoint[0];
-  //     const viewRight = vec3.create();
-  //     vec3.cross(viewRight, viewPlaneNormal, viewUp);
-  //     vec3.scaleAndAdd(focalPoint, focalPoint, viewRight, delta * widthWorld);
-  //   }
-  //   if (imageCanvasPoint[1] !== 0.5) {
-  //     const delta = 0.5 - imageCanvasPoint[1];
-  //     const viewUp = activeCamera.getViewUp() as Point3;
-  //     vec3.scaleAndAdd(focalPoint, focalPoint, viewUp, delta * heightWorld);
-  //   }
-  //   const topLeft = this.canvasToWorld([0, 0]);
-  //   if (imageCanvasPoint[2] !== 0.5) {
-  //     const delta = 0.5 - imageCanvasPoint[2];
-  //     const right = this.canvasToWorld([this.sWidth, 0]);
-  //     const vector = vec3.subtract(vec3.create(), right, topLeft);
-  //     vec3.scaleAndAdd(focalPoint, focalPoint, vector, delta);
-  //   }
-  //   if (imageCanvasPoint[3] !== 0.5) {
-  //     const delta = 0.5 - imageCanvasPoint[3];
-  //     const bottom = this.canvasToWorld([0, this.sHeight]);
-  //     const vector = vec3.subtract(vec3.create(), bottom, topLeft);
-  //     vec3.scaleAndAdd(focalPoint, focalPoint, vector, delta);
-  //   }
-  //   activeCamera.setFocalPoint(focalPoint[0], focalPoint[1], focalPoint[2]);
-  //   activeCamera.setPosition(
-  //     focalPoint[0] + distanceVec[0],
-  //     focalPoint[1] + distanceVec[1],
-  //     focalPoint[2] + distanceVec[2]
-  //   );
-  // }
-  if( zoom && zoom!==1 ) viewport.setZoom(zoom);
-  if( pan ) {
+  if (imageCanvasPoint && imageData) {
+    const canvas = viewport.getCanvas();
+    const canvasX = imageCanvasPoint[2] ?? 0.5;
+    const canvasY = imageCanvasPoint[3] ?? 0.5;
+    const canvasPanX = canvas.width * (canvasX - 0.5);
+    const canvasPanY = canvas.height * (canvasY - 0.5);
+   
+    const canvasZero = viewport.worldToCanvas([0,0,0]);
+    const canvasEdge = viewport.worldToCanvas(imageData.dimensions);
+    const canvasImage = [canvasEdge[0]-canvasZero[0], canvasEdge[1]-canvasZero[1]];
+    const [imgWidth,imgHeight] = canvasImage;
+    const imagePanX = imgWidth * (0.5-imageCanvasPoint[0]);
+    const imagePanY = imgHeight  * (0.5-imageCanvasPoint[1]);
+    viewport.setPan([imagePanX+canvasPanX,imagePanY+canvasPanY],true);
+  }
+
+  if (flipHorizontal || flipVertical) {
+    viewport.flip(value);
+  }
+
+  // Now set the sync value offsets
+  if (zoom && zoom !== 1) viewport.setZoom(zoom);
+  if (pan) {
     console.log("Setting pan to", JSON.stringify(pan));
     viewport.setPan(pan);
   }
@@ -70,21 +53,19 @@ const setViewportZoomPan = (id,value,viewport) => {
 
 /** Stores the viewport zoom/pan information, when a viewport goes away (to be restored later) */
 const storeViewportZoomPan = (settings, priorSettings, viewport) => {
-  if( !priorSettings || !viewport ) return;
+  if (!priorSettings || !viewport) return;
   console.log("Storing viewport zoom pan for reset");
-  settings.customViewportOptions = { 
-    ...priorSettings.customViewportOptions,
-    ...settings.customViewportOptions,
+  settings.customViewportOptions = {
     zoomPan: {
+      ...priorSettings.customViewportOptions?.zoomPan,
+      ...settings.customViewportOptions?.zoomPan,
       pan: viewport.getPan(),
       zoom: viewport.getZoom(),
     },
   };
   settings.imageCanvasPoint = settings.imageCanvasPoint ?? priorSettings.imageCanvasPoint;
-  settings.initialDisplayArea = settings.initialDisplayArea ?? priorSettings.initialDisplayArea;
-  settings.displaySetGroup = settings.displaySetGroup ?? priorSettings.displaySetGroup;
   settings.syncGroups = settings.syncGroups ?? priorSettings.syncGroups;
   console.log("Updated settings", settings);
 }
 
-export {storeViewportZoomPan, setViewportZoomPan};
+export { storeViewportZoomPan, setViewportZoomPan };

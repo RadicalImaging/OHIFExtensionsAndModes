@@ -63,7 +63,7 @@ export default {
               attribute: 'numImageFrames',
               constraint: {
                 betweeen: {
-                  value: [20,40],
+                  value: [20, 40],
                 },
               },
             },
@@ -92,7 +92,7 @@ export default {
               attribute: 'numImageFrames',
               constraint: {
                 betweeen: {
-                  value: [20,40],
+                  value: [20, 40],
                 },
               },
             },
@@ -122,7 +122,7 @@ export default {
               attribute: 'numImageFrames',
               constraint: {
                 betweeen: {
-                  value: [20,40],
+                  value: [20, 40],
                 },
               },
             },
@@ -152,7 +152,7 @@ export default {
               attribute: 'numImageFrames',
               constraint: {
                 betweeen: {
-                  value: [20,40],
+                  value: [20, 40],
                 },
               },
             },
@@ -171,10 +171,13 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            initialDisplayArea: [0.6,0.6],
-            imageCanvasPoint: [0.5,0.3],
-            
-            displaySetGroup: 'displaySetCineLax4',            
+            customViewportOptions: {
+              zoomPan: {
+                initialDisplayArea: [0.6, 0.6],
+                imageCanvasPoint: [0.5, 0.35],
+              },
+            },
+            displaySetGroup: 'displaySetCineLax4',
             syncGroups: [
               {
                 type: 'cameraPosition',
@@ -193,8 +196,12 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            initialDisplayArea: [0.6,0.6],
-            displaySetGroup: 'displaySetCineLax3',            
+            customViewportOptions: {
+              zoomPan: {
+                initialDisplayArea: [0.6, 0.6],
+              },
+            },
+            displaySetGroup: 'displaySetCineLax3',
             syncGroups: [
               {
                 type: 'cameraPosition',
@@ -213,9 +220,13 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            initialDisplayArea: [0.5,0.5],
-            imageCanvasPoint: [0.5, 0.4],
-            displaySetGroup: 'displaySetCineLax2',            
+            customViewportOptions: {
+              zoomPan: {
+                initialDisplayArea: [0.5, 0.5],
+                imageCanvasPoint: [0.5, 0.45],
+              },
+            },
+            displaySetGroup: 'displaySetCineLax2',
             syncGroups: [
               {
                 type: 'cameraPosition',
@@ -234,8 +245,12 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            initialDisplayArea: [0.4,0.4],
-            displaySetGroup: 'displaySetCineSax',            
+            customViewportOptions: {
+              zoomPan: {
+                initialDisplayArea: [0.4, 0.4],
+              },
+            },
+            displaySetGroup: 'displaySetCineSax',
           },
           displaySets: [
             {
