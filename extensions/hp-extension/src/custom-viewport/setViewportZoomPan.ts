@@ -9,9 +9,6 @@ const setViewportZoomPan = (id, value, viewport) => {
   const { zoom, pan, flipHorizontal, flipVertical } = value;
   const { imageCanvasPoint, initialDisplayArea } = value;
 
-  const camera = viewport.getCamera();
-  console.log("Camera=", JSON.stringify(camera));
-
   // Set the base values - assume height fits for now
   let initialZoom = 1;
   if (initialDisplayArea) {
