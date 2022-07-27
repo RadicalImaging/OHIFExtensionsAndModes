@@ -121,8 +121,11 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             background: [127,0,127],
-            initialCenter: [1,0],
-            canvasCenter: [1,0],
+            customViewportOptions: {
+              zoomPan: {
+                imageCanvasPoint: [1,0,1,0],
+              },
+            },
           },
           displaySets: [
             {
@@ -134,10 +137,9 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             background: [127,127,0],
-            initialCenter: [0,0],
-            canvasCenter: [0,0],
             customViewportOptions: {
               zoomPan: {
+                imageCanvasPoint: [0,0,0,0],
                 flipHorizontal: true,
               },
             },
@@ -152,13 +154,12 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             background: [0,0,127],
-            initialCenter: [1,0],
-            canvasCenter: [1,0],
             customViewportOptions: {
               zoomPan: {
+                imageCanvasPoint: [1,0,1,0],
                 flipVertical: true,
               },
-            },
+            },            
           },
           displaySets: [
             {
@@ -170,10 +171,9 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             background: [0,127,0],
-            initialCenter: [0,0],
-            canvasCenter: [0,0],
             customViewportOptions: {
               zoomPan: {
+                imageCanvasPoint: [0,0,0,0],
                 flipHorizontal: true,
               },
             },

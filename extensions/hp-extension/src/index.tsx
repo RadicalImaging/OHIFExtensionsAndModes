@@ -24,7 +24,7 @@ export default {
     servicesManager,
   }) => {
     const { HangingProtocolService } = servicesManager.services;
-    HangingProtocolService.addCustomViewportSetting('zoomPan', "Set initial zoom, WITH camera event", 
+    HangingProtocolService.addCustomViewportOption('zoomPan', "Set initial zoom, WITH camera event", 
       setViewportZoomPan, 
       storeViewportZoomPan);
     HangingProtocolService.addCustomAttribute('ViewCode', 'View Code Designator:Value', viewCodeAttribute);
