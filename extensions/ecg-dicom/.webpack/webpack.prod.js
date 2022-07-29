@@ -5,6 +5,12 @@ const outputFile = 'index.umd.js';
 const rootDir = path.resolve(__dirname, '../');
 const outputFolder = path.join(__dirname, '../public/umd/@radical/ecg-dicom/');
 
+const modulesPaths = [
+  path.resolve(__dirname, '..'),
+  path.resolve(__dirname, '..', 'node_modules'),
+  'node_modules'
+];
+
 const config = {
   mode: 'production',
   entry: rootDir + '/' + pkg.module,
@@ -37,17 +43,37 @@ const config = {
     rules: [
       {
         test: /(\.jsx|\.js|\.tsx|\.ts)$/,
-        loader: 'babel-loader',
-        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            //configFile: path.resolve(__dirname, '..', 'babel.config.js'),
+            presets: [
+              // WebPack handles ES6 --> Target Syntax
+              [
+                '@babel/preset-env', { modules: false }
+              ],
+              '@babel/preset-react',
+              '@babel/preset-typescript'
+            ],
+          }
+        },
         resolve: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx',],
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
       },
     ],
   },
   resolve: {
-    modules: [path.resolve('./node_modules'), path.resolve('./src')],
-    extensions: ['.json', '.js', '.jsx'],
+    modules: [
+      ...modulesPaths,
+      path.resolve('./src')],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+  },
+  resolveLoader: {
+    modules: [
+      ...modulesPaths,
+    ],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
   },
 };
 

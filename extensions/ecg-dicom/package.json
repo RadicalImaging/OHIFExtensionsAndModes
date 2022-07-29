@@ -1,6 +1,6 @@
 {
   "name": "@radical/ecg-dicom",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Basic DICOM ECG Viewer",
   "author": "Bill Wallace",
   "license": "MIT",
@@ -24,6 +24,7 @@
     "dev:dicom-pdf": "yarn run dev",
     "build": "cross-env NODE_ENV=production webpack --config .webpack/webpack.prod.js",
     "build:package": "yarn run build",
+    "postinstall": "yarn run build:package",
     "start": "yarn run dev"
   },
   "peerDependencies": {

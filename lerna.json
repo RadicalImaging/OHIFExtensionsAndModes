@@ -1,0 +1,7 @@
+{
+  "packages": [
+    "extensions/*",
+    "modes/*"
+  ],
+  "version": "0.0.0"
+}
