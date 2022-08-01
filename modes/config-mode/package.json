@@ -13,6 +13,7 @@
     "ohif-mode"
   ],
   "main": "dist/umd/@radical/config-mode/index.umd.js",
+  "_public": "public/",
   "module": "src/index.js",
   "engines": {
     "node": ">=14",
