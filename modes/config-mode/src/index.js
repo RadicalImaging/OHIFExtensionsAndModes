@@ -14,7 +14,7 @@ const ConfigurableModes = ConfigPoint.createConfiguration("ConfigurableModes", {
   // script element tag as a umd extension element.
   umdExtensions: [
    {id: '@radical/hp-extension', src: '/umd/@radical/hp-extension/index.umd.js'},
-   {id: '@radical/site-finding', src: '/umd/@radical/site-finding/index.umd.js'},
+   // {id: '@radical/site-finding', src: '/umd/@radical/site-finding/index.umd.js'},
    {id: '@radical/ecg-dicom', src: '/umd/@radical/ecg-dicom/index.umd.js'},
   //  {id: '@radical/microscopy-dicom', src: '/umd/@radical/microscopy-dicom/index.umd.js'},
   ],
