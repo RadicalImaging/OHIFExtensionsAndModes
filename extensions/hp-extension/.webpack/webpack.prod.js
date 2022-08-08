@@ -36,6 +36,24 @@ const config = {
         amd: '@ohif/ui',
         root: '@ohif/ui',
       },
+      '@cornerstonejs/core': {
+        commonjs2: '@cornerstonejs/core',
+        commonjs: '@cornerstonejs/core',
+        amd: '@cornerstonejs/core',
+        root: '@cornerstonejs/core',
+      },
+      '@cornerstonejs/tools': {
+        commonjs2: '@cornerstonejs/tools',
+        commonjs: '@cornerstonejs/tools',
+        amd: '@cornerstonejs/tools',
+        root: '@cornerstonejs/tools',
+      },
+      '@ohif/ui': {
+        commonjs2: '@ohif/ui',
+        commonjs: '@ohif/ui',
+        amd: '@ohif/ui',
+        root: '@ohif/ui',
+      },
       '@ohif/mode-longitudinal': {
         commonjs2: '@ohif/mode-longitudinal',
         commonjs: '@ohif/mode-longitudinal',

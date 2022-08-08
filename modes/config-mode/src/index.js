@@ -72,6 +72,8 @@ async function loadExternals() {
   modules['config-point'] = await import("config-point");
   modules['react'] = await import("react");
   modules['@ohif/core'] = await import("@ohif/core");
+  modules['@cornerstonejs/core'] = await import('@cornerstonejs/core');
+  modules['@cornerstonejs/tools'] = await import('@cornerstonejs/tools');
 }
 
 /**

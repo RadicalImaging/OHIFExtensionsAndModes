@@ -45,16 +45,8 @@ export default [
               toolGroupId: 'default',
               syncGroups: [
                 {
-                  type: 'cameraPosition',
+                  type: 'zoomPan',
                   id: 'axialSync',
-                  source: true,
-                  target: true,
-                },
-                {
-                  type: 'voi',
-                  id: 'ptWLSync',
-                  source: true,
-                  target: true,
                 },
               ],
             },
@@ -69,10 +61,8 @@ export default [
               toolGroupId: 'default',
               syncGroups: [
                 {
-                  type: 'cameraPosition',
+                  type: 'zoomPan',
                   id: 'axialSync',
-                  source: true,
-                  target: true,
                 },
               ],
             },
@@ -88,10 +78,8 @@ export default [
               toolGroupId: 'default',
               syncGroups: [
                 {
-                  type: 'cameraPosition',
+                  type: 'zoomPan',
                   id: 'axialSync',
-                  source: true,
-                  target: true,
                 },
               ],
             },
@@ -107,10 +95,8 @@ export default [
               toolGroupId: 'default',
               syncGroups: [
                 {
-                  type: 'cameraPosition',
+                  type: 'zoomPan',
                   id: 'axialSync',
-                  source: true,
-                  target: true,
                 },
               ],
             },
@@ -154,10 +140,8 @@ export default [
               toolGroupId: 'default',
               syncGroups: [
                 {
-                  type: 'cameraPosition',
+                  type: 'zoomPan',
                   id: 'axialSync',
-                  source: true,
-                  target: true,
                 },
               ],
             },
@@ -172,10 +156,8 @@ export default [
               toolGroupId: 'default',
               syncGroups: [
                 {
-                  type: 'cameraPosition',
+                  type: 'zoomPan',
                   id: 'axialSync',
-                  source: true,
-                  target: true,
                 },
               ],
             },
@@ -240,10 +222,8 @@ export default [
               toolGroupId: 'default',
               syncGroups: [
                 {
-                  type: 'cameraPosition',
+                  type: 'zoomPan',
                   id: 'axialSync',
-                  source: true,
-                  target: true,
                 },
               ],
             },
@@ -258,10 +238,8 @@ export default [
               toolGroupId: 'default',
               syncGroups: [
                 {
-                  type: 'cameraPosition',
+                  type: 'zoomPan',
                   id: 'axialSync',
-                  source: true,
-                  target: true,
                 },
               ],
             },

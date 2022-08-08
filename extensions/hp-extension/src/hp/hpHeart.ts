@@ -171,19 +171,14 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            customViewportOptions: {
-              zoomPan: {
-                initialDisplayArea: [0.6, 0.6],
-                imageCanvasPoint: [0.5, 0.35],
-              },
-            },
             displaySetGroup: 'displaySetCineLax4',
             syncGroups: [
               {
-                type: 'cameraPosition',
-                id: 'axialSync',
-                source: false,
-                target: false,
+                type: 'initialZoomPan',
+                options: { 
+                  initialDisplayArea: [0.6, 0.6],
+                  imageCanvasPoint: [0.5, 0.35],
+                },
               },
             ],
           },
@@ -196,20 +191,15 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            customViewportOptions: {
-              zoomPan: {
-                initialDisplayArea: [0.6, 0.6],
-              },
-            },
-            displaySetGroup: 'displaySetCineLax3',
             syncGroups: [
               {
-                type: 'cameraPosition',
-                id: 'axialSync',
-                source: false,
-                target: false,
+                type: 'initialZoomPan',
+                options: { 
+                  initialDisplayArea: [0.6, 0.6],
+                },
               },
             ],
+            displaySetGroup: 'displaySetCineLax3',
           },
           displaySets: [
             {
@@ -220,21 +210,16 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            customViewportOptions: {
-              zoomPan: {
-                initialDisplayArea: [0.5, 0.5],
-                imageCanvasPoint: [0.5, 0.45],
-              },
-            },
-            displaySetGroup: 'displaySetCineLax2',
             syncGroups: [
               {
-                type: 'cameraPosition',
-                id: 'axialSync',
-                source: false,
-                target: false,
+                type: 'initialZoomPan',
+                options: { 
+                  initialDisplayArea: [0.5, 0.5],
+                  imageCanvasPoint: [0.5, 0.45],
+                  },
               },
             ],
+            displaySetGroup: 'displaySetCineLax2',
           },
           displaySets: [
             {
@@ -245,11 +230,14 @@ export default {
         {
           viewportOptions: {
             toolGroupId: 'default',
-            customViewportOptions: {
-              zoomPan: {
-                initialDisplayArea: [0.4, 0.4],
+            syncGroups: [
+              {
+                type: 'initialZoomPan',
+                options: { 
+                  initialDisplayArea: [0.4, 0.4],
+                  },
               },
-            },
+            ],
             displaySetGroup: 'displaySetCineSax',
           },
           displaySets: [

@@ -121,11 +121,14 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             background: [127,0,127],
-            customViewportOptions: {
-              zoomPan: {
-                imageCanvasPoint: [1,0,1,0],
+            syncGroups: [
+              {
+                type: 'initialZoomPan',
+                options: { 
+                  imageCanvasPoint: [1,0,1,0],
+                },
               },
-            },
+            ],
           },
           displaySets: [
             {
@@ -137,12 +140,14 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             background: [127,127,0],
-            customViewportOptions: {
-              zoomPan: {
-                imageCanvasPoint: [0,0,0,0],
-                flipHorizontal: true,
+            syncGroups: [
+              {
+                type: 'initialZoomPan',
+                options: { 
+                  imageCanvasPoint: [0,0,0,0],
+                },
               },
-            },
+            ],
           },
           displaySets: [
             {
@@ -154,12 +159,14 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             background: [0,0,127],
-            customViewportOptions: {
-              zoomPan: {
-                imageCanvasPoint: [1,0,1,0],
-                flipVertical: true,
+            syncGroups: [
+              {
+                type: 'initialZoomPan',
+                options: { 
+                  imageCanvasPoint: [1,1,1,1],
+                },
               },
-            },            
+            ],
           },
           displaySets: [
             {
@@ -171,12 +178,14 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             background: [0,127,0],
-            customViewportOptions: {
-              zoomPan: {
-                imageCanvasPoint: [0,0,0,0],
-                flipHorizontal: true,
+            syncGroups: [
+              {
+                type: 'initialZoomPan',
+                options: { 
+                  imageCanvasPoint: [0,1,0,1],
+                },
               },
-            },
+            ],
           },
           displaySets: [
             {
