@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-
+import multipartDecode from '../multipartDecode';
 import WaveformView from './WaveformView';
 import GridPattern from './GridPattern';
 
@@ -62,7 +62,8 @@ const getChannelData = async (data, numberOfChannels, numberOfSamples, bits, typ
       xhr.responseType = 'arraybuffer';
       xhr.open('GET', url);
       xhr.onload = function () {
-        data.Value = convertBuffer(xhr.response,numberOfChannels, numberOfSamples, bits, type);
+        const decoded = multipartDecode(xhr.response)[0];
+        data.Value = convertBuffer(decoded,numberOfChannels, numberOfSamples, bits, type);
         resolve(data.Value);
       };
       xhr.onerror = function () {
