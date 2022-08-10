@@ -14,6 +14,7 @@ const config = {
     filename: outputFile,
     library: pkg.name,
     libraryTarget: 'umd',
+    publicPath: '/umd/@radicalimaging/microscopy-dicom/',
     umdNamedDefine: true,
   },
   externals: [
@@ -23,6 +24,12 @@ const config = {
         commonjs2: 'react',
         commonjs: 'react',
         amd: 'react',
+      },
+      dcmjs: {
+        root: 'dcmjs',
+        commonjs2: 'dcmjs',
+        commonjs: 'dcmjs',
+        amd: 'dcmjs',
       },
       '@ohif/core': {
         commonjs2: '@ohif/core',
@@ -35,6 +42,12 @@ const config = {
         commonjs: '@ohif/ui',
         amd: '@ohif/ui',
         root: '@ohif/ui',
+      },
+      'config-point': {
+        commonjs2: 'config-point',
+        commonjs: 'config-point',
+        amd: 'config-point',
+        root: 'config-point',
       },
     },
   ],

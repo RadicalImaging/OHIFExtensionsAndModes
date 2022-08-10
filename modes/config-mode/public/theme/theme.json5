@@ -5,10 +5,7 @@
   ConfigurableModes: {
     modes: {
       "hpMode": "hpMode",
-      "ecgMode": { configOperation: "reference", source: "ecgMode"},
       "mprMode": { configOperation: "reference", source: "mprMode"},
-      "microscopyMode": { configOperation: "reference", source: "microscopyMode"},
-      "@ohif/mode-tmtv": "@ohif/mode-tmtv",
     },
     clearDefaultModes: true,
   },
@@ -37,39 +34,5 @@
       ],
   },
 
-  microscopyMode: {
-    configBase: "@ohif/mode-longitudinal",
-
-    id: "microscopy",
-    route: "microscopy",
-    routeName: "microscopy",
-    displayName: "Microscopy",
-
-    sopClassHandlers: [
-      "@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler",
-    ],
-    routes: [
-      {
-        _layoutTemplate: {
-          props: {
-            viewports: {
-              microscopy: {
-                namespace: "@radicalimaging/microscopy-dicom.viewportModule.microscopy-dicom",
-                displaySetsToDisplay: [
-                  "@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler",
-                  "@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySRSopClassHandler",
-                ],
-              },
-            },
-          },
-        },
-      },
-    ],
-
-    // Need to define a second function because the original value of the first one is already present, so it
-    // uses the original value as the replacement text.  TODO - fix in config-point
-    isValidModeFunc: {configOperation: 'safe', value: 'modalities.indexOf("SM")!=-1'},
-    isValidMode: {configOperation: 'reference', reference: 'isValidModeFunc'},
-  }
 
 }
