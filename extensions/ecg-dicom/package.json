@@ -1,5 +1,5 @@
 {
-  "name": "@radical/ecg-dicom",
+  "name": "@radicalimaging/ecg-dicom",
   "version": "3.0.1",
   "description": "Basic DICOM ECG Viewer",
   "author": "Bill Wallace",
@@ -12,7 +12,7 @@
   "keywords": [
     "ohif-extension"
   ],
-  "main": "public/umd/@radical/ecg-dicom/index.umd.js",
+  "main": "public/umd/@radicalimaging/ecg-dicom/index.umd.js",
   "module": "src/index.tsx",
   "engines": {
     "node": ">=14",

@@ -3,7 +3,7 @@ const pkg = require('../package.json');
 
 const outputFile = 'index.umd.js';
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, '../public/umd/@radicalimaging/microscopy-dicom/');
+const outputFolder = path.join(__dirname, '../public/umd/@radicalimaging/site-finding/');
 
 const config = {
   mode: 'production',
@@ -15,6 +15,7 @@ const config = {
     library: pkg.name,
     libraryTarget: 'umd',
     umdNamedDefine: true,
+    globalObject: "typeof self !== 'undefined' ? self : this",
   },
   externals: [
     {
@@ -47,10 +48,6 @@ const config = {
         resolve: {
           extensions: ['.js', '.jsx', '.ts', '.tsx',],
         },
-      },
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
       },
     ],
   },

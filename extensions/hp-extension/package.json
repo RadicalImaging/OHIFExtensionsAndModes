@@ -1,5 +1,5 @@
 {
-  "name": "@radical/hp-extension",
+  "name": "@radicalimaging/hp-extension",
   "version": "3.0.0",
   "description": "Extension to define support for basic MPR",
   "author": "Bill Wallace",
@@ -12,7 +12,7 @@
   "keywords": [
     "ohif-extension"
   ],
-  "main": "public/umd/@radical/hp-extension/index.umd.js",
+  "main": "public/umd/@radicalimaging/hp-extension/index.umd.js",
   "module": "src/index.tsx",
   "engines": {
     "node": ">=14",
@@ -24,6 +24,7 @@
     "dev:dicom-pdf": "yarn run dev",
     "build": "cross-env NODE_ENV=production webpack --config .webpack/webpack.prod.js",
     "build:package": "yarn run build",
+    "postinstall": "yarn run build:package",
     "start": "yarn run dev"
   },
   "peerDependencies": {

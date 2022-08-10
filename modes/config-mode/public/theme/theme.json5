@@ -17,9 +17,9 @@
     configBase: "@ohif/mode-longitudinal",
 
     hangingProtocols: [
-      '@radical/hp-extension.hangingProtocolModule.heart',
-      '@radical/hp-extension.hangingProtocolModule.breast',
-      '@radical/hp-extension.hangingProtocolModule.MN',
+      '@radicalimaging/hp-extension.hangingProtocolModule.heart',
+      '@radicalimaging/hp-extension.hangingProtocolModule.breast',
+      '@radicalimaging/hp-extension.hangingProtocolModule.MN',
       '@ohif/extension-default.hangingProtocolModule.default',
       ],
   },
@@ -32,7 +32,7 @@
     routeName: "mpr",
     displayName: "Volume",
     hangingProtocols: [
-      '@radical/hp-extension.hangingProtocolModule.mpr',
+      '@radicalimaging/hp-extension.hangingProtocolModule.mpr',
       '@ohif/extension-default.hangingProtocolModule.default',
       ],
   },
@@ -46,7 +46,7 @@
     displayName: "Microscopy",
 
     sopClassHandlers: [
-      "@radical/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler",
+      "@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler",
     ],
     routes: [
       {
@@ -54,10 +54,10 @@
           props: {
             viewports: {
               microscopy: {
-                namespace: "@radical/microscopy-dicom.viewportModule.microscopy-dicom",
+                namespace: "@radicalimaging/microscopy-dicom.viewportModule.microscopy-dicom",
                 displaySetsToDisplay: [
-                  "@radical/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler",
-                  "@radical/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySRSopClassHandler",
+                  "@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler",
+                  "@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySRSopClassHandler",
                 ],
               },
             },

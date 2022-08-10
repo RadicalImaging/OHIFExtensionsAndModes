@@ -6,7 +6,7 @@ const SOP_CLASS_UIDS = {
   VL_WHOLE_SLIDE_MICROSCOPY_IMAGE_STORAGE: '1.2.840.10008.5.1.4.1.1.77.1.6',
 };
 
-const SOPClassHandlerId = '@radical/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySRSopClassHandler';
+const SOPClassHandlerId = '@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySRSopClassHandler';
 
 const DicomMicroscopySopClassHandler = {
   name: 'DicomMicroscopySopClassHandler',
