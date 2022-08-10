@@ -5,9 +5,12 @@
   "author": "Bill Wallace",
   "license": "MIT",
   "files": [
-    "dist",
+    "public",
     "README.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": "OHIF/Viewers",
   "keywords": [
     "ohif-extension"
