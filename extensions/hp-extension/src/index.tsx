@@ -33,6 +33,7 @@ export default {
     HangingProtocolService.addCustomAttribute('seriesDescriptions', 'Series Descriptions', seriesDescriptionsFromDisplaySets);
     HangingProtocolService.addCustomAttribute('numberOfDisplaySets', 'Number of displays sets', numberOfDisplaySets);
   
+    console.log("About to create synchronizer initialzoompan");
     SyncGroupService.setSynchronizer('initialzoompan', initialZoomPan);
   },
 

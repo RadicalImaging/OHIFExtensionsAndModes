@@ -5,8 +5,9 @@ function targetEventListener(listener, evt) {
   console.log('targetEventListener', evt, this);
   const { detail } = evt;
   const { viewportId } = detail;
-  const { options } = viewportId;
-  const viewportInfo = this._viewportMap[viewportId];
+  const options = this.getOptions(viewportId);
+  if( !options ) return;
+  const { viewportInfo } = options;
   console.log('viewportInfo=', viewportInfo);
   if( !viewportInfo ) return;
   listener.call(options,this,viewportInfo,evt);
@@ -14,9 +15,9 @@ function targetEventListener(listener, evt) {
 
 function add(viewportInfo) {
   const { viewportId } = viewportInfo;
-
-  this._viewportMap[viewportId] = { ...viewportInfo };
-
+  const options = this.getOptions(viewportId);
+  options.viewportInfo = viewportInfo;
+  
   console.log("Add viewport info called for", viewportId);
 }
 
@@ -34,7 +35,6 @@ export default (id, eventName, callback) => {
   const synchronizer = SynchronizerManager.createSynchronizer(id, eventName, callback);
 
   synchronizer.add = add;
-  synchronizer._viewportMap = {};
   synchronizer._eventHandlers = {};
   synchronizer.addEvent = addEvent;
   synchronizer.addEvent(eventName, synchronizer._eventHandler);

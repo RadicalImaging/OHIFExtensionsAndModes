@@ -1,51 +1,38 @@
 {
-  "name": "@radicalimaging/hp-extension",
-  "version": "3.0.0",
-  "description": "Extension to define support for basic MPR",
-  "author": "Bill Wallace",
+  "name": "@radicalimaging/mode-ecg",
+  "version": "3.0.5",
+  "description": "Display ECGs",
+  "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
+  "module": "src/index.tsx",
   "files": [
-    "dist",
+    "public/**",
     "README.md"
   ],
   "repository": "OHIF/Viewers",
   "keywords": [
-    "ohif-extension"
+    "ohif-mode"
   ],
-  "main": "public/umd/@radicalimaging/hp-extension/index.umd.js",
-  "module": "src/index.tsx",
+  "main": "public/umd/@radicalimaging/mode-ecg/index.umd.js",
   "engines": {
     "node": ">=14",
     "npm": ">=6",
-    "yarn": ">=1.18.0"
+    "yarn": ">=1.16.0"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --config .webpack/webpack.dev.js --watch --debug --output-pathinfo",
-    "dev:dicom-pdf": "yarn run dev",
+    "dev:cornerstone": "yarn run dev",
     "build": "cross-env NODE_ENV=production webpack --config .webpack/webpack.prod.js",
     "build:package": "yarn run build",
-    "postinstall": "yarn run build:package",
-    "start": "yarn run dev"
+    "start": "yarn run dev",
+    "test:unit": "jest --watchAll",
+    "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
-    "@ohif/core": "^3.0.0",
-    "@ohif/extension-cornerstone": "^3.0.0",
-    "@ohif/extension-default": "^3.0.0",
-    "@ohif/i18n": "^1.0.0",
-    "prop-types": "^15.6.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-i18next": "^10.11.0",
-    "react-router": "^6.3.0",
-    "react-router-dom": "^6.3.0",
-    "webpack": "^5.50.0",
-    "webpack-merge": "^5.7.3"
+    "@ohif/core": "^3.0.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.7.6",
-    "@cornerstonejs/tools": "^0.21.4",
-    "config-point": "^0.4.8",
-    "lodash": "^4.17.21"
+    "@babel/runtime": "7.7.6"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
