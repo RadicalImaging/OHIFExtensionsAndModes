@@ -1,11 +1,12 @@
 import { id } from './id';
 import getHangingProtocolModule from './hp';
-import {setViewportZoomPan, storeViewportZoomPan } from './custom-viewport/setViewportZoomPan';
+// import {setViewportZoomPan, storeViewportZoomPan } from './custom-viewport/setViewportZoomPan';
 import viewCodeAttribute from './custom-attribute/viewCode';
 import lateralityAttribute from './custom-attribute/laterality';
 import numberOfDisplaySets from './custom-attribute/numberOfDisplaySets';
 import seriesDescriptionsFromDisplaySets from './custom-attribute/seriesDescriptionsFromDisplaySets';
 import getCommandsModule from './commandsModule';
+import initialZoomPan from './synchronizers/createInitialZoomPanSynchronizer';
 
 /**
  * Adds extensions for various hanging protocols, including 2x2 mode and MPR modes.
@@ -23,14 +24,16 @@ export default {
   preRegistration: ({
     servicesManager,
   }) => {
-    const { HangingProtocolService } = servicesManager.services;
-    HangingProtocolService.addCustomViewportSetting('zoomPan', "Set initial zoom, WITH camera event", 
-      setViewportZoomPan, 
-      storeViewportZoomPan);
+    const { HangingProtocolService, SyncGroupService } = servicesManager.services;
+    // HangingProtocolService.addCustomViewportOption('zoomPan', "Set initial zoom, WITH camera event", 
+    //   setViewportZoomPan, 
+    //   storeViewportZoomPan);
     HangingProtocolService.addCustomAttribute('ViewCode', 'View Code Designator:Value', viewCodeAttribute);
     HangingProtocolService.addCustomAttribute('Laterality', 'Laterality of object', lateralityAttribute);
     HangingProtocolService.addCustomAttribute('seriesDescriptions', 'Series Descriptions', seriesDescriptionsFromDisplaySets);
     HangingProtocolService.addCustomAttribute('numberOfDisplaySets', 'Number of displays sets', numberOfDisplaySets);
+  
+    SyncGroupService.setSynchronizer('initialzoompan', initialZoomPan);
   },
 
   /**

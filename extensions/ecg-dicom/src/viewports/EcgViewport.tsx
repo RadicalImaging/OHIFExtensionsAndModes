@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-
+import multipartDecode from '../multipartDecode';
 import WaveformView from './WaveformView';
 import GridPattern from './GridPattern';
 
@@ -37,7 +37,7 @@ const convertBuffer = (dataSrc, numberOfChannels, numberOfSamples, bits, type) =
 
 const str2ab = str => Uint8Array.from(atob(str), c => c.charCodeAt(0));
 
-const getChannelData = async (data, numberOfChannels, numberOfSamples, bits, type) => {
+const getChannelData = async (data, numberOfChannels, numberOfSamples, bits, type, studyUID) => {
   if (data.Value) return data.Value;
   if (data.InlineBinary) {
     data.Value = convertBuffer(str2ab(data.InlineBinary), numberOfChannels, numberOfSamples, bits, type);
@@ -49,9 +49,33 @@ const getChannelData = async (data, numberOfChannels, numberOfSamples, bits, typ
     data.Value = convertBuffer(bulkdata, numberOfChannels, numberOfSamples, bits, type);
     return data.Value;
   }
+  let {BulkDataURI: url} = data;
+  if (url) {
+    // older OHIF without retrieveBulkdata functionality
+    if( url.indexOf(':')===-1 ) {
+      url = `${window.config.dataSources[0].configuration.qidoRoot}/studies/${studyUID}/${url}`;
+    }
+    console.log("Retrieving", url);
+
+    return new Promise( (resolve,reject) => {
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'arraybuffer';
+      xhr.open('GET', url);
+      xhr.onload = function () {
+        const decoded = multipartDecode(xhr.response)[0];
+        data.Value = convertBuffer(decoded,numberOfChannels, numberOfSamples, bits, type);
+        resolve(data.Value);
+      };
+      xhr.onerror = function () {
+        reject(xhr.response);
+      };
+      xhr.send();
+    });
+  }
   console.log("Can't convert waveform", data);
   return [];
 }
+
 
 function EcgViewport(props) {
   const { displaySets } = props;
@@ -63,6 +87,7 @@ function EcgViewport(props) {
   }
 
   const waveform = others[0].WaveformSequence[0];
+  const {StudyInstanceUID: studyUID} = others[0];
 
   if (!waveform) {
     return (
@@ -83,7 +108,7 @@ function EcgViewport(props) {
   const extraHeight = 5;
 
   useEffect(() => {
-    getChannelData(WaveformData, NumberOfWaveformChannels, NumberOfWaveformSamples, WaveformBitsAllocated, WaveformSampleInterpretation).then(res => {
+    getChannelData(WaveformData, NumberOfWaveformChannels, NumberOfWaveformSamples, WaveformBitsAllocated, WaveformSampleInterpretation,studyUID).then(res => {
       setChannelData(res);
     })
   }, [WaveformData])

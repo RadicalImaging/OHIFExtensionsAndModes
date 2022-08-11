@@ -1,18 +1,21 @@
 {
-  "name": "@radical/microscopy-dicom",
+  "name": "@radicalimaging/microscopy-dicom",
   "version": "3.0.0",
   "description": "Microscopy Viewer for OHIF 3",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
   "files": [
-    "dist",
+    "public/**",
     "README.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": "OHIF/Viewers",
   "keywords": [
     "ohif-extension"
   ],
-  "main": "public/umd/@radical/microscopy-dicom/index.umd.js",
+  "main": "public/umd/@radicalimaging/microscopy-dicom/index.umd.js",
   "module": "src/index.tsx",
   "engines": {
     "node": ">=14",
@@ -45,6 +48,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
+    "config-point": "^0.4.8",
     "dcmjs": "^0.24.4",
     "dicomweb-client": "^0.8.4",
     "image-type": "^4.1.0",

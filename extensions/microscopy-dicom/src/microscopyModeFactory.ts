@@ -1,7 +1,5 @@
 import { hotkeys } from '@ohif/core';
-import toolbarButtons from './toolbarButtons.js';
-import { id } from './id.js';
-import initToolGroups from './initToolGroups.js';
+import { id } from './id';
 import ConfigPoint from "config-point";
 
 const ohif = {
@@ -51,82 +49,38 @@ const extensionDependencies = {
   '@radicalimaging/ecg-dicom': '^3.0.0',
 };
 
-function modeFactory({ modeConfiguration }) {
+function modeFactory() {
   return {
     // TODO: We're using this as a route segment
     // We should not be.
     id,
-    routeName: 'ecg',
-    displayName: 'ECG',
+    routeName: 'microscopy',
+    displayName: 'Microscopy',
     
     /**
      * Lifecycle hooks
      */
     onModeEnter: ({ servicesManager, extensionManager, commandsManager }) => {
-      const { ToolBarService, ToolGroupService } = servicesManager.services;
-
-      // Init Default and SR ToolGroups
-      initToolGroups(extensionManager, ToolGroupService, commandsManager);
-
-      let unsubscribe;
-
-      const activateTool = () => {
-        ToolBarService.recordInteraction({
-          groupId: 'WindowLevel',
-          itemId: 'WindowLevel',
-          interactionType: 'tool',
-          commands: [
-            {
-              commandName: 'setToolActive',
-              commandOptions: {
-                toolName: 'WindowLevel',
-              },
-              context: 'CORNERSTONE',
-            },
-          ],
-        });
-
-        // We don't need to reset the active tool whenever a viewport is getting
-        // added to the toolGroup.
-        unsubscribe();
-      };
-
-      // Since we only have one viewport for the basic cs3d mode and it has
-      // only one hanging protocol, we can just use the first viewport
-      ({ unsubscribe } = ToolGroupService.subscribe(
-        ToolGroupService.EVENTS.VIEWPORT_ADDED,
-        activateTool
-      ));
-
-      ToolBarService.init(extensionManager);
-      ToolBarService.addButtons(toolbarButtons);
-      ToolBarService.createButtonSection('primary', [
-      ]);
     },
+
     onModeExit: ({ servicesManager }) => {
-      const {
-        ToolGroupService,
-        MeasurementService,
-        ToolBarService,
-      } = servicesManager.services;
-
-      ToolBarService.reset();
-      MeasurementService.clearMeasurements();
-      ToolGroupService.destroy();
     },
+    
     validationTags: {
       study: [],
       series: [],
     },
+    
     isValidMode: ({ modalities }) => {
       const modalities_list = modalities.split('\\');
 
       // Slide Microscopy and ECG modality not supported by basic mode yet
-      return modalities_list.includes('ECG');
+      return modalities_list.includes('SM');
     },
+    
     routes: [
       {
-        path: 'longitudinal',
+        path: 'microscopy',
         /*init: ({ servicesManager, extensionManager }) => {
           //defaultViewerRouteInit
         },*/
@@ -138,6 +92,13 @@ function modeFactory({ modeConfiguration }) {
               // TODO: Should be optional, or required to pass empty array for slots?
               rightPanels: [tracked.measurements],
               viewports: [
+                {
+                  namespace: "@radicalimaging/microscopy-dicom.viewportModule.microscopy-dicom",
+                  displaySetsToDisplay: [
+                    "@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler",
+                    "@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySRSopClassHandler",
+                  ],
+                },
                 {
                   namespace: tracked.viewport,
                   displaySetsToDisplay: [ohif.sopClassHandler],
@@ -171,6 +132,7 @@ function modeFactory({ modeConfiguration }) {
     // general handler needs to come last.  For this case, the dicomvideo must
     // come first to remove video transfer syntax before ohif uses images
     sopClassHandlers: [
+      "@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler",
       ecgdicom.sopClassHandler,
       dicomvideo.sopClassHandler,
       ohif.sopClassHandler,
@@ -181,12 +143,10 @@ function modeFactory({ modeConfiguration }) {
   };
 }
 
-const mode = ConfigPoint.createConfiguration("ecgMode", {
+const mode = ConfigPoint.createConfiguration("microscopyMode", {
   id,
   modeFactory,
   extensionDependencies,
 });
-
-
 
 export default mode;

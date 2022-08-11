@@ -3,17 +3,17 @@ const pkg = require('../package.json');
 
 const outputFile = 'index.umd.js';
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, '../public/umd/@radical/ecg-dicom/');
+const outputFolder = path.join(__dirname, '../public/umd/@radicalimaging/ecg-dicom/');
 
 const config = {
-  mode: 'production',
+  mode: 'development',
   entry: rootDir + '/' + pkg.module,
   devtool: 'source-map',
   output: {
     path: outputFolder,
     filename: outputFile,
     library: pkg.name,
-    publicPath: '/umd/@radical/ecg-dicom/',
+    publicPath: '/umd/@radicalimaging/ecg-dicom/',
     libraryTarget: 'umd',
     umdNamedDefine: true,
   },

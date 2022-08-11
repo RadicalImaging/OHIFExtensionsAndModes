@@ -1,7 +1,5 @@
 import { hotkeys } from '@ohif/core';
-import toolbarButtons from './toolbarButtons.js';
 import { id } from './id.js';
-import initToolGroups from './initToolGroups.js';
 import ConfigPoint from "config-point";
 
 const ohif = {
@@ -63,70 +61,26 @@ function modeFactory({ modeConfiguration }) {
      * Lifecycle hooks
      */
     onModeEnter: ({ servicesManager, extensionManager, commandsManager }) => {
-      const { ToolBarService, ToolGroupService } = servicesManager.services;
-
-      // Init Default and SR ToolGroups
-      initToolGroups(extensionManager, ToolGroupService, commandsManager);
-
-      let unsubscribe;
-
-      const activateTool = () => {
-        ToolBarService.recordInteraction({
-          groupId: 'WindowLevel',
-          itemId: 'WindowLevel',
-          interactionType: 'tool',
-          commands: [
-            {
-              commandName: 'setToolActive',
-              commandOptions: {
-                toolName: 'WindowLevel',
-              },
-              context: 'CORNERSTONE',
-            },
-          ],
-        });
-
-        // We don't need to reset the active tool whenever a viewport is getting
-        // added to the toolGroup.
-        unsubscribe();
-      };
-
-      // Since we only have one viewport for the basic cs3d mode and it has
-      // only one hanging protocol, we can just use the first viewport
-      ({ unsubscribe } = ToolGroupService.subscribe(
-        ToolGroupService.EVENTS.VIEWPORT_ADDED,
-        activateTool
-      ));
-
-      ToolBarService.init(extensionManager);
-      ToolBarService.addButtons(toolbarButtons);
-      ToolBarService.createButtonSection('primary', [
-      ]);
     },
+
     onModeExit: ({ servicesManager }) => {
-      const {
-        ToolGroupService,
-        MeasurementService,
-        ToolBarService,
-      } = servicesManager.services;
-
-      ToolBarService.reset();
-      MeasurementService.clearMeasurements();
-      ToolGroupService.destroy();
     },
+    
     validationTags: {
       study: [],
       series: [],
     },
+    
     isValidMode: ({ modalities }) => {
       const modalities_list = modalities.split('\\');
 
       // Slide Microscopy and ECG modality not supported by basic mode yet
       return modalities_list.includes('ECG');
     },
+    
     routes: [
       {
-        path: 'longitudinal',
+        path: 'ecg',
         /*init: ({ servicesManager, extensionManager }) => {
           //defaultViewerRouteInit
         },*/
@@ -186,7 +140,5 @@ const mode = ConfigPoint.createConfiguration("ecgMode", {
   modeFactory,
   extensionDependencies,
 });
-
-
 
 export default mode;

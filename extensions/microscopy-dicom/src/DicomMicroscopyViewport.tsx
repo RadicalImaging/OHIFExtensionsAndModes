@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactResizeDetector from 'react-resize-detector';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
-
+import * as DICOMwebClient from 'dicomweb-client';
 import microscopyManager from './tools/microscopyManager';
 // import ViewportOverlay from './components/ViewportOverlay';
 import './DicomMicroscopyViewport.css';
@@ -88,8 +88,12 @@ class DicomMicroscopyViewport extends Component {
       );
       const microscopyViewer = api.VLWholeSlideMicroscopyImageViewer;
 
+      const url = window.config.dataSources[0].configuration.wadoRoot;
+      const client = new DICOMwebClient.api.DICOMwebClient({url});
+      client.wadoURL = url;
+
       const options = {
-        client: dataSource.retrieve.dicomWebClient,
+        client,
         metadata,
         retrieveRendered: false,
         controls: ['overview'],

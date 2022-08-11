@@ -5,10 +5,7 @@
   ConfigurableModes: {
     modes: {
       "hpMode": "hpMode",
-      "ecgMode": { configOperation: "reference", source: "ecgMode"},
       "mprMode": { configOperation: "reference", source: "mprMode"},
-      "microscopyMode": { configOperation: "reference", source: "microscopyMode"},
-      "@ohif/mode-tmtv": "@ohif/mode-tmtv",
     },
     clearDefaultModes: true,
   },
@@ -17,9 +14,9 @@
     configBase: "@ohif/mode-longitudinal",
 
     hangingProtocols: [
-      '@radical/hp-extension.hangingProtocolModule.heart',
-      '@radical/hp-extension.hangingProtocolModule.breast',
-      '@radical/hp-extension.hangingProtocolModule.MN',
+      '@radicalimaging/hp-extension.hangingProtocolModule.heart',
+      '@radicalimaging/hp-extension.hangingProtocolModule.breast',
+      '@radicalimaging/hp-extension.hangingProtocolModule.MN',
       '@ohif/extension-default.hangingProtocolModule.default',
       ],
   },
@@ -32,44 +29,10 @@
     routeName: "mpr",
     displayName: "Volume",
     hangingProtocols: [
-      '@radical/hp-extension.hangingProtocolModule.mpr',
+      '@radicalimaging/hp-extension.hangingProtocolModule.mpr',
       '@ohif/extension-default.hangingProtocolModule.default',
       ],
   },
 
-  microscopyMode: {
-    configBase: "@ohif/mode-longitudinal",
-
-    id: "microscopy",
-    route: "microscopy",
-    routeName: "microscopy",
-    displayName: "Microscopy",
-
-    sopClassHandlers: [
-      "@radical/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler",
-    ],
-    routes: [
-      {
-        _layoutTemplate: {
-          props: {
-            viewports: {
-              microscopy: {
-                namespace: "@radical/microscopy-dicom.viewportModule.microscopy-dicom",
-                displaySetsToDisplay: [
-                  "@radical/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler",
-                  "@radical/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySRSopClassHandler",
-                ],
-              },
-            },
-          },
-        },
-      },
-    ],
-
-    // Need to define a second function because the original value of the first one is already present, so it
-    // uses the original value as the replacement text.  TODO - fix in config-point
-    isValidModeFunc: {configOperation: 'safe', value: 'modalities.indexOf("SM")!=-1'},
-    isValidMode: {configOperation: 'reference', reference: 'isValidModeFunc'},
-  }
 
 }
