@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/microscopy-dicom",
-  "version": "3.0.0",
+  "version": "3.0.5",
   "description": "Microscopy Viewer for OHIF 3",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",

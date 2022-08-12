@@ -10,6 +10,9 @@
     "README.md"
   ],
   "repository": "OHIF/Viewers",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "ohif-mode"
   ],
