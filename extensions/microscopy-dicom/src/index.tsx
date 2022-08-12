@@ -1,7 +1,6 @@
 import DicomMicroscopySopClassHandler from './DicomMicroscopySopClassHandler';
 import { id } from './id';
 import React, { Suspense } from "react";
-import modeFactory from './microscopyModeFactory';
 
 const Component = React.lazy(() => {
   return import('./DicomMicroscopyViewport');
@@ -19,8 +18,6 @@ const MicroscopyViewport = props => {
  * You can remove any of the following modules if you don't need them.
  */
 export default {
-  ...modeFactory,
-
   /**
    * Only required property. Should be a unique value across all extensions.
    * You ID can be anything you want, but it should be unique.
