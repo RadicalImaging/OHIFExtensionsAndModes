@@ -31,13 +31,23 @@ const dicompdf = {
   viewport: '@ohif/extension-dicom-pdf.viewportModule.dicom-pdf',
 };
 
-/**
- * Just two dependencies to be able to render a viewport with panels in order
- * to make sure that the mode is working.
- */
+
+const tracked = {
+  measurements:
+    '@ohif/extension-measurement-tracking.panelModule.trackedMeasurements',
+  thumbnailList: '@ohif/extension-measurement-tracking.panelModule.seriesList',
+  viewport:
+    '@ohif/extension-measurement-tracking.viewportModule.cornerstone-tracked',
+};
+
 const extensionDependencies = {
+  // Can derive the versions at least process.env.from npm_package_version
   '@ohif/extension-default': '^3.0.0',
   '@ohif/extension-cornerstone': '^3.0.0',
+  '@ohif/extension-measurement-tracking': '^3.0.0',
+  '@ohif/extension-cornerstone-dicom-sr': '^3.0.0',
+  '@ohif/extension-dicom-pdf': '^3.0.1',
+  '@ohif/extension-dicom-video': '^3.0.1',
   '@radicalimaging/hp-extension': '^3.0.0',
 };
 
@@ -100,6 +110,18 @@ function modeFactory({ modeConfiguration }) {
                   namespace: cornerstone.viewport,
                   displaySetsToDisplay: [ohif.sopClassHandler],
                 },
+                {
+                  namespace: dicomsr.viewport,
+                  displaySetsToDisplay: [dicomsr.sopClassHandler],
+                },
+                {
+                  namespace: dicomvideo.viewport,
+                  displaySetsToDisplay: [dicomvideo.sopClassHandler],
+                },
+                {
+                  namespace: dicompdf.viewport,
+                  displaySetsToDisplay: [dicompdf.sopClassHandler],
+                },
               ],
             },
           };
@@ -108,6 +130,7 @@ function modeFactory({ modeConfiguration }) {
     ],
     /** List of extensions that are used by the mode */
     extensions: extensionDependencies,
+
     /** HangingProtocols used by the mode */
     hangingProtocols: [
       '@radicalimaging/hp-extension.hangingProtocolModule.heart',
@@ -115,6 +138,7 @@ function modeFactory({ modeConfiguration }) {
       '@radicalimaging/hp-extension.hangingProtocolModule.MN',
       '@ohif/extension-default.hangingProtocolModule.default',
     ],
+
     /** SopClassHandlers used by the mode */
     sopClassHandlers: [
       dicomvideo.sopClassHandler,
@@ -122,6 +146,7 @@ function modeFactory({ modeConfiguration }) {
       dicompdf.sopClassHandler,
       dicomsr.sopClassHandler,
     ],
+    
     /** hotkeys for mode */
     hotkeys: [...hotkeys.defaults.hotkeyBindings],
   };
