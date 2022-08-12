@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/mode-microscopy",
-  "version": "3.0.5",
+  "version": "3.0.7",
   "description": "Microscopy Viewing Mode",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
@@ -32,7 +32,8 @@
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
-    "@ohif/core": "^3.0.0"
+    "@ohif/core": "^3.0.0",
+    "@radicalimaging/microscopy-dicom": "^3.0.5"
   },
   "dependencies": {
     "@babel/runtime": "7.7.6"
