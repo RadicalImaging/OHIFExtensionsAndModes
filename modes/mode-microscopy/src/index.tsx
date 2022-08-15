@@ -28,11 +28,6 @@ const dicomvideo = {
   viewport: '@ohif/extension-dicom-video.viewportModule.dicom-video',
 };
 
-const ecgdicom = {
-  sopClassHandler: '@radicalimaging/ecg-dicom.sopClassHandlerModule.ecg-dicom',
-  viewport: '@radicalimaging/ecg-dicom.viewportModule.ecg-dicom',
-};
-
 const dicompdf = {
   sopClassHandler: '@ohif/extension-dicom-pdf.sopClassHandlerModule.dicom-pdf',
   viewport: '@ohif/extension-dicom-pdf.viewportModule.dicom-pdf',
@@ -113,10 +108,6 @@ function modeFactory() {
                   namespace: dicompdf.viewport,
                   displaySetsToDisplay: [dicompdf.sopClassHandler],
                 },
-                {
-                  namespace: ecgdicom.viewport,
-                  displaySetsToDisplay: [ecgdicom.sopClassHandler],
-                },
               ],
             },
           };
@@ -131,7 +122,6 @@ function modeFactory() {
     // come first to remove video transfer syntax before ohif uses images
     sopClassHandlers: [
       '@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler',
-      ecgdicom.sopClassHandler,
       dicomvideo.sopClassHandler,
       ohif.sopClassHandler,
       dicompdf.sopClassHandler,
