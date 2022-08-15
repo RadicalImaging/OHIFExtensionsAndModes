@@ -1,6 +1,6 @@
 import { hotkeys } from '@ohif/core';
 import { id } from './id';
-import ConfigPoint from "config-point";
+import ConfigPoint from 'config-point';
 
 const ohif = {
   layout: '@ohif/extension-default.layoutTemplateModule.viewerLayout',
@@ -46,7 +46,6 @@ const extensionDependencies = {
   '@ohif/extension-cornerstone-dicom-sr': '^3.0.0',
   '@ohif/extension-dicom-pdf': '^3.0.1',
   '@ohif/extension-dicom-video': '^3.0.1',
-  '@radicalimaging/ecg-dicom': '^3.0.0',
 };
 
 function modeFactory() {
@@ -56,28 +55,26 @@ function modeFactory() {
     id,
     routeName: 'microscopy',
     displayName: 'Microscopy',
-    
+
     /**
      * Lifecycle hooks
      */
-    onModeEnter: ({ servicesManager, extensionManager, commandsManager }) => {
-    },
+    onModeEnter: ({ servicesManager, extensionManager, commandsManager }) => {},
 
-    onModeExit: ({ servicesManager }) => {
-    },
-    
+    onModeExit: ({ servicesManager }) => {},
+
     validationTags: {
       study: [],
       series: [],
     },
-    
+
     isValidMode: ({ modalities }) => {
       const modalities_list = modalities.split('\\');
 
       // Slide Microscopy and ECG modality not supported by basic mode yet
       return modalities_list.includes('SM');
     },
-    
+
     routes: [
       {
         path: 'microscopy',
@@ -93,10 +90,11 @@ function modeFactory() {
               rightPanels: [tracked.measurements],
               viewports: [
                 {
-                  namespace: "@radicalimaging/microscopy-dicom.viewportModule.microscopy-dicom",
+                  namespace:
+                    '@radicalimaging/microscopy-dicom.viewportModule.microscopy-dicom',
                   displaySetsToDisplay: [
-                    "@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler",
-                    "@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySRSopClassHandler",
+                    '@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler',
+                    '@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySRSopClassHandler',
                   ],
                 },
                 {
@@ -132,7 +130,7 @@ function modeFactory() {
     // general handler needs to come last.  For this case, the dicomvideo must
     // come first to remove video transfer syntax before ohif uses images
     sopClassHandlers: [
-      "@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler",
+      '@radicalimaging/microscopy-dicom.sopClassHandlerModule.DicomMicroscopySopClassHandler',
       ecgdicom.sopClassHandler,
       dicomvideo.sopClassHandler,
       ohif.sopClassHandler,
@@ -143,7 +141,7 @@ function modeFactory() {
   };
 }
 
-const mode = ConfigPoint.createConfiguration("microscopyMode", {
+const mode = ConfigPoint.createConfiguration('microscopyMode', {
   id,
   modeFactory,
   extensionDependencies,
