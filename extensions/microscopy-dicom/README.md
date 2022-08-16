@@ -1,5 +1,7 @@
 # microscopy-dicom 
-Microscopy Viewer Plugin for OHIF v3.2
+DICOM Microscopy Viewer Plugin for OHIF v3.2
+
+![image](https://user-images.githubusercontent.com/27778909/184883332-b67d2046-e428-457c-8a1a-1cc5f0854a45.png)
 
 ## Description 
 The Microscopy plugin for OHIF allows rendering of DICOM microscopy images within OHIF v3.2.  
@@ -9,6 +11,10 @@ OHIF v2 tool set into the v3 version.
 The microscopy plugin uses the dicom-microscopy-viewer, which has various tools for annotation, as well as
 support for switching between various DICOM map layers so that the user can magnify the image, and the appropriate
 DICOM file will be chosen to be used.  Tiles fetches are mapped into frames, and the frames are displayed within OpenLayers.  This allows for fast panning even when images are very large.  The viewer has been tested on objects containing 340,000 tiles, and is still extremely fast.
+
+## Try it out
+You can try a live version 
+[here](https://d3t6nz73ql33tx.cloudfront.net/microscopy?StudyInstanceUIDs=1.2.276.1.74.1.2.132733202464108492637644434464108492)
 
 ## Future Work
 There are a number of defficincies in the current viewer.  None of the annotation tools currently work with the service, and the OHIF v2 implementation of those tools was a very custom side panel for storing measurements.  Both of these areas need to be addressed.
