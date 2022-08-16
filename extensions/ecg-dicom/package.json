@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/ecg-dicom",
-  "version": "5.1.0",
+  "version": "3.0.8",
   "description": "Basic DICOM ECG Viewer",
   "author": "Bill Wallace",
   "license": "MIT",
@@ -16,7 +16,7 @@
   "keywords": [
     "ohif-extension"
   ],
-  "main": "dist/index.umd.js",
+  "main": "dist/umd/@radicalimaging/ecg-dicom/index.umd.js",
   "module": "src/index.tsx",
   "engines": {
     "node": ">=14",
