@@ -1,9 +1,10 @@
 const path = require('path');
 const pkg = require('../package.json');
 
-const outputFile = 'index.umd.js';
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, '../public/umd', pkg.name);
+const outputFolder = path.join(__dirname, '../dist');
+const packageName = pkg.name.replace('/', '--');
+const outputFile = `index.umd.js`;
 
 const config = {
   mode: 'development',
@@ -13,7 +14,7 @@ const config = {
     path: outputFolder,
     filename: outputFile,
     library: pkg.name,
-    publicPath: `/umd/${pkg.name}/`,
+    chunkFilename: `[name].${packageName}.chunk.js`,
     libraryTarget: 'umd',
     umdNamedDefine: true,
   },
@@ -40,7 +41,7 @@ const config = {
         loader: 'babel-loader',
         exclude: /(node_modules|bower_components)/,
         resolve: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx',],
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
       },
     ],
