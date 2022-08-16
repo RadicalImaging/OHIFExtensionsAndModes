@@ -66,6 +66,12 @@ const config = {
         amd: 'config-point',
         root: 'config-point',
       },
+      '@radicalimaging/config-mode': {
+        commonjs2: '@radicalimaging/config-mode',
+        commonjs: '@radicalimaging/config-mode',
+        amd: '@radicalimaging/config-mode',
+        root: '@radicalimaging/config-mode',
+      },
     },
   ],
   module: {

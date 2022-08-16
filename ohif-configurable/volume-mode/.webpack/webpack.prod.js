@@ -6,7 +6,7 @@ const rootDir = path.resolve(__dirname, '../');
 const outputFolder = path.join(__dirname, '../public/umd', pkg.name);
 
 const config = {
-  mode: 'development',
+  mode: 'production',
   entry: rootDir + '/' + pkg.module,
   devtool: 'source-map',
   output: {
@@ -14,6 +14,7 @@ const config = {
     filename: outputFile,
     library: pkg.name,
     libraryTarget: 'umd',
+    publicPath: `/umd/${pkg.name}/`,
     umdNamedDefine: true,
   },
   externals: [
@@ -65,6 +66,12 @@ const config = {
         commonjs: 'config-point',
         amd: 'config-point',
         root: 'config-point',
+      },
+      '@radicalimaging/config-mode': {
+        commonjs2: '@radicalimaging/config-mode',
+        commonjs: '@radicalimaging/config-mode',
+        amd: '@radicalimaging/config-mode',
+        root: '@radicalimaging/config-mode',
       },
     },
   ],

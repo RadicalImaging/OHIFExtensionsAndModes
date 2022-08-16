@@ -1,18 +1,21 @@
 {
-  "name": "@radicalimaging/config-mode",
-  "version": "3.0.0",
-  "description": "A configurable/themeable mode that allows runtime extensions to the mode.",
-  "author": "Radical Imaging",
+  "name": "@radicalimaging/mode-hp",
+  "version": "3.0.1",
+  "description": "Apply hanging protocols to longitudinal mode",
+  "author": "Bill Wallace and Radical Imaging",
   "license": "MIT",
   "files": [
-    "dist",
+    "public/**",
     "README.md"
   ],
   "repository": "OHIF/Viewers",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "ohif-mode"
   ],
-  "main": "public/umd/@radicalimaging/config-mode/index.umd.js",
+  "main": "public/umd/@radicalimaging/mode-hp/index.umd.js",
   "module": "src/index.tsx",
   "engines": {
     "node": ">=14",
@@ -29,18 +32,11 @@
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
-    "@cornerstonejs/core": "^3.0.0",
-    "@cornerstonejs/tools": "^3.0.0",
     "@ohif/core": "^3.0.0"
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
-    "@cornerstonejs/tools": "^0.21.3",
-    "config-point": "^0.4.8",
-    "gl-matrix": "^3.4.3",
-    "lodash": "^4.17.21",
-    "lodash.clonedeep": "^4.5.0",
-    "lodash.get": "^4.4.2"
+    "config-point": "^0.4.8"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",

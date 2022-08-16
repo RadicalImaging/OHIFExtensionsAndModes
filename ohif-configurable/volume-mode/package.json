@@ -1,21 +1,18 @@
 {
-  "name": "@radicalimaging/mode-hp",
-  "version": "3.0.1",
-  "description": "Apply hanging protocols to longitudinal mode",
-  "author": "Bill Wallace and Radical Imaging",
+  "name": "@radicalimaging/volume-mode",
+  "version": "3.0.0",
+  "description": "Volume Viewer Mode",
+  "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
+  "main": "public/umd/@radicalimaging/volume-mode/index.umd.js",
   "files": [
     "public/**",
     "README.md"
   ],
   "repository": "OHIF/Viewers",
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
     "ohif-mode"
   ],
-  "main": "public/umd/@radicalimaging/mode-hp/index.umd.js",
   "module": "src/index.tsx",
   "engines": {
     "node": ">=14",
@@ -35,7 +32,8 @@
     "@ohif/core": "^3.0.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.7.6"
+    "@babel/runtime": "7.7.6",
+    "config-point": "^0.4.8"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",

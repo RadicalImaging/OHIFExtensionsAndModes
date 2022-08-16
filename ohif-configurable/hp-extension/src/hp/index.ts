@@ -2,6 +2,7 @@ import hpMpr from './hpMpr';
 import hpHeart from './hpHeart';
 import hpMN from './hpMN';
 import hpBreast from './hpBreast';
+import hpVolume from './hpVolume';
 import ConfigPoint from "config-point";
 
 const hangingProtocols = ConfigPoint.createConfiguration("hpExtensionHangingProtocols",
@@ -22,6 +23,10 @@ const hangingProtocols = ConfigPoint.createConfiguration("hpExtensionHangingProt
       {
         name: 'MN',
         protocols: hpMN,
+      },
+      {
+        name: 'Volume',
+        protocols: hpVolume,
       },
     ],
   });
