@@ -6,13 +6,14 @@ const outputFolder = path.join(__dirname, `../dist/umd/${pkg.name}/`);
 const outputFile = 'index.umd.js';
 
 const config = {
-  mode: 'development',
+  mode: 'production',
   entry: rootDir + '/' + pkg.module,
   devtool: 'source-map',
   output: {
     path: outputFolder,
     filename: outputFile,
     library: pkg.name,
+    publicPath: `/umd/${pkg.name}/`,
     libraryTarget: 'umd',
     chunkFilename: '[name].chunk.js',
     umdNamedDefine: true,
@@ -24,6 +25,42 @@ const config = {
         commonjs2: 'react',
         commonjs: 'react',
         amd: 'react',
+      },
+      '@ohif/core': {
+        commonjs2: '@ohif/core',
+        commonjs: '@ohif/core',
+        amd: '@ohif/core',
+        root: '@ohif/core',
+      },
+      '@ohif/ui': {
+        commonjs2: '@ohif/ui',
+        commonjs: '@ohif/ui',
+        amd: '@ohif/ui',
+        root: '@ohif/ui',
+      },
+      '@cornerstonejs/core': {
+        commonjs2: '@cornerstonejs/core',
+        commonjs: '@cornerstonejs/core',
+        amd: '@cornerstonejs/core',
+        root: '@cornerstonejs/core',
+      },
+      '@cornerstonejs/tools': {
+        commonjs2: '@cornerstonejs/tools',
+        commonjs: '@cornerstonejs/tools',
+        amd: '@cornerstonejs/tools',
+        root: '@cornerstonejs/tools',
+      },
+      '@ohif/ui': {
+        commonjs2: '@ohif/ui',
+        commonjs: '@ohif/ui',
+        amd: '@ohif/ui',
+        root: '@ohif/ui',
+      },
+      '@ohif/mode-longitudinal': {
+        commonjs2: '@ohif/mode-longitudinal',
+        commonjs: '@ohif/mode-longitudinal',
+        amd: '@ohif/mode-longitudinal',
+        root: '@ohif/mode-longitudinal',
       },
       'config-point': {
         commonjs2: 'config-point',
@@ -47,7 +84,7 @@ const config = {
   },
   resolve: {
     modules: [path.resolve('./node_modules'), path.resolve('./src')],
-    extensions: ['.json', '.js', '.jsx'],
+    extensions: ['.json', '.js', '.jsx', '.tsx', '.ts'],
   },
 };
 
