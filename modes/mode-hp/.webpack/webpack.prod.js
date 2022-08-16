@@ -14,7 +14,6 @@ const config = {
     filename: outputFile,
     library: pkg.name,
     libraryTarget: 'umd',
-    publicPath: `/umd/${pkg.name}/`,
     umdNamedDefine: true,
   },
   externals: [

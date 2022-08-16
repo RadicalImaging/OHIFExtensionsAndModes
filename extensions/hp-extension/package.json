@@ -9,6 +9,9 @@
     "README.md"
   ],
   "repository": "OHIF/Viewers",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "ohif-extension"
   ],
@@ -43,6 +46,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
+    "@cornerstonejs/tools": "^0.21.4",
     "config-point": "^0.4.8",
     "lodash": "^4.17.21"
   },

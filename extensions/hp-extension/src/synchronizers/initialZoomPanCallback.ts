@@ -12,7 +12,8 @@ export default function initialPanZoomCallback(
     );
   }
 
-  const { viewportId, options } = sourceViewport;
+  const { viewportId } = sourceViewport;
+  const options = synchronizerInstance.getOptions(viewportId);
   if (!options) {
     return;
   }
@@ -48,15 +49,16 @@ export default function initialPanZoomCallback(
   if( pan ) sViewport.setPan(pan);
 }
 
-export function storeCurrentZoomPan(synchronizerInstance: Synchronizer,  sourceViewport: Types.IViewportId) {
-  const renderingEngine = getRenderingEngine(sourceViewport.renderingEngineId);
+export function storeCurrentZoomPan(synchronizerInstance: Synchronizer,  viewportInfo: Types.IViewportId) {
+  const renderingEngine = getRenderingEngine(viewportInfo.renderingEngineId);
   if (!renderingEngine) {
     throw new Error(
-      `No RenderingEngine for Id: ${sourceViewport.renderingEngineId}`
+      `No RenderingEngine for Id: ${viewportInfo.renderingEngineId}`
     );
   }
 
-  const { viewportId, options } = sourceViewport;
+  const { viewportId } = viewportInfo;
+  const options = synchronizerInstance.getOptions(viewportId);
   if (!options) return;
 
   const sViewport = renderingEngine.getViewport(viewportId);

@@ -1,7 +1,6 @@
 import { id } from './id';
 import getSopClassHandlerModule from "./getSopClassHandlerModule";
 import React, { Suspense } from "react";
-import mode from './ecgModeFactory';
 
 const Component = React.lazy(() => {
   return import('./viewports/EcgViewport');
@@ -19,8 +18,6 @@ const EcgViewport = props => {
  * You can remove any of the following modules if you don't need them.
  */
 export default {
-  ...mode,
-  
   /**
    * Only required property. Should be a unique value across all extensions.
    * You ID can be anything you want, but it should be unique.

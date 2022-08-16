@@ -26,27 +26,12 @@ const ConfigurableModes = ConfigPoint.createConfiguration("ConfigurableModes", {
 
 
 /** Load method for dynamic loading of modes and extensions. */
-const modesFactory = async (modes, extensions) => {
+const hotLoad = async () => {
   // Load themes from the "theme" parameter on the URL before returning the modes
   await loadSearchConfigPoint("theme", "/theme", "theme");
-
-  // TODO - iterate over the set of actual modes, and import only the required ones once.
-  // Creates a mode called configPoint-base-@ohif/mode-longitudinal
-  createDerivativeMode(await import("@ohif/mode-longitudinal"));
-  createDerivativeMode(await import("@ohif/mode-tmtv"));
-
-  if( ConfigurableModes.clearDefaultModes ) modes.splice(0,modes.length);
-  
-  await loadUmdExtensions(ConfigurableModes.umdExtensions, extensions);
-
-  const useModes = ConfigurableModes.modes.map(modeRef => {
-    // getConfig will just return an object if provided one, or will get the referenced mode value
-    const mode = ConfigPoint.getConfig(modeRef);
-      return mode.bindFactory ? {...mode, modeFactory: mode.bindFactory(mode)} : mode;
-  });
-  return useModes;
 };
 
-export {configMode};
+
+export {hotLoad};
 
 export default modesFactory;
