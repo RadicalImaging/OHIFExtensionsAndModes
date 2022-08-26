@@ -1,18 +1,22 @@
 {
   "name": "@radicalimaging/config-mode",
-  "version": "3.0.0",
+  "version": "3.3.0",
   "description": "A configurable/themeable mode that allows runtime extensions to the mode.",
   "author": "Radical Imaging",
   "license": "MIT",
   "files": [
-    "dist",
+    "public/**",
+    "dist/**",
     "README.md"
   ],
   "repository": "OHIF/Viewers",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "ohif-mode"
   ],
-  "main": "public/umd/@radicalimaging/config-mode/index.umd.js",
+  "main": "dist/umd/@radicalimaging/config-mode/index.umd.js",
   "module": "src/index.tsx",
   "engines": {
     "node": ">=14",
@@ -29,13 +33,13 @@
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
-    "@cornerstonejs/core": "^3.0.0",
-    "@cornerstonejs/tools": "^3.0.0",
+    "@cornerstonejs/core": "0.15.0",
+    "@cornerstonejs/tools": "0.22.0",
     "@ohif/core": "^3.0.0"
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
-    "@cornerstonejs/tools": "^0.21.3",
+    "@cornerstonejs/tools": "0.22.0",
     "config-point": "^0.4.8",
     "gl-matrix": "^3.4.3",
     "lodash": "^4.17.21",

@@ -12,7 +12,7 @@
   "keywords": [
     "ohif-extension"
   ],
-  "main": "public/umd/@radicalimaging/site-finding/index.umd.js",
+  "main": "dist/umd/@radicalimaging/site-finding/index.umd.js",
   "module": "src/index.tsx",
   "engines": {
     "node": ">=14",

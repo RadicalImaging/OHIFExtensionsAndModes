@@ -6,6 +6,5 @@ which rely on a common configurable package `config-point`.  As such, they are i
 Radical Imaging is the primary author, with individual authors including:
 
 * Bill Wallace
-* Alireza Sedghi
 * Rodolfo Costa
 

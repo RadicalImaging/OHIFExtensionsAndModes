@@ -1,14 +1,17 @@
 {
   "name": "@radicalimaging/volume-mode",
-  "version": "3.0.0",
+  "version": "3.3.1",
   "description": "Volume Viewer Mode",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
-  "main": "public/umd/@radicalimaging/volume-mode/index.umd.js",
+  "main": "dist/umd/@radicalimaging/volume-mode/index.umd.js",
   "files": [
-    "public/**",
+    "dist/**",
     "README.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": "OHIF/Viewers",
   "keywords": [
     "ohif-mode"
@@ -33,6 +36,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
+    "@radicalimaging/config-mode": "^3.3.0",
     "config-point": "^0.4.8"
   },
   "devDependencies": {

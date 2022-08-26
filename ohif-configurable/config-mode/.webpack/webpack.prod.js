@@ -1,19 +1,21 @@
 const path = require('path');
 const pkg = require('../package.json');
 
-const outputFile = 'index.umd.js';
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, '../public/umd', pkg.name);
+const outputFolder = path.join(__dirname, `../dist/umd/${pkg.name}/`);
+const outputFile = 'index.umd.js';
 
 const config = {
-  mode: 'development',
+  mode: 'production',
   entry: rootDir + '/' + pkg.module,
   devtool: 'source-map',
   output: {
     path: outputFolder,
     filename: outputFile,
     library: pkg.name,
+    publicPath: `/umd/${pkg.name}/`,
     libraryTarget: 'umd',
+    chunkFilename: '[name].chunk.js',
     umdNamedDefine: true,
   },
   externals: [
@@ -75,14 +77,14 @@ const config = {
         loader: 'babel-loader',
         exclude: /(node_modules|bower_components)/,
         resolve: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx',],
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
       },
     ],
   },
   resolve: {
     modules: [path.resolve('./node_modules'), path.resolve('./src')],
-    extensions: ['.json', '.js', '.jsx', '.tsx', '.ts',],
+    extensions: ['.json', '.js', '.jsx', '.tsx', '.ts'],
   },
 };
 

@@ -12,6 +12,7 @@ import createSingleViewportSynchronizer from './createSingleViewportSynchronizer
 export default function createSynchronizer(
   synchronizerName: string,
 ) {
+  console.log("createSynchronizer");
   const synchronizer = createSingleViewportSynchronizer(
     synchronizerName,
     Enums.Events.STACK_NEW_IMAGE,

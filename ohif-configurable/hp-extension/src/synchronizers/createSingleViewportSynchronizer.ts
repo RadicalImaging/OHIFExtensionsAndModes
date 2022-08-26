@@ -16,6 +16,10 @@ function targetEventListener(listener, evt) {
 function add(viewportInfo) {
   const { viewportId } = viewportInfo;
   const options = this.getOptions(viewportId);
+  if( !options ) {
+    this.setOptions(viewportId, { viewportInfo });
+    return;
+  }
   options.viewportInfo = viewportInfo;
   
   console.log("Add viewport info called for", viewportId);

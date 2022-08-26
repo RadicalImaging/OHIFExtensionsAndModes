@@ -26,9 +26,7 @@ export default {
     servicesManager,
   }) => {
     const { HangingProtocolService, SyncGroupService } = servicesManager.services;
-    // HangingProtocolService.addCustomViewportOption('zoomPan', "Set initial zoom, WITH camera event", 
-    //   setViewportZoomPan, 
-    //   storeViewportZoomPan);
+    console.log("HangingProtocolService=", HangingProtocolService);
     HangingProtocolService.addCustomAttribute('ViewCode', 'View Code Designator:Value', viewCodeAttribute);
     HangingProtocolService.addCustomAttribute('Laterality', 'Laterality of object', lateralityAttribute);
     HangingProtocolService.addCustomAttribute('seriesDescriptions', 'Series Descriptions', seriesDescriptionsFromDisplaySets);

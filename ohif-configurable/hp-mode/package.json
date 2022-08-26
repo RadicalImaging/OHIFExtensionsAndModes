@@ -1,11 +1,11 @@
 {
-  "name": "@radicalimaging/mode-hp",
-  "version": "3.0.1",
+  "name": "@radicalimaging/hp-mode",
+  "version": "3.3.2",
   "description": "Apply hanging protocols to longitudinal mode",
   "author": "Bill Wallace and Radical Imaging",
   "license": "MIT",
   "files": [
-    "public/**",
+    "dist/**",
     "README.md"
   ],
   "repository": "OHIF/Viewers",
@@ -15,7 +15,7 @@
   "keywords": [
     "ohif-mode"
   ],
-  "main": "public/umd/@radicalimaging/mode-hp/index.umd.js",
+  "main": "dist/umd/@radicalimaging/hp-mode/index.umd.js",
   "module": "src/index.tsx",
   "engines": {
     "node": ">=14",
@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
+    "@radicalimaging/config-mode": "^3.3.0",
     "config-point": "^0.4.8"
   },
   "devDependencies": {
