@@ -46,7 +46,7 @@ const extensionDependencies = {
   '@ohif/extension-cornerstone-dicom-sr': '^3.0.0',
   '@ohif/extension-dicom-pdf': '^3.0.1',
   '@ohif/extension-dicom-video': '^3.0.1',
-  '@radicalimaging/ecg-dicom': '^3.0.0',
+  '@radicalimaging/ecg-dicom': '^3.0.4',
 };
 
 function modeFactory({ modeConfiguration }) {
