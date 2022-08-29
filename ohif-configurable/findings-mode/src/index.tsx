@@ -16,7 +16,7 @@ const extensionDependencies = {
 };
 
 function modeFactory({ modeConfiguration }) {
-  return ConfigPoint.createConfiguration("@radicalimaging/mode-hp", {
+  return ConfigPoint.createConfiguration("@radicalimaging/mode-findings", {
     /**
      * Mode ID, which should be unique among modes used by the viewer. This ID
      * is used to identify the mode in the viewer's state.
