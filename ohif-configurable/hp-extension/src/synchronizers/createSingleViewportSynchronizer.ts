@@ -20,9 +20,7 @@ function add(viewportInfo) {
     this.setOptions(viewportId, { viewportInfo });
     return;
   }
-  options.viewportInfo = viewportInfo;
-  
-  console.log("Add viewport info called for", viewportId);
+  options.viewportInfo = viewportInfo;  
 }
 
 function addEvent(eventName, listener) {
