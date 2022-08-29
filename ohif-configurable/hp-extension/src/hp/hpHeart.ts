@@ -1,11 +1,7 @@
 export default {
   id: 'LV Function Heart',
   hasUpdatedPriorsInformation: false,
-  name: 'Default',
-  createdDate: '2021-02-23T19:22:08.894Z',
-  modifiedDate: '2021-02-23T19:22:08.894Z',
-  availableTo: {},
-  editableBy: {},
+  name: 'LV Function Heart',
   protocolMatchingRules: [
     {
       id: 'MR',
@@ -62,7 +58,7 @@ export default {
               weight: 1,
               attribute: 'numImageFrames',
               constraint: {
-                betweeen: {
+                range: {
                   value: [20, 40],
                 },
               },
@@ -91,7 +87,7 @@ export default {
               id: 'numImageFrames>25',
               attribute: 'numImageFrames',
               constraint: {
-                betweeen: {
+                range: {
                   value: [20, 40],
                 },
               },
@@ -121,7 +117,7 @@ export default {
               id: 'numImageFrames>25',
               attribute: 'numImageFrames',
               constraint: {
-                betweeen: {
+                range: {
                   value: [20, 40],
                 },
               },
@@ -151,7 +147,7 @@ export default {
               id: 'numImageFrames>25',
               attribute: 'numImageFrames',
               constraint: {
-                betweeen: {
+                range: {
                   value: [20, 40],
                 },
               },
