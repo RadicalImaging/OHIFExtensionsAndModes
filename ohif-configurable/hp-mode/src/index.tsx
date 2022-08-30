@@ -11,7 +11,7 @@ import ConfigPoint from 'config-point';
 
 const extensionDependencies = {
   ...defaultExtensions,
-  '@radicalimaging/hp-extension': '^3.3.2',
+  '@radicalimaging/hp-extension': '^3.3.3',
 };
 
 function modeFactory({ modeConfiguration }) {
