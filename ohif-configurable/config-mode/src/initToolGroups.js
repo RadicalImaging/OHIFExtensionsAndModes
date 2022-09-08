@@ -55,6 +55,13 @@ function initDefaultToolGroup(
           eventDetails,
         }),
     },
+
+    [toolNames.EllipticalROI]: {
+      shadow: true,
+      preventHandleOutsideImage: false,
+      // Radius of the circle to draw  at the center point of the ellipse.
+      centerPointRadius: 7,
+    },
   };
 
   const toolGroupId = 'default';
@@ -119,7 +126,7 @@ function initSRToolGroup(extensionManager, ToolGroupService, commandsManager) {
   };
 
   const toolsConfig = {
-    [toolNames.ArrowAnnotate]: {
+    [SRToolNames.SRArrowAnnotate]: {
       getTextCallback: (callback, eventDetails) =>
         commandsManager.runCommand('arrowTextCallback', {
           callback,
@@ -132,6 +139,13 @@ function initSRToolGroup(extensionManager, ToolGroupService, commandsManager) {
           data,
           eventDetails,
         }),
+    },
+    
+    [SRToolNames.SREllipticalROI]: {
+      shadow: true,
+      preventHandleOutsideImage: false,
+      // Radius of the circle to draw  at the center point of the ellipse.
+      centerPointRadius: 7,
     },
   };
 

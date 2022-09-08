@@ -1,14 +1,14 @@
 import { hotkeys } from '@ohif/core';
 import { id } from './id';
 import {
-  initToolGroups, toolGroupIds, toolbarButtons,
+  initToolGroups, toolbarButtons,
   sopClassHandlers, defaultExtensions, defaultRoutes,
   onModeExit, onModeEnter,
   defaultTool, defaultToolBarSections,
 } from '@radicalimaging/config-mode';
 import ConfigPoint from 'config-point';
 import findingsContextMenu from './findingsContextMenu';
-
+import codingValues from './codingValues';
 
 const extensionDependencies = {
   ...defaultExtensions,
@@ -29,7 +29,9 @@ function modeFactory({ modeConfiguration }) {
      */
     displayName: 'Findings',
 
-    toolbarButtons: [...toolbarButtons, findingsContextMenu],
+    toolbarButtons,
+
+    modeCustomizations: [findingsContextMenu, codingValues],
 
     defaultTool,
     toolBarSections: defaultToolBarSections,

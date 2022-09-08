@@ -2,13 +2,11 @@ import { SynchronizerManager, Synchronizer } from '@cornerstonejs/tools';
 import { eventTarget } from '@cornerstonejs/core';
 
 function targetEventListener(listener, evt) {
-  console.log('targetEventListener', evt, this);
   const { detail } = evt;
   const { viewportId } = detail;
   const options = this.getOptions(viewportId);
   if( !options ) return;
   const { viewportInfo } = options;
-  console.log('viewportInfo=', viewportInfo);
   if( !viewportInfo ) return;
   listener.call(options,this,viewportInfo,evt);
 }

@@ -1,3 +1,5 @@
+import codingValues from "./codingValues";
+
 const findingsContextMenu = {
   id: 'cornerstoneContextMenu',
   type: 'ohif.contextMenu',
@@ -10,6 +12,7 @@ const findingsContextMenu = {
           commandName: 'showViewerContextMenu',
           commandOptions: {
             menuName: 'cornerstoneContextMenu',
+            refs: codingValues,
             items: [
               {
                 id: 'forExistingMeasurement',
@@ -49,24 +52,15 @@ const findingsContextMenu = {
               {
                 id: 'findingSelectionSubMenu',
                 selector: ({ nearbyToolData }) => !!nearbyToolData,
+                attribute: 'code',
                 items: [
-                  {
-                    label: 'sub1',
-                    actionType: 'RunCommands',
-                    commands: [
-                      {
-                        commandName: 'deleteMeasurement',
-                      }
-                    ],
+                  { 
+                    commandName: 'setFinding',
+                    code: 'SCT:371861004',
                   },
-                  {
-                    label: 'sub2',
-                    actionType: 'RunCommands',
-                    commands: [
-                      {
-                        commandName: 'setLabel',
-                      },
-                    ]
+                  { 
+                    commandName: 'setFinding',
+                    code: 'SCT:194983005'
                   },
                 ],
               },
@@ -74,24 +68,16 @@ const findingsContextMenu = {
               {
                 id: 'siteSelectionSubMenu',
                 selector: ({ nearbyToolData }) => !!nearbyToolData,
+                attribute: 'code',
                 items: [
                   {
-                    label: 'Site sub1',
-                    actionType: 'RunCommands',
-                    commands: [
-                      {
-                        commandName: 'deleteMeasurement',
-                      }
-                    ],
+                    actionType: 'Default',
+                    commandName: 'setSite',
+                    code: 'SegmentationCardiac:4ch',
                   },
                   {
-                    label: 'Site sub2',
-                    actionType: 'RunCommands',
-                    commands: [
-                      {
-                        commandName: 'setLabel',
-                      },
-                    ]
+                    commandName: 'setSite',
+                    code: 'SegmentationCardiac:3ch',
                   },
                 ],
               },
