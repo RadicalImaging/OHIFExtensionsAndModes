@@ -1,5 +1,5 @@
 export default function onModeEnter({ servicesManager, extensionManager, commandsManager }) {
-  const { ToolBarService, ToolGroupService } = servicesManager.services;
+  const { ToolBarService, guiCustomizationService, ToolGroupService } = servicesManager.services;
 
   // Init Default and SR ToolGroups
   this.initToolGroups(extensionManager, ToolGroupService, commandsManager);
@@ -26,4 +26,7 @@ export default function onModeEnter({ servicesManager, extensionManager, command
   Object.keys(this.toolBarSections).forEach(section => {
     ToolBarService.createButtonSection(section, this.toolBarSections[section]);
   });
+  
+  guiCustomizationService?.init?.(extensionManager);
+  guiCustomizationService?.addModeCustomizations?.(this.modeCustomizations);
 }

@@ -144,12 +144,18 @@ export default {
           // Matches displaysets, NOT series
           seriesMatchingRules: [
             {
-              id: 'numImageFrames>25',
+              id: 'numImageFrames=25',
               attribute: 'numImageFrames',
               constraint: {
-                range: {
-                  value: [20, 40],
-                },
+                equals: 25,
+              },
+            },
+            {
+              id: 'numImageFrames=30',
+              weight: 5,
+              attribute: 'numImageFrames',
+              constraint: {
+                equals: 30,
               },
             },
             {
