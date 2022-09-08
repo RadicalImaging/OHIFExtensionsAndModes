@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/hp-mode",
-  "version": "3.3.4",
+  "version": "3.3.5",
   "description": "Apply hanging protocols to longitudinal mode",
   "author": "Bill Wallace and Radical Imaging",
   "license": "MIT",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
-    "@radicalimaging/config-mode": "^3.3.0",
+    "@radicalimaging/config-mode": "^3.3.1",
     "config-point": "^0.4.8"
   },
   "devDependencies": {

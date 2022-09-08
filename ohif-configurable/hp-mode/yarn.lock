@@ -1083,20 +1083,20 @@
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
 
-"@cornerstonejs/core@^0.14.4":
-  version "0.14.4"
-  resolved "https://registry.yarnpkg.com/@cornerstonejs/core/-/core-0.14.4.tgz#bb98dfd5cda0328fd921bd066e5465109e8aaaf5"
-  integrity sha512-l/Lb4Q5LoanpythYRUVRmKxqzORg101ILFXGldqQh1U7iRT7SkPf1HBxPLlqMd5nX2P5FighpBNqnlKszUxZ1g==
+"@cornerstonejs/core@^0.15.0":
+  version "0.15.3"
+  resolved "https://registry.yarnpkg.com/@cornerstonejs/core/-/core-0.15.3.tgz#ab7a960fe74641c0f183b391f0c11b6f353af248"
+  integrity sha512-W6SiJfN3BvC8JWpUnWJzRFbQfP45qU/myKrum7kUyNyvwxyFnAaENYFpnq2FXCUS24HYRXCp4uc+C4dHDQpAFA==
   dependencies:
     detect-gpu "^4.0.7"
     lodash.clonedeep "4.5.0"
 
-"@cornerstonejs/tools@^0.21.3":
-  version "0.21.7"
-  resolved "https://registry.yarnpkg.com/@cornerstonejs/tools/-/tools-0.21.7.tgz#9243a2f0b400cb869bc8c62e4377634a787aac6d"
-  integrity sha512-2alQr2JkaUiPyBi9aipeo/quKoo5Xwr/fABiO6ce9Ur0DQpp9WZ2jZWtC/xtC36QvrXIDAruEEq5WNV4ZASPJQ==
+"@cornerstonejs/tools@0.22.0":
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/@cornerstonejs/tools/-/tools-0.22.0.tgz#357d4411fe38a1148d92587a2031b1d3a29e5fbb"
+  integrity sha512-C8PirK0+JQRYb/BNRHoG6AoCt2YIAtbikbsVwNu90mSa8fFUXo8vHGz4pfXU0FGfl7yTdKCSJmEOZr9HoEJOlQ==
   dependencies:
-    "@cornerstonejs/core" "^0.14.4"
+    "@cornerstonejs/core" "^0.15.0"
     lodash.clonedeep "4.5.0"
     lodash.get "^4.4.2"
 
@@ -1161,13 +1161,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@radicalimaging/config-mode@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@radicalimaging/config-mode/-/config-mode-3.3.0.tgz#3c4b71c8506998f2231a0d24870726634ea7eeb5"
-  integrity sha512-mgRKYytRj3HY8az26Nkd7IhzLMoWWjrhKkvHIEVu3b7toPJ8MR96jXZUljoWf7O8pG8/R0CSEII3Vi2JbTcO7Q==
+"@radicalimaging/config-mode@^3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@radicalimaging/config-mode/-/config-mode-3.3.1.tgz#56ea2dd3d91742550b5e14c139bf92f22c317615"
+  integrity sha512-nCC+TgWbrUr2hDMDC1ggwVjQyyU9h/x2bi/zMHtWB6fCF4J/LCEE7ObOqpcBE5BMoCSh2FKNp68RdwUpVbn6jw==
   dependencies:
     "@babel/runtime" "7.7.6"
-    "@cornerstonejs/tools" "^0.21.3"
+    "@cornerstonejs/tools" "0.22.0"
     config-point "^0.4.8"
     gl-matrix "^3.4.3"
     lodash "^4.17.21"
