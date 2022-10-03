@@ -5,11 +5,11 @@ const onModeExit = ({ servicesManager }) => {
     SyncGroupService,
     MeasurementService,
     ToolBarService,
-    guiCustomizationService,
+    uiCustomizationService,
   } = servicesManager.services;
 
   ToolBarService.reset();
-  guiCustomizationService?.reset?.();
+  uiCustomizationService?.reset?.();
   MeasurementService.clearMeasurements();
   ToolGroupService.destroy();
   SyncGroupService.destroy();

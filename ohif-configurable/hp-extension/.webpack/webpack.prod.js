@@ -6,7 +6,7 @@ const outputFolder = path.join(__dirname, `../dist/umd/${pkg.name}/`);
 const outputFile = 'index.umd.js';
 
 const config = {
-  mode: 'production',
+  mode: 'development',
   entry: rootDir + '/' + pkg.module,
   devtool: 'source-map',
   output: {

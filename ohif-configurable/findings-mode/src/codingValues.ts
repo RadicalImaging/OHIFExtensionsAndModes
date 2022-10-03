@@ -8,13 +8,13 @@ const codingValues = {
   },
   'SCT:194983005': {
     text: 'Aortic insufficiency',
-    color: 'darkred',
+    color: 'darkred', // TODO - annotationColor rather than color
   },
   // Series labels
   'SegmentationCardiac:4ch': {
     text: '4-chamber',
     color: '#000000',
-    seriesLabel: true,
+    seriesLabel: true,  // Remove from examples
   },
   'SegmentationCardiac:3ch': {
     text: '3-chamber',

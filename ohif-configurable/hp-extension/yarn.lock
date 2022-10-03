@@ -1077,20 +1077,20 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@cornerstonejs/core@^0.14.3":
-  version "0.14.3"
-  resolved "https://registry.yarnpkg.com/@cornerstonejs/core/-/core-0.14.3.tgz#4b9efe59ab1f611d4784e5f108ae0db6ba4a4083"
-  integrity sha512-tgjJHhRmYbmhpYSJi8mhDeg8vkNX3U5Hn4QXItiqoM4OuUo+MEWpGAc5ZAk2YWWhrs1kMXQfVtx78XDdSemFOA==
+"@cornerstonejs/core@^0.16.1":
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/@cornerstonejs/core/-/core-0.16.1.tgz#796016bae79950bd76cfb8aaf57bc7c3d131059c"
+  integrity sha512-cWu/NswDKcbdnheiJ8w0BhUL9960z9uL9MVV378f1/k3oh2lW3IIwSlUPk2oQfh9qDVH6MY89KjbKDvooDwvag==
   dependencies:
     detect-gpu "^4.0.7"
     lodash.clonedeep "4.5.0"
 
-"@cornerstonejs/tools@^0.21.4":
-  version "0.21.4"
-  resolved "https://registry.yarnpkg.com/@cornerstonejs/tools/-/tools-0.21.4.tgz#0768cd7f4221367fad7410c0185de72b2df32952"
-  integrity sha512-Myz1aKf4R9YSiEdCTnJtb0sWp8AWvAjF02/dskdWrlOueeTP3yT4U4L2Bq+yED1XqTm0vUBwdEX8PtGc7l4dYw==
+"@cornerstonejs/tools@^0.24.1":
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/@cornerstonejs/tools/-/tools-0.24.1.tgz#d6c38af6167b515b3545b7dc2db43b34f6e43d30"
+  integrity sha512-X98m1MZahte1m+hd/J8oSUH5zxj+hv/7Stav3AHOUfyMPTm9tcl32bH87WpLK7cm9bLRzMNp23/6U1biEH2+Gg==
   dependencies:
-    "@cornerstonejs/core" "^0.14.3"
+    "@cornerstonejs/core" "^0.16.1"
     lodash.clonedeep "4.5.0"
     lodash.get "^4.4.2"
 

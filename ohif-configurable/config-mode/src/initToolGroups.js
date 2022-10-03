@@ -60,7 +60,7 @@ function initDefaultToolGroup(
       shadow: true,
       preventHandleOutsideImage: false,
       // Radius of the circle to draw  at the center point of the ellipse.
-      centerPointRadius: 7,
+      centerPointRadius: 3,
     },
   };
 
@@ -145,7 +145,7 @@ function initSRToolGroup(extensionManager, ToolGroupService, commandsManager) {
       shadow: true,
       preventHandleOutsideImage: false,
       // Radius of the circle to draw  at the center point of the ellipse.
-      centerPointRadius: 7,
+      centerPointRadius: 3,
     },
   };
 
