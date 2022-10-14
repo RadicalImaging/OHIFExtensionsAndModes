@@ -1,44 +1,106 @@
 const webpack = require('webpack');
-const merge = require('webpack-merge');
 const path = require('path');
-const webpackCommon = require('./../../../.webpack/webpack.commonjs.js');
-const pkg = require('./../package.json');
+const pkg = require('../package.json');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const ROOT_DIR = path.join(__dirname, './..');
-const SRC_DIR = path.join(__dirname, '../src');
-const DIST_DIR = path.join(__dirname, '../dist');
+const rootDir = path.resolve(__dirname, '../');
+const outputFolder = path.join(__dirname, `../dist/umd/${pkg.name}/`)
+const outputFile = 'index.umd.js';
 
-module.exports = (env, argv) => {
-  const commonConfig = webpackCommon(env, argv, { SRC_DIR, DIST_DIR });
-
-  return merge(commonConfig, {
-    devtool: 'source-map',
-    stats: {
-      colors: true,
-      hash: true,
-      timings: true,
-      assets: true,
-      chunks: false,
-      chunkModules: false,
-      modules: false,
-      children: false,
-      warnings: true,
+const config = {
+  mode: 'production',
+  entry: rootDir + '/' + pkg.module,
+  devtool: 'source-map',
+  output: {
+    path: outputFolder,
+    filename: outputFile,
+    library: pkg.name,
+    publicPath: `/umd/${pkg.name}/`,
+    libraryTarget: 'umd',
+    chunkFilename: '[name].chunk.js',
+    umdNamedDefine: true,
+  },
+  externals: [
+    {
+      react: {
+        root: 'React',
+        commonjs2: 'react',
+        commonjs: 'react',
+        amd: 'react',
+      },
+      '@ohif/core': {
+        commonjs2: '@ohif/core',
+        commonjs: '@ohif/core',
+        amd: '@ohif/core',
+        root: '@ohif/core',
+      },
+      '@ohif/ui': {
+        commonjs2: '@ohif/ui',
+        commonjs: '@ohif/ui',
+        amd: '@ohif/ui',
+        root: '@ohif/ui',
+      },
+      '@cornerstonejs/core': {
+        commonjs2: '@cornerstonejs/core',
+        commonjs: '@cornerstonejs/core',
+        amd: '@cornerstonejs/core',
+        root: '@cornerstonejs/core',
+      },
+      '@cornerstonejs/tools': {
+        commonjs2: '@cornerstonejs/tools',
+        commonjs: '@cornerstonejs/tools',
+        amd: '@cornerstonejs/tools',
+        root: '@cornerstonejs/tools',
+      },
+      '@ohif/ui': {
+        commonjs2: '@ohif/ui',
+        commonjs: '@ohif/ui',
+        amd: '@ohif/ui',
+        root: '@ohif/ui',
+      },
+      '@ohif/mode-longitudinal': {
+        commonjs2: '@ohif/mode-longitudinal',
+        commonjs: '@ohif/mode-longitudinal',
+        amd: '@ohif/mode-longitudinal',
+        root: '@ohif/mode-longitudinal',
+      },
+      'config-point': {
+        commonjs2: 'config-point',
+        commonjs: 'config-point',
+        amd: 'config-point',
+        root: 'config-point',
+      },
     },
-    optimization: {
-      minimize: true,
-      sideEffects: true,
-    },
-    output: {
-      path: ROOT_DIR,
-      library: 'OHIFExtDicomHtml',
-      libraryTarget: 'umd',
-      libraryExport: 'default',
-      filename: pkg.main,
-    },
-    plugins: [
-      new webpack.optimize.LimitChunkCountPlugin({
-        maxChunks: 1,
-      }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /(\.jsx|\.js|\.tsx|\.ts)$/,
+        loader: 'babel-loader',
+        exclude: /(node_modules|bower_components)/,
+        resolve: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
     ],
-  });
+  },
+  resolve: {
+    modules: [path.resolve('./node_modules'), path.resolve('./src')],
+    extensions: ['.json', '.js', '.jsx', '.tsx', '.ts'],
+  },
+  plugins: [
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
+    }),
+    new MiniCssExtractPlugin({
+      filename: './dist/[name].css',
+      chunkFilename: './dist/[id].css',
+    }),
+  ],
 };
+
+module.exports = config;
