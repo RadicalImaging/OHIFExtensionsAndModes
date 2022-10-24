@@ -71,6 +71,13 @@ export default {
               },
             },
             {
+              attribute: 'Modality',
+              constraint: {
+                doesNotEqual: 'SR',
+              },
+              required: true,
+            },
+            {
               weight: 10,
               attribute: 'SeriesDescription',
               constraint: {
@@ -98,6 +105,13 @@ export default {
               constraint: {
                 contains: 'LAX',
               },
+            },
+            {
+              attribute: 'Modality',
+              constraint: {
+                doesNotEqual: 'SR',
+              },
+              required: true,
             },
             {
               weight: 10,
@@ -130,6 +144,13 @@ export default {
               },
             },
             {
+              attribute: 'Modality',
+              constraint: {
+                doesNotEqual: 'SR',
+              },
+              required: true,
+            },
+            {
               weight: 10,
               attribute: 'SeriesDescription',
               constraint: {
@@ -157,6 +178,13 @@ export default {
               constraint: {
                 equals: 30,
               },
+            },
+            {
+              attribute: 'Modality',
+              constraint: {
+                doesNotEqual: 'SR',
+              },
+              required: true,
             },
             {
               weight: 20,
