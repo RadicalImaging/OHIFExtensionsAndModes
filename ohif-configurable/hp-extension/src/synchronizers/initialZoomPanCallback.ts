@@ -25,10 +25,13 @@ export default function initialPanZoomCallback(
     const imageData = sViewport.getImageData();
     const { dimensions } = imageData;
 
+    const { pan = [0,0], zoom: previousZoom=1 } = options;
     const { initialDisplayArea = [1, 1], imageCanvasPoint = [0.5, 0.5] } = options;
     const [areaX, areaY] = initialDisplayArea
-    const zoom = Math.min(1.1 / areaX, 1.1 / areaY);
-    sViewport.setZoom(zoom, true);
+    const currentZoom = sViewport.getZoom();
+    const zoom = Math.min(currentZoom / areaX, currentZoom / areaY);
+    const actualZoom = previousZoom * zoom;
+    options.initialZoom = zoom;
 
     const canvas = sViewport.getCanvas();
     const zeroCanvas = sViewport.worldToCanvas([0, 0, 0]);
@@ -43,15 +46,17 @@ export default function initialPanZoomCallback(
     const imageWidth = dimensionsCanvas[1] - zeroCanvas[1];
     const panX = (screenX - 0.5) * screenWidth + (0.5 - imageX) * imageWidth;
     const panY = (screenY - 0.5) * screenHeight + (0.5 - imageY) * imageHeight;
+    sViewport.setZoom(actualZoom);
     if (isFinite(panX) && isFinite(panY)) {
-      sViewport.setPan([panX, panY], true);
+      sViewport.setPan([panX+pan[0], panY+pan[1]]);
+      options.initialPan = [panX,panY];
+    } else {
+      delete options.initialPan;
+      sViewport.setPan(pan);
     }
 
-    const { pan, zoom: previousZoom } = options;
     // These are non-default initial values here, so don't pass true to reset
     // Values have been checked before assigning, so safe to just assign here.
-    if (previousZoom) sViewport.setZoom(previousZoom);
-    if (pan) sViewport.setPan(pan);
     options.isInitialSet = false;
   } catch (reason) {
     console.log("Unable to set initial pan/zoom due to", reason);
@@ -79,7 +84,10 @@ export function storeCurrentZoomPan(synchronizerInstance: Synchronizer, viewport
   const sViewport = renderingEngine.getViewport(viewportId);
   const pan = sViewport.getPan();
   if (pan && isFinite(pan[0]) && isFinite(pan[1])) {
-    options.pan = pan;
-    options.zoom = sViewport.getZoom();
+    const { initialPan = [0,0] } = options;
+    options.pan = [pan[0]-initialPan[0], pan[1]-initialPan[1]];
+    options.zoom = sViewport.getZoom() / (options.initialZoom || 1.1);
+  } else {
+    console.log("* not storing pan/zoom", pan, sViewport.getZoom());
   }
 }
