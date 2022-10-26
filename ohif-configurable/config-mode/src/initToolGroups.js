@@ -37,10 +37,17 @@ function initDefaultToolGroup(
       { toolName: toolNames.Magnify },
     ],
     // enabled
-    // disabled
+    disabled: [{ toolName: toolNames.Crosshairs }],
   };
 
   const toolsConfig = {
+    [toolNames.Crosshairs]: {
+      viewportIndicators: false,
+      autoPan: {
+        enabled: true,
+        panSize: 10,
+      },
+    },
     [toolNames.ArrowAnnotate]: {
       getTextCallback: (callback, eventDetails) =>
         commandsManager.runCommand('arrowTextCallback', {

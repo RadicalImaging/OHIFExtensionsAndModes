@@ -1,40 +1,44 @@
 {
-  "name": "@radicalimaging/mode-ecg",
-  "version": "3.4.2",
-  "description": "Display ECGs",
+  "name": "@radicalimaging/overlays-extension",
+  "version": "3.0.0",
+  "description": "Various custom overlays",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
-  "module": "src/index.tsx",
+  "main": "dist/umd/@radicalimaging/overlays-extension/index.umd.js",
   "files": [
-    "public/**",
     "dist/**",
     "README.md"
   ],
   "repository": "OHIF/Viewers",
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
-    "ohif-mode"
+    "ohif-extension"
   ],
-  "main": "dist/umd/@radicalimaging/mode-ecg/index.umd.js",
+  "module": "src/index.tsx",
   "engines": {
     "node": ">=14",
     "npm": ">=6",
-    "yarn": ">=1.16.0"
+    "yarn": ">=1.18.0"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --config .webpack/webpack.dev.js --watch --debug --output-pathinfo",
-    "dev:cornerstone": "yarn run dev",
+    "dev:dicom-pdf": "yarn run dev",
     "build": "cross-env NODE_ENV=production webpack --config .webpack/webpack.prod.js",
     "build:package": "yarn run build",
-    "start": "yarn run dev",
-    "test:unit": "jest --watchAll",
-    "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
+    "start": "yarn run dev"
   },
   "peerDependencies": {
     "@ohif/core": "^3.0.0",
-    "@radicalimaging/ecg-dicom": "^3.4.2"
+    "@ohif/extension-cornerstone": "^3.0.0",
+    "@ohif/extension-default": "^3.0.0",
+    "@ohif/i18n": "^1.0.0",
+    "prop-types": "^15.6.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^10.11.0",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0",
+    "webpack": "^5.50.0",
+    "webpack-merge": "^5.7.3"
   },
   "dependencies": {
     "@babel/runtime": "7.7.6"
@@ -49,7 +53,7 @@
     "@babel/plugin-transform-runtime": "^7.5.0",
     "@babel/preset-env": "^7.5.0",
     "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.17.12",
+    "@babel/preset-typescript": "^7.18.6",
     "babel-eslint": "^8.0.3",
     "babel-loader": "^8.0.0-beta.4",
     "babel-plugin-inline-react-svg": "^2.0.1",
@@ -60,7 +64,7 @@
     "eslint": "^5.0.1",
     "eslint-loader": "^2.0.0",
     "webpack": "^5.50.0",
-    "webpack-merge": "^5.7.3",
-    "webpack-cli": "^4.10.0"
+    "webpack-cli": "^4.7.2",
+    "webpack-merge": "^5.7.3"
   }
 }

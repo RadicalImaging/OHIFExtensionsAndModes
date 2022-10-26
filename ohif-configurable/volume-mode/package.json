@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/volume-mode",
-  "version": "3.3.1",
+  "version": "3.4.4",
   "description": "Volume Viewer Mode",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
-    "@radicalimaging/config-mode": "^3.3.0",
+    "@radicalimaging/config-mode": "^3.4.2",
     "config-point": "^0.4.8"
   },
   "devDependencies": {

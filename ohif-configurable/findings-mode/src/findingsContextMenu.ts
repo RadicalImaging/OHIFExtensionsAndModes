@@ -1,26 +1,29 @@
 import codingValues from "./codingValues";
+import { UIFindingMenuItemCustomization } from "./findingMenuItem";
 
 const findingsContextMenu = {
   id: 'cornerstoneContextMenu',
-  uiType: 'ohif.contextMenu',
+  customizationType: 'ohif.contextMenu',
   refs: codingValues,
-  items: [
+  menus: [
     {
       id: 'forExistingMeasurement',
       selector: ({ nearbyToolData }) => !!nearbyToolData,
       items: [
         {
-          uiType: "ohif.contextMenuItem", // Implicit value if not otherwise specified
+          customizationType: "ohif.contextSubMenu",
           label: 'Site',
           actionType: 'SubMenu',
           subMenu: 'siteSelectionSubMenu',
         },
         {
+          customizationType: "ohif.contextSubMenu",
           label: 'Finding',
           actionType: 'SubMenu',
           subMenu: 'findingSelectionSubMenu',
         },
         {
+          // customizationType is implicit here in the configuration setup
           label: 'Delete Measurement',
           actionType: 'RunCommands',
           commands: [
@@ -46,13 +49,14 @@ const findingsContextMenu = {
       selector: ({ nearbyToolData }) => !!nearbyToolData,
       attribute: 'code', // This will no longer be required/used
       items: [
-        {
-          uiType: "ohif.findingMenuItem", // TODO - specify that this is a finding menu item, which defaults the commands list
-          commandName: 'setFinding', // Remove commandName
+        <UIFindingMenuItemCustomization>{
+          customizationType: "contextMenu.findingMenuItem", 
+          commandName: 'setFinding', // Remove commandName, once customizationType implemented
           code: 'SCT:371861004',
         },
         {
-          commandName: 'setFinding',
+          customizationType: "contextMenu.findingMenuItem", 
+          commandName: 'setFinding', // Remove commandName, once customizationType implemented
           code: 'SCT:194983005'
         },
       ],
@@ -64,11 +68,14 @@ const findingsContextMenu = {
       attribute: 'code',
       items: [
         {
+          customizationType: "ohif.siteMenuItem",
+          // Remove actionType and commandName 
           actionType: 'Default',
           commandName: 'setSite',
           code: 'SegmentationCardiac:4ch',
         },
         {
+          customizationType: "ohif.siteMenuItem", 
           commandName: 'setSite',
           code: 'SegmentationCardiac:3ch',
         },

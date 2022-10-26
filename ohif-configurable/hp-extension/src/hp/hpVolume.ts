@@ -1,4 +1,4 @@
-export default [
+export default
   {
     id: 'volume',
     hasUpdatedPriorsInformation: false,
@@ -15,6 +15,18 @@ export default [
       },
     ],
     toolGroupIds: ['default'],
+    displaySetSelectors: {
+      defaultDisplaySetId: {
+        seriesMatchingRules: [
+          {
+            attribute: 'numImageFrames',
+            constraint: {
+              greaterThan: 10,
+            },
+          },
+        ],
+      },
+    },
     stages: [
       {
         id: '2x2',
@@ -26,9 +38,10 @@ export default [
             columns: 2,
           },
         },
+        // TODO - delete once the old HPs are all gone
         displaySets: [
           {
-            id: 'displaySet',
+            id: 'defaultDisplaySetId',
             findAll: true,
             seriesMatchingRules: [
               {
@@ -47,8 +60,7 @@ export default [
               viewportType: 'volume',
               orientation: 'axial',
               initialImageOptions: {
-                // index: 5,
-                preset: 'first', // 'first', 'last', 'middle'
+                preset: 'middle', // 'first', 'last', 'middle'
               },
               syncGroups: [
                 {
@@ -61,7 +73,7 @@ export default [
             },
             displaySets: [
               {
-                id: 'displaySet',
+                id: 'defaultDisplaySetId',
               },
             ],
           },
@@ -81,7 +93,7 @@ export default [
             },
             displaySets: [
               {
-                id: 'displaySet',
+                id: 'defaultDisplaySetId',
               },
             ],
           },
@@ -101,7 +113,7 @@ export default [
             },
             displaySets: [
               {
-                id: 'displaySet',
+                id: 'defaultDisplaySetId',
               },
             ],
           },
@@ -128,12 +140,11 @@ export default [
                   slabThickness: 'fullVolume',
                   voiInverted: true,
                 },
-                id: 'displaySet',
+                id: 'defaultDisplaySetId',
               },
             ],
           },
         ],
       },
     ],
-  }
-];
+  };

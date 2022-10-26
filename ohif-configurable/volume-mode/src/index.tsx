@@ -4,14 +4,14 @@ import {
   initToolGroups, toolGroupIds, toolbarButtons,
   sopClassHandlers, defaultExtensions, defaultRoutes,
   onModeExit, onModeEnter,
-  defaultTool, defaultToolBarSections,
+  defaultTool, volumeToolBarSections,
 } from '@radicalimaging/config-mode';
 import ConfigPoint from 'config-point';
 
 
 const extensionDependencies = {
   ...defaultExtensions,
-  '@radicalimaging/hp-extension': '^3.3.1',
+  '@radicalimaging/hp-extension': '^3.4.0',
 };
 
 function modeFactory({ modeConfiguration }) {
@@ -31,7 +31,7 @@ function modeFactory({ modeConfiguration }) {
     toolbarButtons,
 
     defaultTool,
-    toolBarSections: defaultToolBarSections,
+    toolBarSections: volumeToolBarSections,
 
     /**
      * Lifecycle hooks
@@ -56,9 +56,14 @@ function modeFactory({ modeConfiguration }) {
     extensions: extensionDependencies,
 
     /** HangingProtocols used by the mode */
+    // Delete this instance TODO - once hp changes fully released
     hangingProtocols: [
       '@radicalimaging/hp-extension.hangingProtocolModule.Volume',
       '@ohif/extension-default.hangingProtocolModule.default',
+    ],
+    hangingProtocol: [
+      '@radicalimaging/hp-extension.volume',
+      'default',
     ],
 
     sopClassHandlers,

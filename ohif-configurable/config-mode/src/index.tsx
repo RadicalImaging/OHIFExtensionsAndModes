@@ -8,6 +8,7 @@ import onModeExit from "./onModeExit";
 import defaultTool from "./defaultTool";
 import defaultToolBarSections from "./defaultToolBarSections";
 import onModeEnter from "./onModeEnter";
+import volumeToolBarSections from './volumeToolBarSections';
 
 /** Load method for dynamic loading of modes and extensions. */
 const hotLoad = async () => {
@@ -26,4 +27,5 @@ export {
   onModeExit,
   defaultTool,
   defaultToolBarSections,
+  volumeToolBarSections,
 };
