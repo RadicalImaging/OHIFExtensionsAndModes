@@ -12,7 +12,7 @@ import codingValues from './codingValues';
 
 const extensionDependencies = {
   ...defaultExtensions,
-  '@radicalimaging/hp-extension': '^3.3.1',
+  '@radicalimaging/hp-extension': '^3.4.0',
 };
 
 function modeFactory({ modeConfiguration }) {
@@ -66,6 +66,14 @@ function modeFactory({ modeConfiguration }) {
       '@ohif/extension-default.hangingProtocolModule.default',
     ],
 
+    hangingProtocol: [
+      '@radicalimaging/hp-extension.heart',
+      '@radicalimaging/hp-extension.breast',
+      '@radicalimaging/hp-extension.mn',
+      '@radicalimaging/hp-extension.mn1',
+      'default',
+    ],
+
     sopClassHandlers,
 
     /** hotkeys for mode */
@@ -81,3 +89,7 @@ const mode = {
 };
 
 export default mode;
+export {
+  findingsContextMenu,
+  codingValues,
+};

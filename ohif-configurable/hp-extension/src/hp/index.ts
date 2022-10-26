@@ -7,26 +7,39 @@ import ConfigPoint from "config-point";
 
 const hangingProtocols = ConfigPoint.createConfiguration("hpExtensionHangingProtocols",
   {
+    // Include both protocols list and new list
     hangingProtocols: [
       {
-        name: 'mpr',
+        // Statically defined mpr version - applies as initial view rather than command button
+        id: '@radicalimaging/hp-extension.mpr',
         protocols: [hpMpr],
+        protocol: hpMpr,
       },
       {
-        name: 'breast',
+        id: '@radicalimaging/hp-extension.breast',
         protocols: [hpBreast],
+        protocol: hpBreast,
       },
       {
-        name: 'heart',
+        id: '@radicalimaging/hp-extension.heart',
         protocols: [hpHeart],
+        protocol: hpHeart,
       },
       {
-        name: 'MN',
+        id: '@radicalimaging/hp-extension.mn',
         protocols: hpMN,
+        protocol: hpMN[0],
+      },
+      // TODO - combine this with the base MN by adding multiple stages, just doesn't work yet.
+      {
+        id: '@radicalimaging/hp-extension.mn1',
+        protocols: [],
+        protocol: hpMN[1],
       },
       {
-        name: 'Volume',
-        protocols: hpVolume,
+        id: '@radicalimaging/hp-extension.volume',
+        protocols: [hpVolume],
+        protocol: hpVolume,
       },
     ],
   });

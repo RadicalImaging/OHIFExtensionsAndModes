@@ -7,6 +7,11 @@ import {
 } from '@ohif/ui';
 import { defaults } from '@ohif/core';
 
+export const toolGroupIds = {
+  MPR: 'mprGroup',
+  default: 'default',
+};
+
 const { windowLevelPresets } = defaults;
 /**
  *
@@ -29,6 +34,18 @@ function _createButton(type, id, icon, label, commands, tooltip) {
 const _createActionButton = _createButton.bind(null, 'action');
 const _createToggleButton = _createButton.bind(null, 'toggle');
 const _createToolButton = _createButton.bind(null, 'tool');
+
+function _createCommands(commandName, toolName, toolGroupIds) {
+  return toolGroupIds.map(toolGroupId => ({
+    /* It's a command that is being run when the button is clicked. */
+    commandName,
+    commandOptions: {
+      toolName,
+      toolGroupId,
+    },
+    context: 'CORNERSTONE',
+  }));
+}
 
 /**
  *
@@ -245,6 +262,21 @@ const toolbarButtons = [
         _createWwwcPreset(3, 'Liver', '150 / 90'),
         _createWwwcPreset(4, 'Bone', '2500 / 480'),
         _createWwwcPreset(5, 'Brain', '80 / 40'),
+      ],
+    },
+  },
+  {
+    id: 'Crosshairs',
+    type: 'ohif.radioGroup',
+    props: {
+      type: 'toggle',
+      icon: 'tool-crosshair',
+      label: 'Crosshairs',
+      commands: [
+        ..._createCommands('toggleCrosshairs', 'Crosshairs', [
+          toolGroupIds.MPR,
+          toolGroupIds.default,
+        ]),
       ],
     },
   },

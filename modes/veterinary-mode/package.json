@@ -1,23 +1,19 @@
 {
-  "name": "@radicalimaging/mode-ecg",
-  "version": "3.4.2",
-  "description": "Display ECGs",
+  "name": "@radicalimaging/veterinary-mode",
+  "version": "3.0.0",
+  "description": "Veterinary Mode",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
-  "module": "src/index.tsx",
+  "main": "dist/umd/@radicalimaging/veterinary-mode/index.umd.js",
   "files": [
-    "public/**",
     "dist/**",
     "README.md"
   ],
   "repository": "OHIF/Viewers",
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
     "ohif-mode"
   ],
-  "main": "dist/umd/@radicalimaging/mode-ecg/index.umd.js",
+  "module": "src/index.tsx",
   "engines": {
     "node": ">=14",
     "npm": ">=6",
@@ -33,11 +29,12 @@
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
-    "@ohif/core": "^3.0.0",
-    "@radicalimaging/ecg-dicom": "^3.4.2"
+    "@ohif/core": "^3.0.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.7.6"
+    "@babel/runtime": "7.7.6",
+    "@radicalimaging/config-mode": "^3.4.2",
+    "@radicalimaging/findings-mode": "^3.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
@@ -60,7 +57,7 @@
     "eslint": "^5.0.1",
     "eslint-loader": "^2.0.0",
     "webpack": "^5.50.0",
-    "webpack-merge": "^5.7.3",
-    "webpack-cli": "^4.10.0"
+    "webpack-cli": "^4.7.2",
+    "webpack-merge": "^5.7.3"
   }
 }

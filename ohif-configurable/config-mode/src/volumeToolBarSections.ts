@@ -7,6 +7,7 @@ const defaultToolBarSections = {
     'Capture',
     'Layout',
     'MoreTools',
+    'Crosshairs',
   ],
 
 };

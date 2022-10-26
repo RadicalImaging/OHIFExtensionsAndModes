@@ -1,7 +1,8 @@
 export default {
-  id: 'LV Function Heart',
-  hasUpdatedPriorsInformation: false,
+  // id not required, but is included for historical reasons.
+  id: 'hpHeart',
   name: 'LV Function Heart',
+  hasUpdatedPriorsInformation: false,
   protocolMatchingRules: [
     {
       id: 'MR',
@@ -10,6 +11,7 @@ export default {
       constraint: {
         contains: 'MR',
       },
+      required: true,
     },
     {
       id: 'SAX',
@@ -37,12 +39,127 @@ export default {
     },
   ],
   toolGroupIds: ['default'],
+  displaySetSelectors: {
+    displaySetCineLax4: {
+      // Matches displaysets, NOT series
+      seriesMatchingRules: [
+        {
+          id: 'numImageFrames 20-40',
+          weight: 1,
+          attribute: 'numImageFrames',
+          constraint: {
+            range: {
+              value: [20, 40],
+            },
+          },
+        },
+        {
+          weight: 20,
+          attribute: 'SeriesDescription',
+          constraint: {
+            contains: 'LAX',
+          },
+        },
+        {
+          weight: 10,
+          attribute: 'SeriesDescription',
+          constraint: {
+            contains: '4',
+          },
+        },
+      ],
+    },
+    displaySetCineLax3: {
+      // Matches displaysets, NOT series
+      seriesMatchingRules: [
+        {
+          attribute: 'numImageFrames',
+          constraint: {
+            range: {
+              value: [20, 40],
+            },
+          },
+        },
+        {
+          weight: 20,
+          attribute: 'SeriesDescription',
+          constraint: {
+            contains: 'LAX',
+          },
+        },
+        {
+          weight: 10,
+          attribute: 'SeriesDescription',
+          constraint: {
+            contains: '3',
+          },
+        },
+      ],
+      studyMatchingRules: [],
+    },
+    displaySetCineLax2: {
+      // Matches displaysets, NOT series
+      seriesMatchingRules: [
+        {
+          id: 'numImageFrames>25',
+          attribute: 'numImageFrames',
+          constraint: {
+            range: {
+              value: [20, 40],
+            },
+          },
+        },
+        {
+          weight: 20,
+          attribute: 'SeriesDescription',
+          constraint: {
+            contains: 'LAX',
+          },
+        },
+        {
+          weight: 10,
+          attribute: 'SeriesDescription',
+          constraint: {
+            contains: '2',
+          },
+        },
+      ],
+      studyMatchingRules: [],
+    },
+    displaySetCineSax: {
+      // Matches displaysets, NOT series
+      seriesMatchingRules: [
+        {
+          attribute: 'numImageFrames',
+          constraint: {
+            equals: 25,
+          },
+        },
+        {
+          weight: 5,
+          attribute: 'numImageFrames',
+          constraint: {
+            equals: 30,
+          },
+        },
+        {
+          weight: 20,
+          attribute: 'SeriesDescription',
+          constraint: {
+            contains: 'SAX',
+          },
+        },
+      ],
+      studyMatchingRules: [],
+    },
+  },
+
   stages: [
     {
-      id: 'hYbmMy3b7pz7GLiaT',
       name: 'default',
       viewportStructure: {
         type: 'grid',
+        layoutType: 'grid',
         properties: {
           rows: 2,
           columns: 2,
@@ -194,7 +311,6 @@ export default {
               },
             },
           ],
-          studyMatchingRules: [],
         },
       ],
       viewports: [
@@ -278,7 +394,6 @@ export default {
           ],
         },
       ],
-      createdDate: '2021-02-23T18:32:42.850Z',
     },
   ],
   numberOfPriorsReferenced: -1,

@@ -24,9 +24,9 @@ export default function onModeEnter({ servicesManager, extensionManager, command
   ToolBarService.init(extensionManager);
   ToolBarService.addButtons(this.toolbarButtons);
   Object.keys(this.toolBarSections).forEach(section => {
+    console.log("Creating toolbar section", section, this.toolBarSections[section]);
     ToolBarService.createButtonSection(section, this.toolBarSections[section]);
   });
-  
-  uiCustomizationService?.init?.(extensionManager);
+
   uiCustomizationService?.addModeCustomizations?.(this.modeCustomizations);
 }

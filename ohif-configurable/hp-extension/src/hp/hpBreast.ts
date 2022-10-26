@@ -16,17 +16,105 @@ export default {
     },
   ],
   toolGroupIds: ['default'],
+  displaySetSelectors: {
+    LCC:{
+      // Matches displaysets, NOT series
+      seriesMatchingRules: [
+        {
+          weight: 10,
+          attribute: 'ViewCode',
+          constraint: {
+            contains: 'SCT:399162004',
+          },
+        },
+        {
+          weight: 10,
+          attribute: 'PatientOrientation',
+          constraint: {
+            contains: 'L',
+          },
+          required: true,
+        },
+      ],
+    },
+    RCC:{
+      // Matches displaysets, NOT series
+      seriesMatchingRules: [
+        {
+          weight: 10,
+          attribute: 'ViewCode',
+          constraint: {
+            contains: 'SCT:399162004',
+          },
+          required: true,
+        },
+        {
+          weight: 10,
+          attribute: 'PatientOrientation',
+          constraint: {
+            contains: 'R',
+          },
+          required: true,
+        },
+      ],
+    },
+    LMLO:{
+      seriesMatchingRules: [
+        {
+          weight: 10,
+          attribute: 'ViewCode',
+          constraint: {
+            contains: 'SCT:399368009',
+          },
+          required: true,
+        },
+        {
+          weight: 10,
+          attribute: 'PatientOrientation',
+          constraint: {
+            contains: 'L',
+          },
+          required: true,
+        },
+      ],
+      studyMatchingRules: [],
+    },
+    RMLO:{
+      seriesMatchingRules: [
+        {
+          weight: 10,
+          attribute: 'ViewCode',
+          constraint: {
+            contains: 'SCT:399368009',
+          },
+          required: true,
+        },
+        {
+          weight: 10,
+          attribute: 'PatientOrientation',
+          constraint: {
+            contains: 'R',
+          },
+          required: true,
+        },
+      ],
+      studyMatchingRules: [],
+    },
+},
+
   stages: [
     {
       id: 'hYbmMy3b7pz7GLiaT',
       name: 'default',
       viewportStructure: {
         type: 'grid',
+        layoutType: 'grid',
         properties: {
           rows: 2,
           columns: 2,
         },
       },
+      // TODO - delete this once no longer necessary for backwards compatibility
       displaySets: [
         {
           id: 'LCC',

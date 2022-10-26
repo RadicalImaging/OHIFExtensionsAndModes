@@ -1,34 +1,47 @@
 import { hotkeys } from '@ohif/core';
 import { id } from './id';
 import {
-  initToolGroups, toolGroupIds, toolbarButtons,
-  sopClassHandlers, defaultExtensions, defaultRoutes,
-  onModeExit, onModeEnter,
-  defaultTool, defaultToolBarSections,
+  initToolGroups,
+  toolbarButtons,
+  sopClassHandlers,
+  defaultExtensions,
+  defaultRoutes,
+  onModeExit,
+  onModeEnter,
+  defaultTool,
+  defaultToolBarSections,
 } from '@radicalimaging/config-mode';
 import ConfigPoint from 'config-point';
-
+import {
+  findingsContextMenu,
+  codingValues,
+} from '@radicalimaging/findings-mode';
 
 const extensionDependencies = {
   ...defaultExtensions,
   '@radicalimaging/hp-extension': '^3.4.0',
+  '@radicalimaging/overlays-extension': '^3.0.0',
 };
 
 function modeFactory({ modeConfiguration }) {
-  return ConfigPoint.createConfiguration("@radicalimaging/mode-hp", {
+  return ConfigPoint.createConfiguration('@radicalimaging/veterinary-mode', {
     /**
      * Mode ID, which should be unique among modes used by the viewer. This ID
      * is used to identify the mode in the viewer's state.
      */
     id,
-    routeName: 'hp',
+    routeName: 'veterinary',
     /**
      * Mode name, which is displayed in the viewer's UI in the workList, for the
      * user to select the mode.
      */
-    displayName: 'HP',
+    displayName: 'Veterinary',
 
     toolbarButtons,
+
+    modeCustomizations: [findingsContextMenu, codingValues,
+      // List a mode customization by defining the package to include 
+      '@radicalimaging/overlays-extension.customizationModule.veterinary'],
 
     defaultTool,
     toolBarSections: defaultToolBarSections,
@@ -47,7 +60,9 @@ function modeFactory({ modeConfiguration }) {
       const modalities_list = modalities.split('\\');
 
       // Slide Microscopy modality not supported by basic mode yet
-      return modalities_list.filter(it => it !== 'SM' && it !== 'ECG').length > 0;
+      return (
+        modalities_list.filter(it => it !== 'SM' && it !== 'ECG').length > 0
+      );
     },
 
     routes: defaultRoutes,
@@ -57,15 +72,11 @@ function modeFactory({ modeConfiguration }) {
 
     /** HangingProtocols used by the mode */
     hangingProtocols: [
-      '@radicalimaging/hp-extension.hangingProtocolModule.heart',
-      '@radicalimaging/hp-extension.hangingProtocolModule.breast',
       '@radicalimaging/hp-extension.hangingProtocolModule.MN',
       '@ohif/extension-default.hangingProtocolModule.default',
     ],
 
     hangingProtocol: [
-      '@radicalimaging/hp-extension.heart',
-      '@radicalimaging/hp-extension.breast',
       '@radicalimaging/hp-extension.mn',
       '@radicalimaging/hp-extension.mn1',
       'default',
@@ -75,8 +86,7 @@ function modeFactory({ modeConfiguration }) {
 
     /** hotkeys for mode */
     hotkeys: [...hotkeys.defaults.hotkeyBindings],
-  }
-  );;
+  });
 }
 
 const mode = {

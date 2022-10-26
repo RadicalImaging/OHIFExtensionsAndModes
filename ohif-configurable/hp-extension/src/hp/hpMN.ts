@@ -1,6 +1,5 @@
 export default [
   {
-    id: '2x2',
     hasUpdatedPriorsInformation: false,
     name: '2x2',
     protocolMatchingRules: [
@@ -14,6 +13,19 @@ export default [
       },
     ],
     toolGroupIds: ['default'],
+    displaySetSelectors: {
+      defaultDisplaySetId: {
+        findAll: true,
+        seriesMatchingRules: [
+          {
+            attribute: 'numImageFrames',
+            constraint: {
+              greaterThan: 0,
+            },
+          },
+        ],
+      },
+    },
     stages: [
       {
         id: '2x2',
@@ -27,7 +39,7 @@ export default [
         },
         displaySets: [
           {
-            id: 'displaySet',
+            id: 'defaultDisplaySetId',
             findAll: true,
             seriesMatchingRules: [
               {
@@ -52,7 +64,7 @@ export default [
             },
             displaySets: [
               {
-                id: 'displaySet',
+                id: 'defaultDisplaySetId',
               },
             ],
           },
@@ -69,7 +81,7 @@ export default [
             displaySets: [
               {
                 displaySetIndex: 1,
-                id: 'displaySet',
+                id: 'defaultDisplaySetId',
               },
             ],
           },
@@ -86,7 +98,7 @@ export default [
             displaySets: [
               {
                 displaySetIndex: 2,
-                id: 'displaySet',
+                id: 'defaultDisplaySetId',
               },
             ],
           },
@@ -103,17 +115,19 @@ export default [
             displaySets: [
               {
                 displaySetIndex: 3,
-                id: 'displaySet',
+                id: 'defaultDisplaySetId',
               },
             ],
           },
         ],
       },
+
+      // A 2x1 stage
       {
-        id: '2x1',
         name: '2x1',
         viewportStructure: {
           type: 'grid',
+          layoutType: 'grid',
           properties: {
             rows: 1,
             columns: 2,
@@ -121,7 +135,7 @@ export default [
         },
         displaySets: [
           {
-            id: 'displaySet',
+            id: 'defaultDisplaySetId',
             findAll: true,
             // Matches displaysets, NOT series
             seriesMatchingRules: [
@@ -147,7 +161,7 @@ export default [
             },
             displaySets: [
               {
-                id: 'displaySet',
+                id: 'defaultDisplaySetId',
               },
             ],
           },
@@ -164,7 +178,7 @@ export default [
             displaySets: [
               {
                 displaySetIndex: 1,
-                id: 'displaySet',
+                id: 'defaultDisplaySetId',
               },
             ],
           },
@@ -174,7 +188,7 @@ export default [
     numberOfPriorsReferenced: -1,
   },
 
-
+  // An entirely separate hanging protocol for 2x1 layout
   {
     id: '2x1',
     hasUpdatedPriorsInformation: false,
@@ -190,20 +204,36 @@ export default [
       },
     ],
     toolGroupIds: ['default'],
+    displaySets: {
+      defaultDisplaySetId:{
+        findAll: true,
+        // Matches displaysets, NOT series
+        seriesMatchingRules: [
+          {
+            attribute: 'numImageFrames',
+            constraint: {
+              greaterThan: 0,
+            },
+          },
+        ],
+      },
+    },
     stages: [
       {
         id: '2x1',
         name: '2x1',
         viewportStructure: {
           type: 'grid',
+          layoutType: 'grid',
           properties: {
             rows: 1,
             columns: 2,
           },
         },
+        // TODO - delete this
         displaySets: [
           {
-            id: 'displaySet',
+            id: 'defaultDisplaySetId',
             findAll: true,
             // Matches displaysets, NOT series
             seriesMatchingRules: [
@@ -229,7 +259,7 @@ export default [
             },
             displaySets: [
               {
-                id: 'displaySet',
+                id: 'defaultDisplaySetId',
               },
             ],
           },
@@ -246,7 +276,7 @@ export default [
             displaySets: [
               {
                 displaySetIndex: 1,
-                id: 'displaySet',
+                id: 'defaultDisplaySetId',
               },
             ],
           },

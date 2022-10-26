@@ -5,7 +5,7 @@ import ConfigPoint from "config-point";
 const ohif = {
   layout: '@ohif/extension-default.layoutTemplateModule.viewerLayout',
   sopClassHandler: '@ohif/extension-default.sopClassHandlerModule.stack',
-  hangingProtocols: '@ohif/extension-default.hangingProtocolModule.default',
+  hangingProtocol: '@ohif/extension-default.hangingProtocolModule.default',
 };
 
 const tracked = {
@@ -119,7 +119,9 @@ function modeFactory({ modeConfiguration }) {
       },
     ],
     extensions: extensionDependencies,
-    hangingProtocols: [ohif.hangingProtocols],
+    // For a while, include both forms
+    hangingProtocols: [ohif.hangingProtocol],
+    hangingProtocol: ohif.hangingProtocol,
     // Order is important in sop class handlers when two handlers both use
     // the same sop class under different situations.  In that case, the more
     // general handler needs to come last.  For this case, the dicomvideo must
