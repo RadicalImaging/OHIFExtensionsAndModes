@@ -45,8 +45,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
-    "@cornerstonejs/tools": "^0.24.12",
-    "config-point": "^0.4.8",
+    "@cornerstonejs/tools": "^0.24.17",
+    "config-point": "^0.5.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

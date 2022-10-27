@@ -33,14 +33,14 @@
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
-    "@cornerstonejs/core": "^0.16.8",
-    "@cornerstonejs/tools": "^0.24.12",
+    "@cornerstonejs/core": "^0.16.11",
+    "@cornerstonejs/tools": "^0.24.17",
     "@ohif/core": "^3.0.0"
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
-    "@cornerstonejs/tools": "^0.24.12",
-    "config-point": "^0.4.8",
+    "@cornerstonejs/tools": "^0.24.17",
+    "config-point": "^0.5.1",
     "gl-matrix": "^3.4.3",
     "lodash": "^4.17.21",
     "lodash.clonedeep": "^4.5.0",
