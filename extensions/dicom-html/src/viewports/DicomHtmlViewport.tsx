@@ -105,7 +105,7 @@ function StyledReportContent({
       return (
         <>
           <div style={styles.content_key}>
-            {getRelationshipString(data)} : {getMeaningString(data)}
+            {getRelationshipString(data)} {getMeaningString(data)}
           </div>
           <div style={styles.content_value}>{value}</div>
         </>
