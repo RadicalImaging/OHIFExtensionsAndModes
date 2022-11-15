@@ -1,11 +1,10 @@
 {
   "name": "@radicalimaging/config-mode",
-  "version": "3.3.5",
+  "version": "3.5.0",
   "description": "A configurable/themeable mode that allows runtime extensions to the mode.",
   "author": "Radical Imaging",
   "license": "MIT",
   "files": [
-    "public/**",
     "dist/**",
     "README.md"
   ],
@@ -28,6 +27,7 @@
     "dev:cornerstone": "yarn run dev",
     "build": "cross-env NODE_ENV=production webpack --config .webpack/webpack.prod.js",
     "build:package": "yarn run build",
+    "publishItem": "yarn publish",
     "start": "yarn run dev",
     "test:unit": "jest --watchAll",
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
@@ -40,6 +40,8 @@
   "dependencies": {
     "@babel/runtime": "7.7.6",
     "@cornerstonejs/tools": "^0.24.17",
+    "@ohif/core": "^2.16.33",
+    "@ohif/ui": "^1.10.10",
     "config-point": "^0.5.1",
     "gl-matrix": "^3.4.3",
     "lodash": "^4.17.21",
