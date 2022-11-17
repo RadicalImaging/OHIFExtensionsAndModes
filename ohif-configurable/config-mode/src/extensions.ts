@@ -10,7 +10,6 @@ export const cornerstone = {
   viewport: '@ohif/extension-cornerstone.viewportModule.cornerstone',
 };
 
-
 export const dicomsr = {
   sopClassHandler:
     '@ohif/extension-cornerstone-dicom-sr.sopClassHandlerModule.dicom-sr',
@@ -26,4 +25,10 @@ export const dicomvideo = {
 export const dicompdf = {
   sopClassHandler: '@ohif/extension-dicom-pdf.sopClassHandlerModule.dicom-pdf',
   viewport: '@ohif/extension-dicom-pdf.viewportModule.dicom-pdf',
+};
+
+export const dicomseg = {
+  panel: '@ohif/extension-cornerstone-dicom-seg.panelModule.panelSegmentation',
+  viewport: '@ohif/extension-cornerstone-dicom-seg.viewportModule.dicom-seg',
+  sopClassHandler: '@ohif/extension-cornerstone-dicom-seg.sopClassHandlerModule.dicom-seg',
 };

@@ -1,11 +1,10 @@
 const path = require('path');
 const pkg = require('../package.json');
 
-const outputFile = 'index.umd.js';
 const rootDir = path.resolve(__dirname, '../');
 const outputFolder = path.join(__dirname, `../dist/umd/${pkg.name}/`);
+const outputFile = 'index.umd.js';
 
-// Todo: add ESM build for the mode in addition to umd build
 const config = {
   mode: 'production',
   entry: rootDir + '/' + pkg.module,
@@ -14,10 +13,10 @@ const config = {
     path: outputFolder,
     filename: outputFile,
     library: pkg.name,
+    publicPath: `/umd/${pkg.name}/`,
     libraryTarget: 'umd',
     chunkFilename: '[name].chunk.js',
     umdNamedDefine: true,
-    globalObject: "typeof self !== 'undefined' ? self : this",
   },
   externals: [
     {
@@ -84,7 +83,7 @@ const config = {
     ],
   },
   resolve: {
-    modules: [path.resolve('./node_modules'), path.resolve('./src')],
+    modules: [path.resolve('../node_modules'), path.resolve('./node_modules'), path.resolve('./src')],
     extensions: ['.json', '.js', '.jsx', '.tsx', '.ts'],
   },
 };

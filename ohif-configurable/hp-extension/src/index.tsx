@@ -4,6 +4,7 @@ import getHangingProtocolModule from './hp';
 import viewCodeAttribute from './custom-attribute/viewCode';
 import lateralityAttribute from './custom-attribute/laterality';
 import numberOfDisplaySets from './custom-attribute/numberOfDisplaySets';
+import numberOfDisplaySetsWithImages from './custom-attribute/numberOfDisplaySetsWithImages';
 import maxNumImageFrames from './custom-attribute/maxNumImageFrames';
 import seriesDescriptionsFromDisplaySets from './custom-attribute/seriesDescriptionsFromDisplaySets';
 import getCommandsModule from './commandsModule';
@@ -31,6 +32,7 @@ export default {
     HangingProtocolService.addCustomAttribute('Laterality', 'Laterality of object', lateralityAttribute);
     HangingProtocolService.addCustomAttribute('seriesDescriptions', 'Series Descriptions', seriesDescriptionsFromDisplaySets);
     HangingProtocolService.addCustomAttribute('numberOfDisplaySets', 'Number of displays sets', numberOfDisplaySets);
+    HangingProtocolService.addCustomAttribute('numberOfDisplaySetsWithImages', 'Number of displays sets with images', numberOfDisplaySetsWithImages);
     HangingProtocolService.addCustomAttribute('maxNumImageFrames', 'Maximum of number of image frames', maxNumImageFrames);
     
     console.log("About to create synchronizer initialzoompan");

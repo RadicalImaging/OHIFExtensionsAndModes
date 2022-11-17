@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build": "lerna run build --stream",
-    "publish": "yarn build && lerna run publish --stream",
+    "publishAll": "yarn build && lerna run publishItem --stream",
     "zzz": "End item"
   },
   "devDependencies": {

@@ -1,7 +1,8 @@
 function initDefaultToolGroup(
   extensionManager,
   ToolGroupService,
-  commandsManager
+  commandsManager,
+  toolGroupId
 ) {
   const utilityModule = extensionManager.getModuleEntry(
     '@ohif/extension-cornerstone.utilityModule.tools'
@@ -35,19 +36,14 @@ function initDefaultToolGroup(
       { toolName: toolNames.StackScroll },
       { toolName: toolNames.Angle },
       { toolName: toolNames.Magnify },
+      { toolName: toolNames.SegmentationDisplay },
     ],
     // enabled
-    disabled: [{ toolName: toolNames.Crosshairs }],
+    // disabled
+    disabled: [{ toolName: toolNames.ReferenceLines }],
   };
 
   const toolsConfig = {
-    [toolNames.Crosshairs]: {
-      viewportIndicators: false,
-      autoPan: {
-        enabled: true,
-        panSize: 10,
-      },
-    },
     [toolNames.ArrowAnnotate]: {
       getTextCallback: (callback, eventDetails) =>
         commandsManager.runCommand('arrowTextCallback', {
@@ -62,16 +58,8 @@ function initDefaultToolGroup(
           eventDetails,
         }),
     },
-
-    [toolNames.EllipticalROI]: {
-      shadow: true,
-      preventHandleOutsideImage: false,
-      // Radius of the circle to draw  at the center point of the ellipse.
-      centerPointRadius: 3,
-    },
   };
 
-  const toolGroupId = 'default';
   ToolGroupService.createToolGroupAndAddTools(toolGroupId, tools, toolsConfig);
 }
 
@@ -133,7 +121,7 @@ function initSRToolGroup(extensionManager, ToolGroupService, commandsManager) {
   };
 
   const toolsConfig = {
-    [SRToolNames.SRArrowAnnotate]: {
+    [toolNames.ArrowAnnotate]: {
       getTextCallback: (callback, eventDetails) =>
         commandsManager.runCommand('arrowTextCallback', {
           callback,
@@ -147,22 +135,88 @@ function initSRToolGroup(extensionManager, ToolGroupService, commandsManager) {
           eventDetails,
         }),
     },
-    
-    [SRToolNames.SREllipticalROI]: {
-      shadow: true,
-      preventHandleOutsideImage: false,
-      // Radius of the circle to draw  at the center point of the ellipse.
-      centerPointRadius: 3,
-    },
   };
 
   const toolGroupId = 'SRToolGroup';
   ToolGroupService.createToolGroupAndAddTools(toolGroupId, tools, toolsConfig);
 }
 
+function initMPRToolGroup(extensionManager, ToolGroupService, commandsManager) {
+  const utilityModule = extensionManager.getModuleEntry(
+    '@ohif/extension-cornerstone.utilityModule.tools'
+  );
+
+  const { toolNames, Enums } = utilityModule.exports;
+
+  const tools = {
+    active: [
+      {
+        toolName: toolNames.WindowLevel,
+        bindings: [{ mouseButton: Enums.MouseBindings.Primary }],
+      },
+      {
+        toolName: toolNames.Pan,
+        bindings: [{ mouseButton: Enums.MouseBindings.Auxiliary }],
+      },
+      {
+        toolName: toolNames.Zoom,
+        bindings: [{ mouseButton: Enums.MouseBindings.Secondary }],
+      },
+      { toolName: toolNames.StackScrollMouseWheel, bindings: [] },
+    ],
+    passive: [
+      { toolName: toolNames.Length },
+      { toolName: toolNames.ArrowAnnotate },
+      { toolName: toolNames.Bidirectional },
+      { toolName: toolNames.DragProbe },
+      { toolName: toolNames.EllipticalROI },
+      { toolName: toolNames.RectangleROI },
+      { toolName: toolNames.StackScroll },
+      { toolName: toolNames.Angle },
+      { toolName: toolNames.SegmentationDisplay },
+    ],
+    disabled: [{ toolName: toolNames.Crosshairs }],
+
+    // enabled
+    // disabled
+  };
+
+  const toolsConfig = {
+    [toolNames.Crosshairs]: {
+      viewportIndicators: false,
+      autoPan: {
+        enabled: false,
+        panSize: 10,
+      },
+    },
+    [toolNames.ArrowAnnotate]: {
+      getTextCallback: (callback, eventDetails) =>
+        commandsManager.runCommand('arrowTextCallback', {
+          callback,
+          eventDetails,
+        }),
+
+      changeTextCallback: (data, eventDetails, callback) =>
+        commandsManager.runCommand('arrowTextCallback', {
+          callback,
+          data,
+          eventDetails,
+        }),
+    },
+  };
+
+  ToolGroupService.createToolGroupAndAddTools('mpr', tools, toolsConfig);
+}
+
 function initToolGroups(extensionManager, ToolGroupService, commandsManager) {
-  initDefaultToolGroup(extensionManager, ToolGroupService, commandsManager);
+  initDefaultToolGroup(
+    extensionManager,
+    ToolGroupService,
+    commandsManager,
+    'default'
+  );
   initSRToolGroup(extensionManager, ToolGroupService, commandsManager);
+  initMPRToolGroup(extensionManager, ToolGroupService, commandsManager);
 }
 
 export default initToolGroups;

@@ -6,7 +6,7 @@ export default [
       {
         id: 'FourOrMoreSeries',
         weight: 25,
-        attribute: 'numberOfDisplaySets',
+        attribute: 'numberOfDisplaySetsWithImages',
         constraint: {
           greaterThan: 3,
         },
@@ -40,7 +40,6 @@ export default [
         displaySets: [
           {
             id: 'defaultDisplaySetId',
-            findAll: true,
             seriesMatchingRules: [
               {
                 attribute: 'numImageFrames',
@@ -55,12 +54,6 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
-              syncGroups: [
-                {
-                  type: 'zoomPan',
-                  id: 'axialSync',
-                },
-              ],
             },
             displaySets: [
               {
@@ -71,12 +64,6 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
-              syncGroups: [
-                {
-                  type: 'zoomPan',
-                  id: 'axialSync',
-                },
-              ],
             },
             displaySets: [
               {
@@ -88,12 +75,6 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
-              syncGroups: [
-                {
-                  type: 'zoomPan',
-                  id: 'axialSync',
-                },
-              ],
             },
             displaySets: [
               {
@@ -105,12 +86,6 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
-              syncGroups: [
-                {
-                  type: 'zoomPan',
-                  id: 'axialSync',
-                },
-              ],
             },
             displaySets: [
               {
@@ -152,12 +127,6 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
-              syncGroups: [
-                {
-                  type: 'zoomPan',
-                  id: 'axialSync',
-                },
-              ],
             },
             displaySets: [
               {
@@ -168,12 +137,6 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
-              syncGroups: [
-                {
-                  type: 'zoomPan',
-                  id: 'axialSync',
-                },
-              ],
             },
             displaySets: [
               {
@@ -197,14 +160,14 @@ export default [
       {
         id: 'TwoOrMoreSeries',
         weight: 15,
-        attribute: 'numberOfDisplaySets',
+        attribute: 'numberOfDisplaySetsWithImages',
         constraint: {
           greaterThan: 1,
         },
       },
     ],
     toolGroupIds: ['default'],
-    displaySets: {
+    displaySetSelectors: {
       defaultDisplaySetId:{
         findAll: true,
         // Matches displaysets, NOT series
@@ -250,12 +213,6 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
-              syncGroups: [
-                {
-                  type: 'zoomPan',
-                  id: 'axialSync',
-                },
-              ],
             },
             displaySets: [
               {
@@ -266,12 +223,6 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
-              syncGroups: [
-                {
-                  type: 'zoomPan',
-                  id: 'axialSync',
-                },
-              ],
             },
             displaySets: [
               {

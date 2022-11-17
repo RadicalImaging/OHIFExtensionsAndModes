@@ -6,6 +6,8 @@ const defaultToolBarSections = {
     'Pan',
     'Capture',
     'Layout',
+    'MPR',
+    'Crosshairs',
     'MoreTools',
   ],
 

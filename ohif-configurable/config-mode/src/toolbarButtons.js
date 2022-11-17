@@ -7,11 +7,6 @@ import {
 } from '@ohif/ui';
 import { defaults } from '@ohif/core';
 
-export const toolGroupIds = {
-  MPR: 'mprGroup',
-  default: 'default',
-};
-
 const { windowLevelPresets } = defaults;
 /**
  *
@@ -31,10 +26,6 @@ function _createButton(type, id, icon, label, commands, tooltip) {
   };
 }
 
-const _createActionButton = _createButton.bind(null, 'action');
-const _createToggleButton = _createButton.bind(null, 'toggle');
-const _createToolButton = _createButton.bind(null, 'tool');
-
 function _createCommands(commandName, toolName, toolGroupIds) {
   return toolGroupIds.map(toolGroupId => ({
     /* It's a command that is being run when the button is clicked. */
@@ -46,6 +37,10 @@ function _createCommands(commandName, toolName, toolGroupIds) {
     context: 'CORNERSTONE',
   }));
 }
+
+const _createActionButton = _createButton.bind(null, 'action');
+const _createToggleButton = _createButton.bind(null, 'toggle');
+const _createToolButton = _createButton.bind(null, 'tool');
 
 /**
  *
@@ -89,19 +84,18 @@ const toolbarButtons = [
             commandName: 'setToolActive',
             commandOptions: {
               toolName: 'Length',
-              toolGroupId: 'default',
             },
             context: 'CORNERSTONE',
           },
-          // {
-          //   commandName: 'setToolActive',
-          //   commandOptions: {
-          //     toolName: 'SRLength',
-          //     toolGroupId: 'SRToolGroup',
-          //   },
-          //   // we can use the setToolActive command for this from Cornerstone commandsModule
-          //   context: 'CORNERSTONE',
-          // },
+          {
+            commandName: 'setToolActive',
+            commandOptions: {
+              toolName: 'SRLength',
+              toolGroupId: 'SRToolGroup',
+            },
+            // we can use the setToolActive command for this from Cornerstone commandsModule
+            context: 'CORNERSTONE',
+          },
         ],
         'Length'
       ),
@@ -265,21 +259,6 @@ const toolbarButtons = [
       ],
     },
   },
-  {
-    id: 'Crosshairs',
-    type: 'ohif.radioGroup',
-    props: {
-      type: 'toggle',
-      icon: 'tool-crosshair',
-      label: 'Crosshairs',
-      commands: [
-        ..._createCommands('toggleCrosshairs', 'Crosshairs', [
-          toolGroupIds.MPR,
-          toolGroupIds.default,
-        ]),
-      ],
-    },
-  },
   // Pan...
   {
     id: 'Pan',
@@ -318,6 +297,45 @@ const toolbarButtons = [
   {
     id: 'Layout',
     type: 'ohif.layoutSelector',
+    props: {
+      rows: 3,
+      columns: 3,
+    },
+  },
+  {
+    id: 'MPR',
+    type: 'ohif.action',
+    props: {
+      type: 'toggle',
+      icon: 'icon-mpr',
+      label: 'MPR',
+      commands: [
+        {
+          commandName: 'toggleMPR',
+          commandOptions: {},
+          context: 'CORNERSTONE',
+        },
+      ],
+    },
+  },
+  {
+    id: 'Crosshairs',
+    type: 'ohif.radioGroup',
+    props: {
+      type: 'tool',
+      icon: 'tool-crosshair',
+      label: 'Crosshairs',
+      commands: [
+        {
+          commandName: 'setToolActive',
+          commandOptions: {
+            toolGroupId: 'mpr',
+            toolName: 'Crosshairs',
+          },
+          context: 'CORNERSTONE',
+        },
+      ],
+    },
   },
   // More...
   {
@@ -384,6 +402,25 @@ const toolbarButtons = [
             },
           ],
           'Flip Horizontal'
+        ),
+        _createToggleButton('StackImageSync', 'link', 'Stack Image Sync', [
+          {
+            commandName: 'toggleStackImageSync',
+            commandOptions: {},
+            context: 'CORNERSTONE',
+          },
+        ]),
+        _createToggleButton(
+          'ReferenceLines',
+          'tool-referenceLines', // change this with the new icon
+          'Reference Lines',
+          [
+            {
+              commandName: 'toggleReferenceLines',
+              commandOptions: {},
+              context: 'CORNERSTONE',
+            },
+          ]
         ),
         _createToolButton(
           'StackScroll',
