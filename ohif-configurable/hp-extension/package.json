@@ -33,6 +33,8 @@
     "@ohif/core": "^3.0.0",
     "@ohif/extension-cornerstone": "^3.0.0",
     "@ohif/extension-default": "^3.0.0",
+    "@cornerstonejs/tools": "^0.29.2",
+    "config-point": "^0.5.1",
     "@ohif/i18n": "^1.0.0",
     "prop-types": "^15.6.2",
     "react": "^17.0.2",
@@ -45,8 +47,6 @@
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
-    "@cornerstonejs/tools": "^0.24.17",
-    "config-point": "^0.5.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
