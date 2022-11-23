@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/config-mode",
-  "version": "3.6.2",
+  "version": "3.7.0",
   "description": "A configurable/themeable mode that allows runtime extensions to the mode.",
   "author": "Radical Imaging",
   "license": "MIT",
@@ -33,10 +33,10 @@
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
-    "@cornerstonejs/core": "^0.21.0",
-    "@cornerstonejs/tools": "^0.29.2",
-    "@ohif/ui": "^1.10.10",
-    "@ohif/core": "^3.0.0"
+    "@cornerstonejs/core": "^0.21.2",
+    "@cornerstonejs/tools": "^0.29.4",
+    "@ohif/core": "^3.0.0",
+    "@ohif/ui": "^1.10.10"
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
