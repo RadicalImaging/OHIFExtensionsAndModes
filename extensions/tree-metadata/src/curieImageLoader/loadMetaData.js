@@ -1,4 +1,5 @@
-import sign from "./sign";
+import { AwsClient } from 'aws4fetch';
+import awsCredentials from './awsCredentials';
 
 const loadMetaDataInternal = async (datastoreId, collectionId, config) => {
     const uri = config.endpoint + '/runtime/datastore/' + datastoreId + '/study/' + collectionId + '/dicomstudymetadata'
@@ -9,10 +10,9 @@ const loadMetaDataInternal = async (datastoreId, collectionId, config) => {
         method: "GET"
     };
 
-    const options = sign(params, config)
     console.time("curie Metadata");
-    console.log("* curie signed request", options);
-    const response = await fetch(options.url, options)
+    const aws = new AwsClient(awsCredentials(config));
+    const response = await aws.fetch(uri)
     console.timeEnd("curie Metadata");
 
     const json = await response.json();
@@ -20,4 +20,4 @@ const loadMetaDataInternal = async (datastoreId, collectionId, config) => {
     return json
 }
 
-export default loadMetaDataInternal
+export default loadMetaDataInternal;

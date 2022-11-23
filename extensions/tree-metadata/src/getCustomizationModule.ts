@@ -11,7 +11,6 @@ import HealthLake from './healthlake/HealthLake';
  * page for login etc.
  */
 export default function getCustomizationModule() {
-  console.log("Registering customization module");
   return [
     {
       name: 'healthlake',

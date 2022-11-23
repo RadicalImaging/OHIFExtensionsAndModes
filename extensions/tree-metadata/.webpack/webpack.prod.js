@@ -28,11 +28,41 @@ const config = {
         commonjs: 'cornerstone-wado-image-loader',
         amd: 'cornerstone-wado-image-loader',
       },
-      react: {
+      'react': {
         root: 'React',
         commonjs2: 'react',
         commonjs: 'react',
         amd: 'react',
+      },
+      'config-point': {
+        root: 'config-point',
+        commonjs2: 'config-point',
+        commonjs: 'config-point',
+        amd: 'config-point',
+      },
+      'classnames': {
+        root: 'classnames',
+        commonjs2: 'classnames',
+        commonjs: 'classnames',
+        amd: 'classnames',
+      },
+      'react-router-dom': {
+        root: 'react-router-dom',
+        commonjs2: 'react-router-dom',
+        commonjs: 'react-router-dom',
+        amd: 'react-router-dom',
+      },
+      'dicomweb-client': {
+        root: 'dicomweb-client',
+        commonjs2: 'dicomweb-client',
+        commonjs: 'dicomweb-client',
+        amd: 'dicomweb-client',
+      },
+      dcmjs: {
+        root: 'dcmjs',
+        commonjs2: 'dcmjs',
+        commonjs: 'dcmjs',
+        amd: 'dcmjs',
       },
       '@ohif/core': {
         commonjs2: '@ohif/core',

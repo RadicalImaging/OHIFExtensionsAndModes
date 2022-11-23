@@ -20,7 +20,7 @@ const defaultRoutes = [
         id: ohif.layout,
         props: {
           leftPanels: [ohif.leftPanel],
-          rightPanels: [dicomseg.panel, ohif.rightPanel],
+          rightPanels: [ohif.rightPanel, dicomseg.panel,],
           viewports: [
             {
               namespace: cornerstone.viewport,

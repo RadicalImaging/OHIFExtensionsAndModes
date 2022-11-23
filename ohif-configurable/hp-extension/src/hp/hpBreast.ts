@@ -14,6 +14,14 @@ export default {
       },
       required: true,
     },
+    {
+      id: 'numberOfImages',
+      attribute: 'numberOfDisplaySetsWithImages',
+      constraint: {
+        greaterThan: 3,
+      },
+      required: true,
+    },
   ],
   toolGroupIds: ['default'],
   displaySetSelectors: {

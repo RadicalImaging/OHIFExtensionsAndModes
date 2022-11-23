@@ -68,7 +68,7 @@ export default class DicomTreeClient extends api.DICOMwebClient {
 
     if (queryUrl) {
       console.log('Fetching from', queryUrl);
-      searchResult = await (await fetch(queryUrl)).json();
+      searchResult = queryUrl[0]==='[' ? JSON.parse(queryUrl) : await (await fetch(queryUrl)).json();
       console.log('Results', searchResult);
     } else {
       searchResult = await super.searchForStudies(options);
@@ -139,7 +139,7 @@ export default class DicomTreeClient extends api.DICOMwebClient {
         ImageSetID = study['00200010']?.Value?.[0];
       }
     }
-    if (this.healthlake && ImageSetID && datastoreID) {
+    if (this.healthlake?.endpoint && ImageSetID && datastoreID) {
       if (this.healthlake.collections[ImageSetID]) {
         console.log('* Returning previously fetched data', ImageSetID);
         return this.healthlake.collections[ImageSetID];
@@ -159,7 +159,7 @@ export default class DicomTreeClient extends api.DICOMwebClient {
         ImageSetID
       );
       const url = `${this.wadoURL}/studies/${studyInstanceUID}/metadataTree.json`;
-      return this._httpGetApplicationJson(url, {}, false, withCredentials);
+      return this._httpGetApplicationJson(url, {datastoreID, ImageSetID, }, false, withCredentials);
     }
   }
 

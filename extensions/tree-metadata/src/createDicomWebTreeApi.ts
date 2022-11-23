@@ -1,4 +1,3 @@
-import { api } from 'dicomweb-client';
 import {
   DicomMetadataStore,
   IWebApiDataSource,
@@ -7,10 +6,9 @@ import {
   classes,
 } from '@ohif/core';
 import cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
+import {AwsV4Signer} from 'aws4fetch';
 
 import { mapParams, search as qidoSearch, processResults } from './qido.js';
-
-import sign from './curieImageLoader/sign';
 
 import getImageId from './utils/getImageId';
 import dcmjs from 'dcmjs';
@@ -22,6 +20,7 @@ import {
 } from './retrieveStudyMetadataTree';
 
 import DicomTreeClient from './utils/DicomTreeClient';
+import awsCredentials from './curieImageLoader/awsCredentials';
 
 const { DicomMetaDictionary, DicomDict } = dcmjs.data;
 
@@ -43,8 +42,7 @@ const initializeCurieFetch = healthlake => {
       const datastoreId = urlParams.get('DatastoreID');
       const collectionId = urlParams.get('ImageSetID');
       const imageFrameId = urlParams.get('frameID');
-      console.log("healthlake,datastore,imageFrame", healthlake, datastoreId, imageFrameId);
-      if (healthlake && datastoreId && imageFrameId) {
+      if (healthlake?.endpoint && datastoreId && imageFrameId) {
         const uri =
           healthlake.endpoint +
           '/runtime/datastore/' +
@@ -53,23 +51,32 @@ const initializeCurieFetch = healthlake => {
           collectionId +
           '/imageframe/' +
           imageFrameId;
-        const params = {
+        
+        
+        const signer = new AwsV4Signer({
+          ...awsCredentials(healthlake),
           url: uri,
-          data: null,
-          headers: {},
-          method: 'GET',
-        };
+        });
 
-        const options = sign(params, healthlake);
-        const { url: curieUrl, headers } = options;
-        xhr.open('GET', curieUrl, true);
-        xhr.setRequestHeader('x-amz-date', headers['x-amz-date']);
-        xhr.setRequestHeader('Authorization', headers.Authorization);
+        
+        xhr.open('GET', uri, true);
         xhr.wasGetResponseHeader = xhr.getResponseHeader;
         xhr.getResponseHeader = function (key) {
           if (key == 'Content-Type') return 'image/jphc';
           return this.wasGetResponseHeader(key);
         };
+
+        xhr.wasSend = xhr.send;
+        xhr.send = () => {
+          signer.sign().then(({headers}) => {
+            xhr.setRequestHeader('x-amz-date', headers.get('x-amz-date'));
+            xhr.setRequestHeader('Authorization', headers.get('Authorization'));  
+            xhr.wasSend();
+          })
+        }
+        
+
+        
       } else {
         xhr.open('GET', url, true);
       }
@@ -109,8 +116,6 @@ function createDicomWebTreeApi(dicomWebConfig, UserAuthenticationService) {
     headers: UserAuthenticationService.getAuthorizationHeader(),
     errorInterceptor: errorHandler.getHTTPErrorHandler(),
   };
-
-  console.log('Creating a dicom web tree api', dicomWebConfig);
 
   const wadoConfig = {
     url: wadoRoot,
@@ -156,7 +161,6 @@ function createDicomWebTreeApi(dicomWebConfig, UserAuthenticationService) {
               supportsWildcard,
             }) || {};
           if (window.curie && window.curie.ImageSetID) {
-            console.log('curie data', window.curie);
             const { ImageSetID, datastoreID } = window.curie;
             const tree = await implementation._retrieveSeriesMetadataDeduplicated(
               ImageSetID

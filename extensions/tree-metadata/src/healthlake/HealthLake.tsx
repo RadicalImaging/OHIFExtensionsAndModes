@@ -22,6 +22,7 @@ function HealthLake() {
     const studyID = window.document.getElementById('studyID').value;
     const studyUID = window.document.getElementById('studyUID').value;
     const queryJson = window.document.getElementById('queryJson').value;
+    const endpoint = window.document.getElementById('endpoint').value;
 
     console.log(
       'View study',
@@ -38,6 +39,7 @@ function HealthLake() {
       studyUID,
       datastoreID,
       queryJson,
+      endpoint,
     };
     window.localStorage.setItem("healthlake", JSON.stringify(window.healthlake));
     return window.healthlake;
@@ -70,6 +72,14 @@ function HealthLake() {
         defaultValue={healthlake?.queryJson}
       />
       <br />
+      Endpoint:{' '}
+      <input
+        id="endpoint"
+        type="text"
+        className="border-primary-main mt-2 bg-black"
+        defaultValue={healthlake?.endpoint}
+      />
+      <br />
       Datastore ID:{' '}
       <input
         id="DatastoreID"
@@ -82,7 +92,7 @@ function HealthLake() {
         className={classnames('font-bold', 'ml-2')}
         onClick={() => {
           const { studyUID, datastoreID, studyID } = setupHealthLakeConnect();
-          const destination = `/?datastoreID=${datastoreID}&ImageSetID=${studyID}`;
+          const destination = `/?datastoreID=${datastoreID}&ImageSetID=${studyID}&datasources=healthlake`;
           console.log('Querying to destination', destination);
           navigate(destination);
         }}
