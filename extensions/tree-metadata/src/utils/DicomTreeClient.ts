@@ -50,7 +50,10 @@ export default class DicomTreeClient extends api.DICOMwebClient {
       this.healthlake = {
         region: 'us-east-1',
         endpoint: 'https://medical-imaging.us-east-1.amazonaws.com',
+        tree: true,
+        images:true,
         collections: {},
+        ...window.healthlake,
         ...qidoConfig.healthlake,
       };
     }
@@ -139,7 +142,7 @@ export default class DicomTreeClient extends api.DICOMwebClient {
         ImageSetID = study['00200010']?.Value?.[0];
       }
     }
-    if (this.healthlake?.endpoint && ImageSetID && datastoreID) {
+    if (this.healthlake?.tree && ImageSetID && datastoreID) {
       if (this.healthlake.collections[ImageSetID]) {
         console.log('* Returning previously fetched data', ImageSetID);
         return this.healthlake.collections[ImageSetID];

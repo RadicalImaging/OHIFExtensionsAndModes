@@ -35,14 +35,16 @@ const metadataProvider = classes.MetadataProvider;
 const retrievedStudies: Record<string, unknown> = {};
 
 const initializeCurieFetch = healthlake => {
-  console.log("Initialize curie");
+  if( !healthlake.endpoint ) return;
+  console.log("Initialize curie", healthlake);
   cornerstoneWADOImageLoader.configure({
     open: function (xhr, url) {
       const urlParams = new URLSearchParams(url);
       const datastoreId = urlParams.get('DatastoreID');
       const collectionId = urlParams.get('ImageSetID');
       const imageFrameId = urlParams.get('frameID');
-      if (healthlake?.endpoint && datastoreId && imageFrameId) {
+      const healthlakeParam = urlParams.get('healthlake');
+      if (healthlakeParam==="true" && datastoreId && imageFrameId) {
         const uri =
           healthlake.endpoint +
           '/runtime/datastore/' +
@@ -130,7 +132,8 @@ function createDicomWebTreeApi(dicomWebConfig, UserAuthenticationService) {
   // TODO -> We'll need to merge auth later.
   const qidoDicomWebClient = new DicomTreeClient(qidoConfig);
   const wadoDicomWebClient = new DicomTreeClient(wadoConfig);
-
+  console.log("Initializing", qidoConfig, qidoDicomWebClient.healthlake);
+  
   initializeCurieFetch(qidoDicomWebClient.healthlake);
 
   const implementation = {
@@ -499,11 +502,13 @@ function createDicomWebTreeApi(dicomWebConfig, UserAuthenticationService) {
     getImageIdsForInstance({ instance, frame = 1 }) {
       const { DatastoreID, ImageFrames, ImageSetID } = instance;
       const frameID = ImageFrames?.[frame - 1]?.ID;
+      const healthlakeParam = qidoDicomWebClient.healthlake?.images ? "true" : "false";
       const extraParameters =
         (DatastoreID && {
           DatastoreID,
           frameID,
           ImageSetID,
+          healthlake: healthlakeParam,
         }) ||
         undefined;
       const imageIds = getImageId({

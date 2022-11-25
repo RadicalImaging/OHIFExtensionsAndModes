@@ -5,14 +5,20 @@ const onModeExit = ({ servicesManager }) => {
     SyncGroupService,
     MeasurementService,
     ToolBarService,
+    SegmentationService,
+    CornerstoneViewportService,
+    HangingProtocolService,
     customizationService,
   } = servicesManager.services;
 
   ToolBarService.reset();
-  customizationService?.reset?.();
   MeasurementService.clearMeasurements();
+  customizationService.reset();
   ToolGroupService.destroy();
   SyncGroupService.destroy();
+  SegmentationService.destroy();
+  CornerstoneViewportService.destroy();
+  HangingProtocolService.reset();
 };
 
 export default onModeExit;

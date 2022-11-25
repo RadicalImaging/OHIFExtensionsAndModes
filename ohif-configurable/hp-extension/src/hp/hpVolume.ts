@@ -3,6 +3,8 @@ export default
     id: 'volume',
     hasUpdatedPriorsInformation: false,
     name: 'Volume',
+    // TODO - add a strategy to load every Nth image
+    imageLoadStrategy: "default",
     protocolMatchingRules: [
       {
         id: 'Volume 2x2',

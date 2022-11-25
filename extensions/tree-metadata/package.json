@@ -7,7 +7,6 @@
   "main": "dist/umd/@radicalimaging/tree-metadata/index.umd.js",
   "files": [
     "dist/**",
-    "public/**",
     "README.md"
   ],
   "repository": "OHIF/Viewers",

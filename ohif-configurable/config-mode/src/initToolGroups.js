@@ -18,13 +18,24 @@ function initDefaultToolGroup(
       },
       {
         toolName: toolNames.Pan,
-        bindings: [{ mouseButton: Enums.MouseBindings.Auxiliary }],
+        bindings: [
+          { mouseButton: Enums.MouseBindings.Auxiliary },
+          { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Shift },
+        ],
       },
       {
         toolName: toolNames.Zoom,
-        bindings: [{ mouseButton: Enums.MouseBindings.Secondary }],
+        bindings: [
+          { mouseButton: Enums.MouseBindings.Secondary },
+          { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Ctrl },
+          { numTouchPoints: 2 },
+        ],
       },
       { toolName: toolNames.StackScrollMouseWheel, bindings: [] },
+      { toolName: toolNames.StackScroll, bindings: [
+        { numTouchPoints: 3 },
+        { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Alt },
+      ]},
     ],
     passive: [
       { toolName: toolNames.Length },
@@ -33,7 +44,6 @@ function initDefaultToolGroup(
       { toolName: toolNames.DragProbe },
       { toolName: toolNames.EllipticalROI },
       { toolName: toolNames.RectangleROI },
-      { toolName: toolNames.StackScroll },
       { toolName: toolNames.Angle },
       { toolName: toolNames.Magnify },
       { toolName: toolNames.SegmentationDisplay },

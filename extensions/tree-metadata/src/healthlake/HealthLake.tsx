@@ -5,16 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@ohif/ui';
 
 function HealthLake() {
-  console.log("Rendering healthlake initial page");
   const navigate = useNavigate();
 
   const dsConfig = window.config.dataSources[0].configuration;
   let { healthlake } = dsConfig;
-  if (!healthlake) {
-    const sHealthLake = window.localStorage.getItem("healthlake");
-    healthlake = sHealthLake && JSON.parse(sHealthLake) || {};
-  }
-
+  const sHealthLake = window.localStorage.getItem("healthlake");
+  healthlake = Object.assign({}, healthlake, sHealthLake && JSON.parse(sHealthLake) || {});
+  
   const setupHealthLakeConnect = () => {
     const awsSecretAccessKey = window.document.getElementById('secret').value;
     const datastoreID = window.document.getElementById('DatastoreID').value;
@@ -22,15 +19,7 @@ function HealthLake() {
     const studyID = window.document.getElementById('studyID').value;
     const studyUID = window.document.getElementById('studyUID').value;
     const queryJson = window.document.getElementById('queryJson').value;
-    const endpoint = window.document.getElementById('endpoint').value;
 
-    console.log(
-      'View study',
-      awsSecretAccessKey,
-      studyID,
-      studyUID,
-      datastoreID
-    );
     window.healthlake = {
       awsSecretAccessKey,
       awsAccessKeyID,
@@ -39,7 +28,6 @@ function HealthLake() {
       studyUID,
       datastoreID,
       queryJson,
-      endpoint,
     };
     window.localStorage.setItem("healthlake", JSON.stringify(window.healthlake));
     return window.healthlake;
@@ -61,7 +49,7 @@ function HealthLake() {
         id="awsPublicKey"
         type="text"
         className="border-primary-main mt-2 bg-black text-white"
-        defaultValue={healthlake.awsAccessKeyID}
+        defaultValue={healthlake.awsAccessKeyID || "AKIAWQJA6LH4YTR55ZUH"}
       />{' '}
       <br />
       HealthLake Query JSON:{' '}
@@ -69,23 +57,7 @@ function HealthLake() {
         id="queryJson"
         type="text"
         className="border-primary-main mt-2 bg-black"
-        defaultValue={healthlake?.queryJson}
-      />
-      <br />
-      Endpoint:{' '}
-      <input
-        id="endpoint"
-        type="text"
-        className="border-primary-main mt-2 bg-black"
-        defaultValue={healthlake?.endpoint}
-      />
-      <br />
-      Datastore ID:{' '}
-      <input
-        id="DatastoreID"
-        type="text"
-        className="border-primary-main mt-2 bg-black"
-        defaultValue={healthlake?.datastoreID}
+        defaultValue={healthlake?.queryJson || '/dicomweb/curie/studies'}
       />
       <br />
       <Button
@@ -116,6 +88,14 @@ function HealthLake() {
         className="border-primary-main mt-2 bg-black"
         defaultValue=""
       />{' '}
+      <br />
+      Datastore ID:{' '}
+      <input
+        id="DatastoreID"
+        type="text"
+        className="border-primary-main mt-2 bg-black"
+        defaultValue={healthlake?.datastoreID}
+      />
       <br />
       <Button
         className={classnames('font-bold', 'ml-2')}
