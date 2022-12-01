@@ -25,7 +25,7 @@ export default {
   ],
   toolGroupIds: ['default'],
   displaySetSelectors: {
-    LCC:{
+    LCC: {
       // Matches displaysets, NOT series
       seriesMatchingRules: [
         {
@@ -42,9 +42,17 @@ export default {
             contains: 'L',
           },
         },
+        {
+          weight: 10,
+          attribute: 'SeriesDescription',
+          constraint: {
+            contains: 'L CC',
+          },
+          required: true,
+        },
       ],
     },
-    RCC:{
+    RCC: {
       // Matches displaysets, NOT series
       seriesMatchingRules: [
         {
@@ -61,9 +69,25 @@ export default {
             contains: 'R',
           },
         },
+        {
+          weight: 10,
+          attribute: 'SeriesDescription',
+          constraint: {
+            contains: 'CC',
+          },
+          required: true,
+        },
+        {
+          weight: 5,
+          attribute: 'SeriesDescription',
+          constraint: {
+            contains: 'R',
+          },
+          required: true,
+        },
       ],
     },
-    LMLO:{
+    LMLO: {
       seriesMatchingRules: [
         {
           weight: 10,
@@ -79,10 +103,18 @@ export default {
             contains: 'L',
           },
         },
+        {
+          weight: 10,
+          attribute: 'SeriesDescription',
+          constraint: {
+            contains: 'L MLO',
+          },
+          required: true,
+        },
       ],
       studyMatchingRules: [],
     },
-    RMLO:{
+    RMLO: {
       seriesMatchingRules: [
         {
           weight: 10,
@@ -98,10 +130,18 @@ export default {
             contains: 'R',
           },
         },
+        {
+          weight: 10,
+          attribute: 'SeriesDescription',
+          constraint: {
+            contains: 'R MLO',
+          },
+          required: true,
+        },
       ],
       studyMatchingRules: [],
     },
-},
+  },
 
   stages: [
     {
@@ -120,12 +160,12 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             syncGroups: [
-              {
-                type: 'initialZoomPan',
-                options: { 
-                  imageCanvasPoint: [1,0,1,0],
-                },
-              },
+              // {
+              //   type: 'initialZoomPan',
+              //   options: {
+              //     imageCanvasPoint: [1, 0, 1, 0],
+              //   },
+              // },
             ],
           },
           displaySets: [
@@ -138,12 +178,12 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             syncGroups: [
-              {
-                type: 'initialZoomPan',
-                options: { 
-                  imageCanvasPoint: [0,0,0,0],
-                },
-              },
+              // {
+              //   type: 'initialZoomPan',
+              //   options: {
+              //     imageCanvasPoint: [0, 0, 0, 0],
+              //   },
+              // },
             ],
           },
           displaySets: [
@@ -156,12 +196,12 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             syncGroups: [
-              {
-                type: 'initialZoomPan',
-                options: { 
-                  imageCanvasPoint: [1,1,1,1],
-                },
-              },
+              // {
+              //   type: 'initialZoomPan',
+              //   options: {
+              //     imageCanvasPoint: [1, 1, 1, 1],
+              //   },
+              // },
             ],
           },
           displaySets: [
@@ -174,12 +214,12 @@ export default {
           viewportOptions: {
             toolGroupId: 'default',
             syncGroups: [
-              {
-                type: 'initialZoomPan',
-                options: { 
-                  imageCanvasPoint: [0,1,0,1],
-                },
-              },
+              // {
+              //   type: 'initialZoomPan',
+              //   options: {
+              //     imageCanvasPoint: [0, 1, 0, 1],
+              //   },
+              // },
             ],
           },
           displaySets: [

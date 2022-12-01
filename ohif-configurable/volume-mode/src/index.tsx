@@ -47,7 +47,7 @@ function modeFactory({ modeConfiguration }) {
       const modalities_list = modalities.split('\\');
 
       // Slide Microscopy modality not supported by basic mode yet
-      return modalities_list.filter(it => it !== 'SM' && it !== 'ECG').length > 0;
+      return modalities_list.filter(it => it !== 'SM' && it !== 'ECG').find(it => it=='MR' || it=='CT');
     },
 
     routes: defaultRoutes,
@@ -56,11 +56,6 @@ function modeFactory({ modeConfiguration }) {
     extensions: extensionDependencies,
 
     /** HangingProtocols used by the mode */
-    // Delete this instance TODO - once hp changes fully released
-    hangingProtocols: [
-      '@radicalimaging/hp-extension.hangingProtocolModule.Volume',
-      '@ohif/extension-default.hangingProtocolModule.default',
-    ],
     hangingProtocol: [
       '@radicalimaging/hp-extension.volume',
       'default',

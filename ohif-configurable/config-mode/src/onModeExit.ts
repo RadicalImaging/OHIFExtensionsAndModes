@@ -11,6 +11,7 @@ const onModeExit = ({ servicesManager }) => {
     customizationService,
   } = servicesManager.services;
 
+  console.log("**** onModeExit config mode being called");
   ToolBarService.reset();
   MeasurementService.clearMeasurements();
   customizationService.reset();

@@ -4,7 +4,7 @@ export default
     hasUpdatedPriorsInformation: false,
     name: 'Volume',
     // TODO - add a strategy to load every Nth image
-    imageLoadStrategy: "default",
+    imageLoadStrategy: "nth",
     protocolMatchingRules: [
       {
         id: 'Volume 2x2',
@@ -16,7 +16,7 @@ export default
         required: true,
       },
     ],
-    toolGroupIds: ['default'],
+    toolGroupId: 'default',
     displaySetSelectors: {
       defaultDisplaySetId: {
         seriesMatchingRules: [

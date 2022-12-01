@@ -49,6 +49,7 @@ function initDefaultToolGroup(
       { toolName: toolNames.SegmentationDisplay },
     ],
     // enabled
+    enabled: [{ toolName: toolNames.SegmentationDisplay }],
     // disabled
     disabled: [{ toolName: toolNames.ReferenceLines }],
   };
@@ -126,7 +127,9 @@ function initSRToolGroup(extensionManager, ToolGroupService, commandsManager) {
         toolName: SRToolNames.DICOMSRDisplay,
         bindings: [],
       },
+      { toolName: toolNames.SegmentationDisplay },
     ],
+
     // disabled
   };
 
@@ -186,6 +189,7 @@ function initMPRToolGroup(extensionManager, ToolGroupService, commandsManager) {
       { toolName: toolNames.SegmentationDisplay },
     ],
     disabled: [{ toolName: toolNames.Crosshairs }],
+    enabled: [{ toolName: toolNames.SegmentationDisplay }],
 
     // enabled
     // disabled

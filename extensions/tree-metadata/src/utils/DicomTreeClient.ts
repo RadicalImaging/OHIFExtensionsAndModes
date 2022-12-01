@@ -67,7 +67,7 @@ export default class DicomTreeClient extends api.DICOMwebClient {
    */
   async searchForStudies(options) {
     let searchResult;
-    const queryUrl = window.healthlake.queryJson || this.healthlake.queryJson;
+    const queryUrl = window.healthlake?.queryJson || this.healthlake?.queryJson;
 
     if (queryUrl) {
       console.log('Fetching from', queryUrl);
