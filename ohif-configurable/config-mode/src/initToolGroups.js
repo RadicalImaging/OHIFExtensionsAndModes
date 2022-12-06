@@ -1,3 +1,9 @@
+const colours = {
+  "viewport-0": "#f00",
+  "viewport-1": "#0f0",
+  "viewport-2": "#00f",
+};
+
 function initDefaultToolGroup(
   extensionManager,
   ToolGroupService,
@@ -202,6 +208,7 @@ function initMPRToolGroup(extensionManager, ToolGroupService, commandsManager) {
         enabled: false,
         panSize: 10,
       },
+      getReferenceLineColor: (volumeId) => colours[volumeId] || '#0c0',
     },
     [toolNames.ArrowAnnotate]: {
       getTextCallback: (callback, eventDetails) =>
