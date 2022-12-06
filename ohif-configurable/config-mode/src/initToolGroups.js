@@ -77,7 +77,6 @@ function initDefaultToolGroup(
     },
   };
 
-  console.log("* toolsConfig", toolGroupId, toolsConfig);
   ToolGroupService.createToolGroupAndAddTools(toolGroupId, tools, toolsConfig);
 }
 
@@ -209,10 +208,7 @@ function initMPRToolGroup(extensionManager, ToolGroupService, commandsManager) {
         enabled: false,
         panSize: 10,
       },
-      getReferenceLineColor: (volumeId) => {
-        console.log("* getReferenceLineColor", volumeId);
-        return colours[volumeId] || '#0c0';
-      },
+      getReferenceLineColor: (volumeId) => colours[volumeId] || '#0c0',
     },
     [toolNames.ArrowAnnotate]: {
       getTextCallback: (callback, eventDetails) =>
