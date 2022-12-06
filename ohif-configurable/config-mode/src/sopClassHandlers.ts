@@ -8,6 +8,5 @@ const sopClassHandlers = [
   dicomsr.sopClassHandler,
   dicomseg.sopClassHandler,
 ];
-console.log("sopClassHandlers", sopClassHandlers);
 
 export default sopClassHandlers;

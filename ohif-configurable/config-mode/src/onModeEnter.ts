@@ -6,7 +6,9 @@ export default function onModeEnter({ servicesManager, extensionManager, command
     customizationService,
   } = servicesManager.services;
 
+  // Clear a few things here.
   MeasurementService.clearMeasurements();
+  ToolBarService.reset();
 
   // Init Default and SR ToolGroups
   this.initToolGroups(extensionManager, ToolGroupService, commandsManager);

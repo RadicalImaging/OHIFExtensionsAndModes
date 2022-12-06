@@ -1,20 +1,15 @@
-import hpMpr from './hpMpr';
 import hpHeart from './hpHeart';
 import hpMN from './hpMN';
 import hpBreast from './hpBreast';
 import hpVolume from './hpVolume';
 import ConfigPoint from "config-point";
 
+console.log("hpVolume=", hpVolume);
+
 const hangingProtocols = ConfigPoint.createConfiguration("hpExtensionHangingProtocols",
   {
     // Include both protocols list and new list
     hangingProtocols: [
-      {
-        // Statically defined mpr version - applies as initial view rather than command button
-        id: '@radicalimaging/hp-extension.mpr',
-        protocols: [hpMpr],
-        protocol: hpMpr,
-      },
       {
         id: '@radicalimaging/hp-extension.breast',
         protocols: [hpBreast],

@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/hp-extension",
-  "version": "3.6.1",
+  "version": "3.6.4",
   "description": "Extension to define support for basic MPR",
   "author": "Bill Wallace",
   "license": "MIT",
@@ -30,11 +30,13 @@
     "start": "yarn run dev"
   },
   "peerDependencies": {
+    "@cornerstonejs/tools": "^0.30.0",
     "@ohif/core": "^3.0.0",
     "@ohif/extension-cornerstone": "^3.0.0",
     "@ohif/extension-default": "^3.0.0",
     "@ohif/i18n": "^1.0.0",
-    "prop-types": "^15.6.2",
+    "config-point": "^0.5.1",
+    "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-i18next": "^10.11.0",
@@ -45,8 +47,6 @@
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
-    "@cornerstonejs/tools": "^0.24.17",
-    "config-point": "^0.5.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
@@ -71,6 +71,7 @@
     "eslint-loader": "^2.0.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.12.2",
+    "webpack-bundle-analyzer": "^4.7.0",
     "webpack-cli": "^3.0.8"
   }
 }

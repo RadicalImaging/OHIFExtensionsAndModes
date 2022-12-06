@@ -5,14 +5,21 @@ const onModeExit = ({ servicesManager }) => {
     SyncGroupService,
     MeasurementService,
     ToolBarService,
+    SegmentationService,
+    CornerstoneViewportService,
+    HangingProtocolService,
     customizationService,
   } = servicesManager.services;
 
+  console.log("**** onModeExit config mode being called");
   ToolBarService.reset();
-  customizationService?.reset?.();
   MeasurementService.clearMeasurements();
+  customizationService.reset();
   ToolGroupService.destroy();
   SyncGroupService.destroy();
+  SegmentationService.destroy();
+  CornerstoneViewportService.destroy();
+  HangingProtocolService.reset();
 };
 
 export default onModeExit;

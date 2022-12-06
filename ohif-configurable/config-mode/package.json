@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/config-mode",
-  "version": "3.6.1",
+  "version": "3.7.2",
   "description": "A configurable/themeable mode that allows runtime extensions to the mode.",
   "author": "Radical Imaging",
   "license": "MIT",
@@ -33,20 +33,16 @@
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
-    "@cornerstonejs/core": "^0.16.11",
-    "@cornerstonejs/tools": "^0.24.17",
-    "@ohif/core": "^3.0.0"
+    "@cornerstonejs/tools": "^0.30.0",
+    "@ohif/core": "^3.0.0",
+    "@ohif/ui": "^1.10.10",
+    "gl-matrix": "^3.4.3",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.get": "^4.4.2"
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
-    "@cornerstonejs/tools": "^0.24.17",
-    "@ohif/core": "^2.16.33",
-    "@ohif/ui": "^1.10.10",
-    "config-point": "^0.5.1",
-    "gl-matrix": "^3.4.3",
-    "lodash": "^4.17.21",
-    "lodash.clonedeep": "^4.5.0",
-    "lodash.get": "^4.4.2"
+    "config-point": "^0.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
@@ -68,6 +64,7 @@
     "dotenv": "^14.1.0",
     "eslint": "^5.0.1",
     "eslint-loader": "^2.0.0",
+    "lodash": "^4.17.21",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.12.2",
     "webpack-cli": "^3.0.8"
