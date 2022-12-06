@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/mode-dicom-html",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Text Report Mode",
   "author": "OHIF",
   "license": "ISC",
@@ -41,6 +41,7 @@
     "config-point": "^0.5.1"
   },
   "devDependencies": {
+    "mini-css-extract-plugin": "^2.7.2",
     "webpack": "^5.50.0",
     "webpack-merge": "^5.7.3"
   }
