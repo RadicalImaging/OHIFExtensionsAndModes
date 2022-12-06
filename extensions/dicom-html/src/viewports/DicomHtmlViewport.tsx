@@ -1,6 +1,44 @@
 import React from 'react';
+import { utils } from '@ohif/core';
 
 import './DicomHtmlViewport.css';
+
+const { guid } = utils;
+
+const defaultStyles: Record<string, React.CSSProperties> = {
+  meta_header_key: {
+    color: 'rgb(52, 140, 253)',
+    marginRight: '9px',
+    textAlign: 'right',
+    minWidth: '9rem',
+    display: 'inline-block',
+    lineHeight: 1.58,
+  },
+  meta_header_value: {},
+  h1: {
+    color: 'rgb(144, 205, 244)',
+  },
+  h2: {
+    color: 'rgb(144, 205, 244)',
+  },
+  h3: {
+    color: 'rgb(144, 205, 244)',
+  },
+  h4: {
+    color: 'rgb(144, 205, 244)',
+  },
+  h5: {
+    color: 'rgb(144, 205, 244)',
+  },
+  h6: {
+    color: 'rgb(144, 205, 244)',
+  },
+  content_key: {
+    color: 'rgb(52, 140, 253)',
+    lineHeight: 1.58,
+  },
+  content_value: {},
+};
 
 function normalizeString(str) {
   return (str || '').replaceAll('^', ' ');
@@ -21,152 +59,192 @@ const getMeaningString = data => {
   if (data.ConceptNameCodeSequence) {
     const { CodeMeaning } = data.ConceptNameCodeSequence;
 
-    return `${CodeMeaning} = `;
+    return `${CodeMeaning}`;
   }
 
   return '';
 };
 
-function getValueString(data) {
-  switch (data.ValueType) {
-    case 'CODE':
-      const {
-        CodeMeaning,
-        CodeValue,
-        CodingSchemeDesignator,
-      } = data.ConceptNameCodeSequence[0];
+function getValueString(data: any) {
+  if (data.ValueType === 'CODE') {
+    const {
+      CodeMeaning,
+      CodeValue,
+      CodingSchemeDesignator,
+    } = data.ConceptNameCodeSequence[0];
 
-      return `${CodeMeaning} (${CodeValue}, ${CodingSchemeDesignator})`;
+    return `${CodeMeaning} (${CodeValue}, ${CodingSchemeDesignator})`;
+  } else if (data.ValueType === 'PNAME') {
+    return normalizeString(
+      data.PersonName[0] ? data.PersonName[0].Alphabetic : data.PersonName
+    );
+  } else if (data.ValueType === 'TEXT') {
+    return normalizeString(data.TextValue);
+  } else if (data.ValueType === 'UIDREF') {
+    return data.UID;
+  } else if (data.ValueType === 'NUM') {
+    const { MeasuredValueSequence } = data;
+    const numValue = MeasuredValueSequence.NumericValue;
+    const codeValue =
+      MeasuredValueSequence.MeasurementUnitsCodeSequence.CodeValue;
+    return `${numValue} ${codeValue}`;
+  }
+}
 
-    case 'PNAME':
-      console.log(data);
-      return normalizeString(
-        data.PersonName[0] ? data.PersonName[0].Alphabetic : data.PersonName
+function StyledReportContent({
+  instance,
+  styles,
+}: {
+  instance: any;
+  styles: Record<string, React.CSSProperties>;
+}) {
+  const PlainValue = ({ data }) => {
+    const value = getValueString(data);
+
+    if (value) {
+      return (
+        <>
+          <div style={styles.content_key}>
+            {getRelationshipString(data)} {getMeaningString(data)}
+          </div>
+          <div style={styles.content_value}>{value}</div>
+        </>
       );
-
-    case 'TEXT':
-      return normalizeString(data.TextValue);
-
-    case 'UIDREF':
-      return data.UID;
-
-    case 'NUM':
-      const { MeasuredValueSequence } = data;
-      const numValue = MeasuredValueSequence.NumericValue;
-      const codeValue =
-        MeasuredValueSequence.MeasurementUnitsCodeSequence.CodeValue;
-      return `${numValue} ${codeValue}`;
-  }
-}
-
-function constructPlainValue(data) {
-  const value = getValueString(data);
-
-  if (value) {
-    return getRelationshipString(data) + getMeaningString(data) + value;
-  }
-}
-
-function getMainData(data) {
-  const root = [];
-
-  const patientValue = normalizeString(
-    `${data.PatientName[0].Alphabetic} (${data.PatientSex}, #${data.PatientID})`
-  );
-  root.push(getMainDataItem('Patient', patientValue));
-
-  const studyValue = normalizeString(data.StudyDescription);
-  root.push(getMainDataItem('Study', studyValue));
-
-  const seriesValue = normalizeString(
-    `${data.SeriesDescription} (#${data.SeriesNumber})`
-  );
-  root.push(getMainDataItem('Series', seriesValue));
-
-  const manufacturerValue = normalizeString(
-    `${data.Manufacturer} (${data.ManufacturerModelName}, #${data.DeviceSerialNumber})`
-  );
-
-  root.push(getMainDataItem('Manufacturer', manufacturerValue));
-
-  const mainDataObjects = {
-    CompletionFlag: 'Completion flag',
-    VerificationFlag: 'Verification flag',
+    } else {
+      return null;
+    }
   };
 
-  Object.keys(mainDataObjects).forEach(key => {
-    if (!data[key]) {
-      return;
-    }
+  function ReportMetaHeaderItem({ k, v }: { k: string; v: string }) {
+    return (
+      <div key={k}>
+        <span style={styles.meta_header_key}>
+          <b>{k}</b>
+        </span>
+        <span style={styles.meta_header_value}>{v}</span>
+      </div>
+    );
+  }
 
-    const item = getMainDataItem(mainDataObjects[key], data[key]);
+  const ReportMetaHeader = () => {
+    const patientValue = normalizeString(
+      `${instance.PatientName[0].Alphabetic} (${instance.PatientSex}, #${instance.PatientID})`
+    );
+    const studyValue = normalizeString(instance.StudyDescription);
+    const seriesValue = normalizeString(
+      `${instance.SeriesDescription} (#${instance.SeriesNumber})`
+    );
+    const manufacturerValue = normalizeString(
+      `${instance.Manufacturer} (${instance.ManufacturerModelName}, #${instance.DeviceSerialNumber})`
+    );
+    // TODO: Format these dates
+    const contentDateTimeValue = `${instance.ContentDate} ${instance.ContentTime}`;
 
-    root.push(item);
-  });
+    const mainDataObjects = {
+      CompletionFlag: 'Completion flag',
+      VerificationFlag: 'Verification flag',
+    };
 
-  // TODO: Format these dates
-  const contentDateTimeValue = `${data.ContentDate} ${data.ContentTime}`;
-  root.push(getMainDataItem('Content Date/Time', contentDateTimeValue));
+    return (
+      <div>
+        <ReportMetaHeaderItem k="Patient" v={patientValue} />
+        <ReportMetaHeaderItem k="Study" v={studyValue} />
+        <ReportMetaHeaderItem k="Series" v={seriesValue} />
+        <ReportMetaHeaderItem k="Manufacturer" v={manufacturerValue} />
+        {Object.keys(mainDataObjects)
+          .filter(key => !!instance[key])
+          .map(key => {
+            return (
+              <ReportMetaHeaderItem
+                key={key}
+                k={mainDataObjects[key]}
+                v={instance[key]}
+              />
+            );
+          })}
+        <ReportMetaHeaderItem k="Content Date/Time" v={contentDateTimeValue} />
+      </div>
+    );
+  };
 
-  root.push();
+  const ContentSequenceBlock = ({
+    data,
+    level = 1,
+  }: {
+    data: any;
+    level?: number;
+  }) => {
+    let header = null,
+      HeaderDynamicLevel;
+    if (data.ValueType) {
+      if (data.ValueType === 'CONTAINER') {
+        if (!data.ConceptNameCodeSequence) console.log(data);
+        else {
+          const { CodeMeaning, CodeValue, CodingSchemeDesignator } =
+            data.ConceptNameCodeSequence[0] || data.ConceptNameCodeSequence;
 
-  return <div>{root}</div>;
-}
-
-const getContentSequence = (data, level = 1) => {
-  const root = [];
-  if (data.ValueType) {
-    if (data.ValueType === 'CONTAINER') {
-      if (!data.ConceptNameCodeSequence) console.log(data);
-      else {
-        const { CodeMeaning, CodeValue, CodingSchemeDesignator } =
-          data.ConceptNameCodeSequence[0] || data.ConceptNameCodeSequence;
-
-        const header = `${CodeMeaning} (${CodeValue} - ${CodingSchemeDesignator})`;
-        const HeaderDynamicLevel = `h${Math.min(level, 6)}`;
-        root.push(
-          <HeaderDynamicLevel key={header}>{header}</HeaderDynamicLevel>
-        );
+          header = `${CodeMeaning} (${CodeValue} - ${CodingSchemeDesignator})`;
+          HeaderDynamicLevel = `h${Math.min(level, 6)}`;
+        }
       }
-
-      data.ContentSequence.map(item => getContentSequence(item, level + 1))
-        .filter(item => item)
-        .forEach(item => root.push(item));
     }
 
-    root.push(constructPlainValue(data));
-  }
+    return (
+      <div>
+        {header && (
+          <HeaderDynamicLevel key={header} style={styles[HeaderDynamicLevel]}>
+            {header}
+          </HeaderDynamicLevel>
+        )}
+        {data.ValueType ? (
+          <>
+            {data.ValueType === 'CONTAINER' &&
+              data.ContentSequence &&
+              data.ContentSequence.map(item => (
+                <ContentSequenceBlock
+                  key={`ContentSequence_${guid()}`}
+                  data={item}
+                  level={level + 1}
+                />
+              ))}
+            <PlainValue data={data} />
+          </>
+        ) : (
+          data.ContentSequence &&
+          data.ContentSequence.map(item => (
+            <ContentSequenceBlock
+              key={`ContentSequence_${guid()}`}
+              data={item}
+              level={level + 1}
+            />
+          ))
+        )}
+      </div>
+    );
+  };
 
-  if (data.ContentSequence) {
-    data.ContentSequence.map(item => getContentSequence(item, level + 1))
-      .filter(item => item)
-      .forEach(item => root.push(item));
-  }
-
-  return <div>{root}</div>;
-};
-
-function getMainDataItem(key, value) {
   return (
-    <div key={key}>
-      <b>{key}</b>: {value}
-    </div>
-  );
-}
-
-function DicomHtmlViewport(props) {
-  const mainData = getMainData(props.instance);
-  const contentSequence = getContentSequence(props.instance);
-  const content = (
     <>
-      {mainData}
-      {contentSequence}
+      <ReportMetaHeader />
+      <ContentSequenceBlock data={instance} />
     </>
   );
+}
+
+function DicomHtmlViewport({
+  activeViewportIndex,
+  instance,
+  setViewportActive,
+  viewportIndex,
+}: {
+  activeViewportIndex: number | null;
+  instance: any;
+  setViewportActive: (idx: number | null) => void;
+  viewportIndex: number | null;
+}) {
+  // TODO: override default styles with some styles from configurations
 
   const setViewportActiveHandler = () => {
-    const { setViewportActive, viewportIndex, activeViewportIndex } = props;
-
     if (viewportIndex !== activeViewportIndex) {
       setViewportActive(viewportIndex);
     }
@@ -179,7 +257,7 @@ function DicomHtmlViewport(props) {
       onClick={setViewportActiveHandler}
       onScroll={setViewportActiveHandler}
     >
-      {content}
+      <StyledReportContent instance={instance} styles={defaultStyles} />
     </div>
   );
 }
