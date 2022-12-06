@@ -1,3 +1,9 @@
+const colours = {
+  "viewport-0": "#f00",
+  "viewport-1": "#0f0",
+  "viewport-2": "#00f",
+};
+
 function initDefaultToolGroup(
   extensionManager,
   ToolGroupService,
@@ -71,6 +77,7 @@ function initDefaultToolGroup(
     },
   };
 
+  console.log("* toolsConfig", toolGroupId, toolsConfig);
   ToolGroupService.createToolGroupAndAddTools(toolGroupId, tools, toolsConfig);
 }
 
@@ -201,6 +208,10 @@ function initMPRToolGroup(extensionManager, ToolGroupService, commandsManager) {
       autoPan: {
         enabled: false,
         panSize: 10,
+      },
+      getReferenceLineColor: (volumeId) => {
+        console.log("* getReferenceLineColor", volumeId);
+        return colours[volumeId] || '#0c0';
       },
     },
     [toolNames.ArrowAnnotate]: {
