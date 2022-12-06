@@ -3,7 +3,7 @@
   "version": "3.4.1",
   "description": "OHIF extension for rendering structured reports to HTML",
   "author": "Michel Dubois",
-  "license": "MIT",
+  "license": "MIT", 
   "repository": "OHIF/Viewers",
   "main": "dist/umd/@radicalimaging/extension-dicom-html/index.umd.js",
   "module": "src/index.tsx",
@@ -21,11 +21,12 @@
     "access": "public"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack --config .webpack/webpack.dev.js --watch --output-pathinfo",
-    "dev:dicom-html": "yarn run dev",
     "build": "cross-env NODE_ENV=production webpack --config .webpack/webpack.prod.js",
     "build:package": "yarn run build",
-    "start": "yarn run dev"
+    "publishItem": "yarn publish",
+    "start": "yarn run dev",
+    "test:unit": "jest --watchAll",
+    "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
     "@ohif/core": "^3.0.0",
