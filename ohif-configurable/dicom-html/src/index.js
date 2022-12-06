@@ -10,7 +10,7 @@ import {
 } from '@radicalimaging/config-mode';
 import ConfigPoint from 'config-point';
 import routes from './routes';
-import { dicomhtml } from './extensions';
+import { dicomhtml, ohif } from './extensions';
 
 const extensionDependencies = {
   '@ohif/extension-default': '^3.0.0',
@@ -60,7 +60,7 @@ function modeFactory({ modeConfiguration }) {
     extensions: extensionDependencies,
 
     /** HangingProtocols used by the mode */
-    hangingProtocols: ['@ohif/extension-default.hangingProtocolModule.default'],
+    hangingProtocols: [ohif.hangingProtocol],
 
     hangingProtocol: ['default'],
 
