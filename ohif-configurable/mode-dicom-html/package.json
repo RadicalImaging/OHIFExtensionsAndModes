@@ -1,11 +1,11 @@
 {
   "name": "@radicalimaging/mode-dicom-html",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Text Report Mode",
   "author": "OHIF",
   "license": "ISC",
   "repository": "OHIF/Viewers",
-  "main": "dist/@radicalimaging/mode-dicom-html/index.umd.js",
+  "main": "dist/umd/@radicalimaging/mode-dicom-html/index.umd.js",
   "module": "src/index.js",
   "engines": {
     "node": ">=14",
