@@ -36,6 +36,7 @@ function _getDisplaySetsFromSeries(
     SeriesNumber,
     SeriesDate,
     ConceptNameCodeSequence,
+    SOPClassUID,
   } = instance;
 
   const srDisplaySet = {
@@ -48,11 +49,15 @@ function _getDisplaySetsFromSeries(
     SeriesInstanceUID,
     StudyInstanceUID,
     SOPClassHandlerId,
+    SOPClassUID,
     referencedImages: null,
     measurements: null,
+    others: [instance], // this line is important to avoid any duplicated generation of displaySets
     isDerivedDisplaySet: true,
     isLoaded: false,
     sopClassUids,
+    numImageFrames: 0,
+    numInstances: 1,
     instance,
   };
 
