@@ -6,7 +6,8 @@
     "hp-extension",
     "hp-mode",
     "volume-mode",
-    "findings-mode"
+    "findings-mode",
+    "mode-dicom-html"
   ],
   "scripts": {
     "build": "lerna run build --stream",
