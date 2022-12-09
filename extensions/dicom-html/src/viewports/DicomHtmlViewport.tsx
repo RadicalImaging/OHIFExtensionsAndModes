@@ -84,10 +84,12 @@ function getValueString(data: any) {
     return data.UID;
   } else if (data.ValueType === 'NUM') {
     const { MeasuredValueSequence } = data;
-    const numValue = MeasuredValueSequence.NumericValue;
-    const codeValue =
-      MeasuredValueSequence.MeasurementUnitsCodeSequence.CodeValue;
-    return `${numValue} ${codeValue}`;
+    if (MeasuredValueSequence) {
+      const numValue = MeasuredValueSequence.NumericValue;
+      const codeValue =
+        MeasuredValueSequence.MeasurementUnitsCodeSequence.CodeValue;
+      return `${numValue} ${codeValue}`;
+    }
   }
 }
 
@@ -135,7 +137,7 @@ function StyledReportContent({
       `${instance.SeriesDescription} (#${instance.SeriesNumber})`
     );
     const manufacturerValue = normalizeString(
-      `${instance.Manufacturer} (${instance.ManufacturerModelName}, #${instance.DeviceSerialNumber})`
+      `${instance.Manufacturer || 'Unknown'} (${instance.ManufacturerModelName || 'Unknown'}, #${instance.DeviceSerialNumber || 'Unknown'})`
     );
     // TODO: Format these dates
     const contentDateTimeValue = `${instance.ContentDate} ${instance.ContentTime}`;
@@ -174,7 +176,7 @@ function StyledReportContent({
     data: any;
     level?: number;
   }) => {
-    let header = null,
+    let header : string | null = null,
       HeaderDynamicLevel;
     if (data.ValueType) {
       if (data.ValueType === 'CONTAINER') {
