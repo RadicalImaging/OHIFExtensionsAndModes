@@ -15,36 +15,37 @@ import {ohif, cornerstone, dicomsr, dicomvideo, dicompdf, dicomseg} from "./exte
 const defaultRoutes = [
   {
     path: 'template',
-    layoutTemplate: ({ location, servicesManager }) => {
-      return {
-        id: ohif.layout,
-        props: {
-          leftPanels: [ohif.leftPanel],
-          rightPanels: [ohif.rightPanel, dicomseg.panel,],
-          viewports: [
-            {
-              namespace: cornerstone.viewport,
-              displaySetsToDisplay: [ohif.sopClassHandler],
-            },
-            {
-              namespace: dicomsr.viewport,
-              displaySetsToDisplay: [dicomsr.sopClassHandler],
-            },
-            {
-              namespace: dicomvideo.viewport,
-              displaySetsToDisplay: [dicomvideo.sopClassHandler],
-            },
-            {
-              namespace: dicompdf.viewport,
-              displaySetsToDisplay: [dicompdf.sopClassHandler],
-            },
-            {
-              namespace: dicomseg.viewport,
-              displaySetsToDisplay: [dicomseg.sopClassHandler],
-            },
-          ],
-        },
-      };
+    defaultRoutes: {
+      id: ohif.layout,
+      props: {
+        leftPanels: [ohif.leftPanel],
+        rightPanels: [ohif.rightPanel, dicomseg.panel,],
+        viewports: [
+          {
+            namespace: cornerstone.viewport,
+            displaySetsToDisplay: [ohif.sopClassHandler],
+          },
+          {
+            namespace: dicomsr.viewport,
+            displaySetsToDisplay: [dicomsr.sopClassHandler],
+          },
+          {
+            namespace: dicomvideo.viewport,
+            displaySetsToDisplay: [dicomvideo.sopClassHandler],
+          },
+          {
+            namespace: dicompdf.viewport,
+            displaySetsToDisplay: [dicompdf.sopClassHandler],
+          },
+          {
+            namespace: dicomseg.viewport,
+            displaySetsToDisplay: [dicomseg.sopClassHandler],
+          },
+        ],
+      },
+    },
+    layoutTemplate({ location, servicesManager }) {
+      return this.defaultRoutes;
     },
   },
 ];

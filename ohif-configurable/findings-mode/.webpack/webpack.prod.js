@@ -44,6 +44,12 @@ const config = {
         commonjs: 'classnames',
         amd: 'classnames',
       },
+      '@radicalimaging/config-mode': {
+        root: '@radicalimaging/config-mode',
+        commonjs2: '@radicalimaging/config-mode',
+        commonjs: '@radicalimaging/config-mode',
+        amd: '@radicalimaging/config-mode',
+      },
       'react-router-dom': {
         root: 'react-router-dom',
         commonjs2: 'react-router-dom',

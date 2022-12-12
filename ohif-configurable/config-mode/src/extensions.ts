@@ -10,6 +10,15 @@ export const cornerstone = {
   viewport: '@ohif/extension-cornerstone.viewportModule.cornerstone',
 };
 
+
+export const tracked = {
+  measurements:
+    '@ohif/extension-measurement-tracking.panelModule.trackedMeasurements',
+  thumbnailList: '@ohif/extension-measurement-tracking.panelModule.seriesList',
+  viewport:
+    '@ohif/extension-measurement-tracking.viewportModule.cornerstone-tracked',
+};
+
 export const dicomsr = {
   sopClassHandler:
     '@ohif/extension-cornerstone-dicom-sr.sopClassHandlerModule.dicom-sr',

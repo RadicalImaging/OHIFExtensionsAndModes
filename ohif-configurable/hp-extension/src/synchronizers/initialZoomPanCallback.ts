@@ -67,9 +67,8 @@ export default function initialPanZoomCallback(
 export function storeCurrentZoomPan(synchronizerInstance: Synchronizer, viewportInfo: Types.IViewportId) {
   const renderingEngine = getRenderingEngine(viewportInfo.renderingEngineId);
   if (!renderingEngine) {
-    throw new Error(
-      `No RenderingEngine for Id: ${viewportInfo.renderingEngineId}`
-    );
+    console.log("No RenderingEngine for Id:",viewportInfo.renderingEngineId);
+    return;
   }
 
   const { viewportId } = viewportInfo;
