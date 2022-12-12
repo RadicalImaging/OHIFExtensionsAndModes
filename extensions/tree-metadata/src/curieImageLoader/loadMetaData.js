@@ -2,7 +2,7 @@ import { AwsClient } from 'aws4fetch';
 import awsCredentials from './awsCredentials';
 
 const loadMetaDataInternal = async (datastoreId, collectionId, config) => {
-    const uri = config.endpoint + '/runtime/datastore/' + datastoreId + '/study/' + collectionId + '/dicomstudymetadata'
+    const uri = config.endpoint + '/runtime/datastore/' + datastoreId + '/imageset?imageSetId=' + collectionId 
     const params = {
         url: uri,
         data: null,
