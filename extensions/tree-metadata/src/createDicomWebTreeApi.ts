@@ -49,7 +49,7 @@ const initializeCurieFetch = healthlake => {
           healthlake.endpoint +
           '/runtime/datastore/' +
           datastoreId +
-          '/study/' +
+          '/imageset/' +
           collectionId +
           '/imageframe/' +
           imageFrameId;
