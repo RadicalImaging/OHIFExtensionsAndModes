@@ -130,7 +130,7 @@ function StyledReportContent({
 
   const ReportMetaHeader = () => {
     const patientValue = normalizeString(
-      `${instance.PatientName[0].Alphabetic} (${instance.PatientSex}, #${instance.PatientID})`
+      `${instance.PatientName?.[0]?.Alphabetic || instance.PatientName} (${instance.PatientSex}, #${instance.PatientID})`
     );
     const studyValue = normalizeString(instance.StudyDescription);
     const seriesValue = normalizeString(
