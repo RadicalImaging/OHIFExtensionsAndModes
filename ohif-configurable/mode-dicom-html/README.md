@@ -1,1 +1,0 @@
-# Text Report Viewer Mode

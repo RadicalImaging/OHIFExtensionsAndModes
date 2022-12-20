@@ -20,7 +20,7 @@ export default [
           {
             attribute: 'numImageFrames',
             constraint: {
-              greaterThan: 0,
+              greaterThan: { value: 0 },
             },
           },
         ],
@@ -44,7 +44,7 @@ export default [
               {
                 attribute: 'numImageFrames',
                 constraint: {
-                  greaterThan: 0,
+                  greaterThan: {value: 0},
                 },
               },
             ],
@@ -54,6 +54,7 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
+              allowUnmatchedView: true,
             },
             displaySets: [
               {
@@ -64,6 +65,7 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
+              allowUnmatchedView: true,
             },
             displaySets: [
               {
@@ -75,6 +77,7 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
+              allowUnmatchedView: true,
             },
             displaySets: [
               {
@@ -86,6 +89,7 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
+              allowUnmatchedView: true,
             },
             displaySets: [
               {
@@ -115,11 +119,18 @@ export default [
             // Matches displaysets, NOT series
             seriesMatchingRules: [
               {
+                weight: 10,
                 attribute: 'numImageFrames',
                 constraint: {
-                  greaterThan: 0,
+                  greaterThan: {value: 0},
                 },
               },
+              {
+                attribute: 'numImageFrames',
+                constraint: {
+                  doesNotEqual: -1,
+                },
+              }
             ],
           },
         ],
@@ -127,6 +138,7 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
+              allowUnmatchedView: true,
             },
             displaySets: [
               {
@@ -137,6 +149,7 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
+              allowUnmatchedView: true,
             },
             displaySets: [
               {
@@ -175,7 +188,7 @@ export default [
           {
             attribute: 'numImageFrames',
             constraint: {
-              greaterThan: 0,
+              greaterThan: { value: 0 },
             },
           },
         ],
@@ -193,26 +206,11 @@ export default [
             columns: 2,
           },
         },
-        // TODO - delete this
-        displaySets: [
-          {
-            id: 'defaultDisplaySetId',
-            findAll: true,
-            // Matches displaysets, NOT series
-            seriesMatchingRules: [
-              {
-                attribute: 'numImageFrames',
-                constraint: {
-                  greaterThan: 0,
-                },
-              },
-            ],
-          },
-        ],
         viewports: [
           {
             viewportOptions: {
               toolGroupId: 'default',
+              allowUnmatchedView: true,
             },
             displaySets: [
               {
@@ -223,6 +221,7 @@ export default [
           {
             viewportOptions: {
               toolGroupId: 'default',
+              allowUnmatchedView: true,
             },
             displaySets: [
               {
