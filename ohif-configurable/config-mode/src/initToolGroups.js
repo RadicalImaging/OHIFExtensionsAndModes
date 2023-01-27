@@ -53,6 +53,7 @@ function initDefaultToolGroup(
       { toolName: toolNames.Angle },
       { toolName: toolNames.Magnify },
       { toolName: toolNames.SegmentationDisplay },
+      { toolName: toolNames.CalibrationLine },
     ],
     // enabled
     enabled: [{ toolName: toolNames.SegmentationDisplay }],
@@ -193,6 +194,7 @@ function initMPRToolGroup(extensionManager, ToolGroupService, commandsManager) {
       { toolName: toolNames.StackScroll },
       { toolName: toolNames.Angle },
       { toolName: toolNames.SegmentationDisplay },
+      { toolName: toolNames.CalibrationLine },
     ],
     disabled: [{ toolName: toolNames.Crosshairs }],
     enabled: [{ toolName: toolNames.SegmentationDisplay }],
