@@ -37,19 +37,6 @@ export default [
             columns: 2,
           },
         },
-        displaySets: [
-          {
-            id: 'defaultDisplaySetId',
-            seriesMatchingRules: [
-              {
-                attribute: 'numImageFrames',
-                constraint: {
-                  greaterThan: {value: 0},
-                },
-              },
-            ],
-          },
-        ],
         viewports: [
           {
             viewportOptions: {
@@ -112,28 +99,6 @@ export default [
             columns: 2,
           },
         },
-        displaySets: [
-          {
-            id: 'defaultDisplaySetId',
-            findAll: true,
-            // Matches displaysets, NOT series
-            seriesMatchingRules: [
-              {
-                weight: 10,
-                attribute: 'numImageFrames',
-                constraint: {
-                  greaterThan: {value: 0},
-                },
-              },
-              {
-                attribute: 'numImageFrames',
-                constraint: {
-                  doesNotEqual: -1,
-                },
-              }
-            ],
-          },
-        ],
         viewports: [
           {
             viewportOptions: {

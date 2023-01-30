@@ -2,6 +2,7 @@ import { id } from './id';
 import getHangingProtocolModule from './hp';
 // import {setViewportZoomPan, storeViewportZoomPan } from './custom-viewport/setViewportZoomPan';
 import viewCodeAttribute from './custom-attribute/viewCode';
+import sameAs from './custom-attribute/sameAs';
 import lateralityAttribute from './custom-attribute/laterality';
 import numberOfDisplaySets from './custom-attribute/numberOfDisplaySets';
 import numberOfDisplaySetsWithImages from './custom-attribute/numberOfDisplaySetsWithImages';
@@ -27,13 +28,13 @@ export default {
     servicesManager,
   }) => {
     const { HangingProtocolService, SyncGroupService } = servicesManager.services;
-    console.log("HangingProtocolService=", HangingProtocolService);
     HangingProtocolService.addCustomAttribute('ViewCode', 'View Code Designator:Value', viewCodeAttribute);
     HangingProtocolService.addCustomAttribute('Laterality', 'Laterality of object', lateralityAttribute);
     HangingProtocolService.addCustomAttribute('seriesDescriptions', 'Series Descriptions', seriesDescriptionsFromDisplaySets);
     HangingProtocolService.addCustomAttribute('numberOfDisplaySets', 'Number of displays sets', numberOfDisplaySets);
     HangingProtocolService.addCustomAttribute('numberOfDisplaySetsWithImages', 'Number of displays sets with images', numberOfDisplaySetsWithImages);
     HangingProtocolService.addCustomAttribute('maxNumImageFrames', 'Maximum of number of image frames', maxNumImageFrames);
+    HangingProtocolService.addCustomAttribute('sameAs', 'Match an attribute in an existing display set', sameAs);
     
     console.log("About to create synchronizer initialzoompan");
     SyncGroupService.setSynchronizer('initialzoompan', initialZoomPan);
