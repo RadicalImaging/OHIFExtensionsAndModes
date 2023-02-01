@@ -5,8 +5,6 @@ import hpVolume from './hpVolume';
 import hpCompare from './hpCompare';
 import ConfigPoint from "config-point";
 
-console.log("hpVolume=", hpVolume);
-
 const hangingProtocols = ConfigPoint.createConfiguration("hpExtensionHangingProtocols",
   {
     hangingProtocols: [

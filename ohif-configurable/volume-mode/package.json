@@ -35,7 +35,7 @@
     "@ohif/core": "^3.0.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.7.6",
+    "@babel/runtime": "7.17.9",
     "@radicalimaging/config-mode": "^3.4.2",
     "config-point": "^0.6.1"
   },

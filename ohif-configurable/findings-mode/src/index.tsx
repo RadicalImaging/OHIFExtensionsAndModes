@@ -58,25 +58,18 @@ const findingsCP = ConfigPoint.createConfiguration("@radicalimaging/mode-finding
   extensions: extensionDependencies,
 
   /** HangingProtocols used by the mode */
-  hangingProtocols: [
-    '@radicalimaging/hp-extension.hangingProtocolModule.heart',
-    '@radicalimaging/hp-extension.hangingProtocolModule.breast',
-    '@radicalimaging/hp-extension.hangingProtocolModule.MN',
-    '@ohif/extension-default.hangingProtocolModule.default',
-  ],
-
   hangingProtocol: [
     '@radicalimaging/hp-extension.heart',
     '@radicalimaging/hp-extension.breast',
     '@radicalimaging/hp-extension.mn',
-    '@radicalimaging/hp-extension.mn1',
+    // '@radicalimaging/hp-extension.mn1',
     'default',
   ],
 
   sopClassHandlers,
 
   /** hotkeys for mode */
-  hotkeys: [...hotkeys.defaults.hotkeyBindings],
+  hotkeys: [...hotkeys.defaults.hotkeyBindings, ...(window.config.hotkeys || [])],
 }
 );
 

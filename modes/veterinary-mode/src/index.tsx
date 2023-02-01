@@ -71,11 +71,6 @@ function modeFactory({ modeConfiguration }) {
     extensions: extensionDependencies,
 
     /** HangingProtocols used by the mode */
-    hangingProtocols: [
-      '@radicalimaging/hp-extension.hangingProtocolModule.MN',
-      '@ohif/extension-default.hangingProtocolModule.default',
-    ],
-
     hangingProtocol: [
       '@radicalimaging/hp-extension.mn',
       '@radicalimaging/hp-extension.mn1',

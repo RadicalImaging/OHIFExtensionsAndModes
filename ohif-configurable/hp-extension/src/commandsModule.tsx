@@ -6,13 +6,6 @@ const commandsModule = ({ servicesManager }) => {
   } = servicesManager.services;
 
   const actions = {
-    nextStage: () => {
-      // next stage in hanging protocols
-      HangingProtocolService.nextProtocolStage();
-    },
-    previousStage: () => {
-      HangingProtocolService.previousProtocolStage();
-    },
 
     updateViewportDisplaySet: ({ direction, circular }) => {
       const {
@@ -76,16 +69,6 @@ const commandsModule = ({ servicesManager }) => {
       commandFn: actions.updateViewportDisplaySet,
       storeContexts: [],
       options: { direction: -1, circular: false },
-    },
-    nextStage: {
-      commandFn: actions.nextStage,
-      storeContexts: [],
-      options: {},
-    },
-    previousStage: {
-      commandFn: actions.previousStage,
-      storeContexts: [],
-      options: {},
     },
   };
 

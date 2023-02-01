@@ -41,7 +41,7 @@
     "webpack-merge": "^5.7.3"
   },
   "dependencies": {
-    "@babel/runtime": "7.7.6"
+    "@babel/runtime": "7.17.9"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",

@@ -156,163 +156,16 @@ export default {
 
   stages: [
     {
-      name: 'default',
+      name: '2x2',
       viewportStructure: {
         type: 'grid',
         layoutType: 'grid',
         properties: {
+          idPrefix: 'heart',
           rows: 2,
           columns: 2,
         },
       },
-      displaySets: [
-        {
-          id: 'displaySetCineLax4',
-          // Matches displaysets, NOT series
-          seriesMatchingRules: [
-            {
-              id: 'numImageFrames 20-40',
-              weight: 1,
-              attribute: 'numImageFrames',
-              constraint: {
-                range: {
-                  value: [20, 40],
-                },
-              },
-            },
-            {
-              weight: 20,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: 'LAX',
-              },
-            },
-            {
-              attribute: 'Modality',
-              constraint: {
-                doesNotEqual: 'SR',
-              },
-              required: true,
-            },
-            {
-              weight: 10,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: '4',
-              },
-            },
-          ],
-        },
-        {
-          id: 'displaySetCineLax3',
-          // Matches displaysets, NOT series
-          seriesMatchingRules: [
-            {
-              id: 'numImageFrames>25',
-              attribute: 'numImageFrames',
-              constraint: {
-                range: {
-                  value: [20, 40],
-                },
-              },
-            },
-            {
-              weight: 20,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: 'LAX',
-              },
-            },
-            {
-              attribute: 'Modality',
-              constraint: {
-                doesNotEqual: 'SR',
-              },
-              required: true,
-            },
-            {
-              weight: 10,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: '3',
-              },
-            },
-          ],
-          studyMatchingRules: [],
-        },
-        {
-          id: 'displaySetCineLax2',
-          // Matches displaysets, NOT series
-          seriesMatchingRules: [
-            {
-              id: 'numImageFrames>25',
-              attribute: 'numImageFrames',
-              constraint: {
-                range: {
-                  value: [20, 40],
-                },
-              },
-            },
-            {
-              weight: 20,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: 'LAX',
-              },
-            },
-            {
-              attribute: 'Modality',
-              constraint: {
-                doesNotEqual: 'SR',
-              },
-              required: true,
-            },
-            {
-              weight: 10,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: '2',
-              },
-            },
-          ],
-          studyMatchingRules: [],
-        },
-        {
-          id: 'displaySetCineSax',
-          // Matches displaysets, NOT series
-          seriesMatchingRules: [
-            {
-              id: 'numImageFrames=25',
-              attribute: 'numImageFrames',
-              constraint: {
-                equals: 25,
-              },
-            },
-            {
-              id: 'numImageFrames=30',
-              weight: 5,
-              attribute: 'numImageFrames',
-              constraint: {
-                equals: 30,
-              },
-            },
-            {
-              attribute: 'Modality',
-              constraint: {
-                doesNotEqual: 'SR',
-              },
-              required: true,
-            },
-            {
-              weight: 20,
-              attribute: 'SeriesDescription',
-              constraint: {
-                contains: 'SAX',
-              },
-            },
-          ],
-        },
-      ],
       viewports: [
         {
           viewportOptions: {
