@@ -1,4 +1,4 @@
-export default [
+export default 
   {
     hasUpdatedPriorsInformation: false,
     id: '@radicalimaging/hp-extension.mn',
@@ -49,15 +49,18 @@ export default [
       displaySets: [
         {
           id: 'defaultDisplaySetId',
-          displaySetIndex: -1,
+          matchedDisplaySetsIndex: -1,
         },
       ],
     },
     stages: [
       {
         id: '2x2',
-        requiredViewports: 1,
-        preferredViewports: 4,
+        stageActivation: {
+          enabled: {
+            minViewportsMatched: 4,
+          },
+        },
         viewportStructure: {
           type: 'grid',
           properties: {
@@ -74,7 +77,6 @@ export default [
             displaySets: [
               {
                 id: 'defaultDisplaySetId',
-                reuseId: '0-0',
               },
             ],
           },
@@ -85,7 +87,7 @@ export default [
             },
             displaySets: [
               {
-                displaySetIndex: 1,
+                matchedDisplaySetsIndex: 1,
                 id: 'defaultDisplaySetId',
                 reuseId: '1-0',
               },
@@ -98,7 +100,7 @@ export default [
             },
             displaySets: [
               {
-                displaySetIndex: 2,
+                matchedDisplaySetsIndex: 2,
                 id: 'defaultDisplaySetId',
                 reuseId: '0-1',
               },
@@ -111,7 +113,7 @@ export default [
             },
             displaySets: [
               {
-                displaySetIndex: 3,
+                matchedDisplaySetsIndex: 3,
                 id: 'defaultDisplaySetId',
                 reuseId: '1-1',
               },
@@ -123,8 +125,15 @@ export default [
       // 3x1 stage
       {
         id: '3x1',
+        // Obsolete settings:
         requiredViewports: 1,
         preferredViewports: 3,
+        // New equivalent:
+        stageActivation: {
+          enabled: {
+            minViewportsMatched: 3,
+          },
+        },
         viewportStructure: {
           type: 'grid',
           properties: {
@@ -152,7 +161,7 @@ export default [
             },
             displaySets: [
               {
-                displaySetIndex: 1,
+                matchedDisplaySetsIndex: 1,
                 id: 'defaultDisplaySetId',
                 reuseId: '1-0',
               },
@@ -165,7 +174,7 @@ export default [
             },
             displaySets: [
               {
-                displaySetIndex: 2,
+                matchedDisplaySetsIndex: 2,
                 id: 'defaultDisplaySetId',
                 reuseId: '0-1',
               },
@@ -179,6 +188,11 @@ export default [
         id: '2x1',
         requiredViewports: 1,
         preferredViewports: 2,
+        stageActivation: {
+          enabled: {
+            minViewportsMatched: 2,
+          },
+        },
         viewportStructure: {
           type: 'grid',
           layoutType: 'grid',
@@ -207,7 +221,7 @@ export default [
             },
             displaySets: [
               {
-                displaySetIndex: 1,
+                matchedDisplaySetsIndex: 1,
                 id: 'defaultDisplaySetId',
                 reuseId: '1-0',
               },
@@ -221,6 +235,11 @@ export default [
         id: '1x1',
         requiredViewports: 1,
         preferredViewports: 1,
+        stageActivation: {
+          enabled: {
+            minViewportsMatched: 1,
+          },
+        },
         viewportStructure: {
           type: 'grid',
           layoutType: 'grid',
@@ -237,83 +256,7 @@ export default [
             },
             displaySets: [
               {
-                displaySetIndex: 1,
                 id: 'defaultDisplaySetId',
-                reuseId: '1-0',
-              },
-            ],
-          },
-        ],
-      },
-        ],
-    numberOfPriorsReferenced: -1,
-  },
-
-  // An entirely separate hanging protocol for 2x1 layout
-  {
-    id: '2x1',
-    hasUpdatedPriorsInformation: false,
-    name: '2x1',
-    protocolMatchingRules: [
-      {
-        id: 'TwoOrMoreSeries',
-        weight: 15,
-        attribute: 'numberOfDisplaySetsWithImages',
-        constraint: {
-          greaterThan: 1,
-        },
-      },
-    ],
-    toolGroupIds: ['default'],
-    displaySetSelectors: {
-      defaultDisplaySetId:{
-        findAll: true,
-        // Matches displaysets, NOT series
-        seriesMatchingRules: [
-          {
-            attribute: 'numImageFrames',
-            constraint: {
-              greaterThan: { value: 0 },
-            },
-          },
-        ],
-      },
-    },
-    stages: [
-      {
-        id: '2x1',
-        name: '2x1',
-        viewportStructure: {
-          type: 'grid',
-          layoutType: 'grid',
-          properties: {
-            rows: 1,
-            columns: 2,
-          },
-        },
-        viewports: [
-          {
-            viewportOptions: {
-              toolGroupId: 'default',
-              allowUnmatchedView: true,
-            },
-            displaySets: [
-              {
-                id: 'defaultDisplaySetId',
-                reuseId: '0-0',
-              },
-            ],
-          },
-          {
-            viewportOptions: {
-              toolGroupId: 'default',
-              allowUnmatchedView: true,
-            },
-            displaySets: [
-              {
-                displaySetIndex: 1,
-                id: 'defaultDisplaySetId',
-                reuseId: '1-0',
               },
             ],
           },
@@ -321,5 +264,4 @@ export default [
       },
     ],
     numberOfPriorsReferenced: -1,
-  },
-];
+  };

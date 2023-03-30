@@ -14,8 +14,8 @@ function OHIFDicomHtmlViewport(props) {
   } = props;
 
   const {
-    DisplaySetService,
-    CornerstoneViewportService,
+    displaySetService,
+    cornerstoneViewportService,
   } = servicesManager.services;
 
   return (

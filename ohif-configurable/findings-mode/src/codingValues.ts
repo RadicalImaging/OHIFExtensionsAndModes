@@ -1,4 +1,6 @@
-const codingValues = {
+import ConfigPoint from "config-point";
+
+const codingValues = ConfigPoint.createConfiguration('codingValues', {
   id: 'codingValues',
   
   // Findings
@@ -19,6 +21,7 @@ const codingValues = {
   'SegmentationCardiac:3ch': {
     text: '3-chamber',
     color: '#000000',
+    keyImage: true,
     seriesLabel: true,
   },
   'SCT:399232001': {
@@ -130,6 +133,6 @@ const codingValues = {
     color: 'red',
     joinedOpenContour: true,
   },
-};
+});
 
 export default codingValues;

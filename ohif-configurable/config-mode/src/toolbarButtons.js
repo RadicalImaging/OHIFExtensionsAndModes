@@ -231,6 +231,21 @@ const toolbarButtons = [
           ],
           'CobbAngle'
         ),
+        // _createToolButton(
+        //   'PlanarFreehandROI',
+        //   'tool-freehand',
+        //   'PlanarFreehandROI',
+        //   [
+        //     {
+        //       commandName: 'setToolActive',
+        //       commandOptions: {
+        //         toolName: 'PlanarFreehandROI',
+        //       },
+        //       context: 'CORNERSTONE',
+        //     },
+        //   ],
+        //   'PlanarFreehandROI'
+        //   ),
         _createToolButton(
           'Rectangle',
           'tool-rectangle',
@@ -379,19 +394,6 @@ const toolbarButtons = [
         },
         items: [
           {
-            id: 'MPRsubMenu',
-            type: 'action',
-            icon: 'icon-mpr',
-            label: 'MPR',
-            commands: [
-              {
-                commandName: 'toggleMPR',
-                commandOptions: {},
-                context: 'CORNERSTONE',
-              },
-            ],
-          },
-          {
             id: '2x2',
             type: 'action',
             label: '2x2',
@@ -399,7 +401,7 @@ const toolbarButtons = [
               {
                 commandName: 'setHangingProtocol',
                 commandOptions: {
-                  protocolId: '@radicalimaging/hp-extension.mn',
+                  protocolId: '@ohif/hp-extension.mn',
                   stageId: '2x2',
                 },
                 context: 'DEFAULT',
@@ -414,7 +416,7 @@ const toolbarButtons = [
               {
                 commandName: 'setHangingProtocol',
                 commandOptions: {
-                  protocolId: '@radicalimaging/hp-extension.mn',              
+                  protocolId: '@ohif/hp-extension.mn',              
                   stageId: '3x1',
                 },
                 context: 'DEFAULT',
@@ -429,7 +431,7 @@ const toolbarButtons = [
               {
                 commandName: 'setHangingProtocol',
                 commandOptions: {
-                  protocolId: '@radicalimaging/hp-extension.mn',              
+                  protocolId: '@ohif/hp-extension.mn',              
                   stageId: '2x1',
                 },
                 context: 'DEFAULT',
@@ -444,7 +446,7 @@ const toolbarButtons = [
               {
                 commandName: 'setHangingProtocol',
                 commandOptions: {
-                  protocolId: '@radicalimaging/hp-extension.mn',              
+                  protocolId: '@ohif/hp-extension.mn',              
                   stageId: '1x1',
                 },
                 context: 'DEFAULT',
@@ -453,7 +455,7 @@ const toolbarButtons = [
           },
         ],
       },
-    } : 
+    } :
     {
       id: 'Layout',
     type: 'ohif.layoutSelector',
@@ -472,11 +474,12 @@ const toolbarButtons = [
       label: 'MPR',
       commands: [
         {
-          commandName: 'toggleMPR',
-          commandOptions: {},
-          context: 'CORNERSTONE',
-        },
-      ],
+          commandName: 'toggleHangingProtocol',
+          commandOptions: {
+            protocolId: 'mpr',
+          },
+          context: 'DEFAULT',
+        },      ],
     },
   },
   {
@@ -488,10 +491,9 @@ const toolbarButtons = [
       label: 'Crosshairs',
       commands: [
         {
-          commandName: 'setToolActive',
           commandOptions: {
-            toolGroupId: 'mpr',
             toolName: 'Crosshairs',
+            toolGroupId: 'mpr',
           },
           context: 'CORNERSTONE',
         },

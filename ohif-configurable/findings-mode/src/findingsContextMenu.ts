@@ -1,10 +1,6 @@
-import codingValues from "./codingValues";
-import { UIFindingMenuItemCustomization } from "./findingMenuItem";
-
 const findingsContextMenu = {
-  id: 'cornerstoneContextMenu',
+  id: 'measurementsContextMenu',
   customizationType: 'ohif.contextMenu',
-  refs: codingValues,
   menus: [
     {
       id: 'forExistingMeasurement',
@@ -13,19 +9,18 @@ const findingsContextMenu = {
         {
           customizationType: "ohif.contextSubMenu",
           label: 'Site',
-          actionType: 'SubMenu',
+          actionType: 'ShowSubMenu',
           subMenu: 'siteSelectionSubMenu',
         },
         {
           customizationType: "ohif.contextSubMenu",
           label: 'Finding',
-          actionType: 'SubMenu',
+          actionType: 'ShowSubMenu',
           subMenu: 'findingSelectionSubMenu',
         },
         {
           // customizationType is implicit here in the configuration setup
           label: 'Delete Measurement',
-          actionType: 'RunCommands',
           commands: [
             {
               commandName: 'deleteMeasurement',
@@ -34,10 +29,9 @@ const findingsContextMenu = {
         },
         {
           label: 'Add Label',
-          actionType: 'RunCommands',
           commands: [
             {
-              commandName: 'setLabel',
+              commandName: 'setMeasurementLabel',
             },
           ]
         },
@@ -47,16 +41,13 @@ const findingsContextMenu = {
     {
       id: 'findingSelectionSubMenu',
       selector: ({ nearbyToolData }) => !!nearbyToolData,
-      attribute: 'code', // This will no longer be required/used
       items: [
-        <UIFindingMenuItemCustomization>{
+        {
           customizationType: "contextMenu.findingMenuItem", 
-          commandName: 'setFinding', // Remove commandName, once customizationType implemented
           code: 'SCT:371861004',
         },
         {
           customizationType: "contextMenu.findingMenuItem", 
-          commandName: 'setFinding', // Remove commandName, once customizationType implemented
           code: 'SCT:194983005'
         },
       ],
@@ -65,18 +56,13 @@ const findingsContextMenu = {
     {
       id: 'siteSelectionSubMenu',
       selector: ({ nearbyToolData }) => !!nearbyToolData,
-      attribute: 'code',
       items: [
         {
-          customizationType: "ohif.siteMenuItem",
-          // Remove actionType and commandName 
-          actionType: 'Default',
-          commandName: 'setSite',
+          customizationType: "contextMenu.siteMenuItem",
           code: 'SegmentationCardiac:4ch',
         },
         {
-          customizationType: "ohif.siteMenuItem", 
-          commandName: 'setSite',
+          customizationType: "contextMenu.siteMenuItem", 
           code: 'SegmentationCardiac:3ch',
         },
       ],

@@ -8,7 +8,6 @@ import {
 } from '@radicalimaging/config-mode';
 import ConfigPoint from 'config-point';
 
-
 const extensionDependencies = {
   ...defaultExtensions,
   '@radicalimaging/hp-extension': '^3.4.0',

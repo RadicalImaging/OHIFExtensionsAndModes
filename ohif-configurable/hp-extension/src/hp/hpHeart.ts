@@ -241,7 +241,7 @@ export default {
           },
           displaySets: [
             {
-              displaySetIndex: 4,
+              matchedDisplaySetsIndex: 4,
               id: 'displaySetCineSax',
             },
           ],

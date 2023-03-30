@@ -8,7 +8,10 @@ import {
 } from '@radicalimaging/config-mode';
 import ConfigPoint from 'config-point';
 import findingsContextMenu from './findingsContextMenu';
+import findingMenuItem from './findingMenuItem';
 import codingValues from './codingValues';
+import customMeasurementItem from './customMeasurementItem';
+import siteMenuItem from './siteMenuItem';
 
 const extensionDependencies = {
   ...defaultExtensions,
@@ -30,7 +33,7 @@ const findingsCP = ConfigPoint.createConfiguration("@radicalimaging/mode-finding
 
   toolbarButtons,
 
-  modeCustomizations: [findingsContextMenu, codingValues],
+  modeCustomizations: [findingsContextMenu, codingValues, customMeasurementItem, findingMenuItem, siteMenuItem],
 
   defaultTool,
   toolBarSections: defaultToolBarSections,

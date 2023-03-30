@@ -9,29 +9,24 @@ const hangingProtocols = ConfigPoint.createConfiguration("hpExtensionHangingProt
   {
     hangingProtocols: [
       {
-        id: '@radicalimaging/hp-extension.breast',
+        name: '@radicalimaging/hp-extension.breast',
         protocol: hpBreast,
       },
       {
-        id: '@radicalimaging/hp-extension.heart',
+        name: '@radicalimaging/hp-extension.heart',
         protocol: hpHeart,
       },
       {
-        id: '@radicalimaging/hp-extension.mn',
-        protocol: hpMN[0],
-      },
-      // TODO - combine this with the base MN by adding multiple stages, just doesn't work yet.
-      {
-        id: '@radicalimaging/hp-extension.mn1',
-        protocol: hpMN[1],
+        name: '@radicalimaging/hp-extension.mn',
+        protocol: hpMN,
       },
       {
-        id: '@radicalimaging/hp-extension.volume',
+        name: '@radicalimaging/hp-extension.volume',
         protocol: hpVolume,
       },
       // Multi-study comparisons
       {
-        id: '@radicalimaging/hp-extension.compare',
+        name: '@radicalimaging/hp-extension.compare',
         protocol: hpCompare,
       },
     ],
