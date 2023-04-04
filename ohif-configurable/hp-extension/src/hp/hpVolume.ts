@@ -4,7 +4,7 @@ export default
     hasUpdatedPriorsInformation: false,
     name: 'Volume',
     // TODO - add a strategy to load every Nth image
-    imageLoadStrategy: "nth",
+    //imageLoadStrategy: "nth",
     protocolMatchingRules: [
       {
         id: 'Volume 2x2',
@@ -26,6 +26,12 @@ export default
               greaterThan: 10,
             },
           },
+          {
+            attribute: 'SeriesNumber',
+            constraint: {
+              equals: 4,
+            },
+          },
         ],
       },
     },
@@ -40,27 +46,12 @@ export default
             columns: 2,
           },
         },
-        // TODO - delete once the old HPs are all gone
-        displaySets: [
-          {
-            id: 'defaultDisplaySetId',
-            findAll: true,
-            seriesMatchingRules: [
-              {
-                attribute: 'numImageFrames',
-                constraint: {
-                  greaterThan: 10,
-                },
-              },
-            ],
-          },
-        ],
         viewports: [
           {
             viewportOptions: {
               viewportId: 'ctAXIAL',
               viewportType: 'volume',
-              orientation: 'axial',
+              orientation: 'acquisition',
               initialImageOptions: {
                 preset: 'middle', // 'first', 'last', 'middle'
               },

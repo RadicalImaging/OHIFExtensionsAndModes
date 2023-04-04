@@ -1,16 +1,27 @@
-
+import codingValues from "./codingValues";
 export type UIFindingMenuItemCustomization = {
-  code: string;
+  codeRef: string;
 }
 
 const findingMenuItem = {
   id: 'contextMenu.findingMenuItem',
-  adaptItem: function(item,...): ContextMenuItem {
-    const { code } = item;
+  codingValues,
+  adaptItem: function (item) {
+    const { code: codeRef } = item;
+    if (!codeRef) throw new Error(`item ${item} has no code ref`);
+    const code = this.codingValues[codeRef];
     return {
       ...item,
-      ...soemthing from code,
-      action: actionToApply: (adaptedItem) => ...
-    }
-  }
-}
+      codeRef,
+      code,
+      label: code.text,
+      commands: [
+        {
+          commandName: 'setFinding',
+        },
+      ],
+    };
+  },
+};
+
+export default findingMenuItem;

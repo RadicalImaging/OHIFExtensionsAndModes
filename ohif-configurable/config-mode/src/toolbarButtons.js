@@ -7,6 +7,8 @@ import {
 } from '@ohif/ui';
 import { defaults } from '@ohif/core';
 
+const isNewHP = window.config.isNewHP;
+
 const { windowLevelPresets } = defaults;
 /**
  *
@@ -199,6 +201,67 @@ const toolbarButtons = [
           ],
           'Ellipse Tool'
         ),
+        _createToolButton(
+          'Angle',
+          'tool-angle',
+          'Angle',
+          [
+            {
+              commandName: 'setToolActive',
+              commandOptions: {
+                toolName: 'Angle',
+              },
+              context: 'CORNERSTONE',
+            },
+      ],
+          'Angle'
+        ),
+        _createToolButton(
+          'CobbAngle',
+          'tool-angle',
+          'CobbAngle',
+          [
+            {
+              commandName: 'setToolActive',
+              commandOptions: {
+                toolName: 'CobbAngle',
+    },
+              context: 'CORNERSTONE',
+  },
+          ],
+          'CobbAngle'
+        ),
+        // _createToolButton(
+        //   'PlanarFreehandROI',
+        //   'tool-freehand',
+        //   'PlanarFreehandROI',
+        //   [
+        //     {
+        //       commandName: 'setToolActive',
+        //       commandOptions: {
+        //         toolName: 'PlanarFreehandROI',
+        //       },
+        //       context: 'CORNERSTONE',
+        //     },
+        //   ],
+        //   'PlanarFreehandROI'
+        //   ),
+        _createToolButton(
+          'Rectangle',
+          'tool-rectangle',
+          'Rectangle',
+          [
+            {
+              commandName: 'setToolActive',
+              commandOptions: {
+                toolName: 'RectangleROI',
+              },
+              context: 'CORNERSTONE',
+            },
+          ],
+          'Rectangle'
+        ),
+
       ],
     },
   },
@@ -294,14 +357,114 @@ const toolbarButtons = [
       ],
     },
   },
+
+  // ************ New Layout Section
+  
+    // Measurement
+    isNewHP ? 
   {
     id: 'Layout',
+      type: 'ohif.splitButton',
+      props: {
+        groupId: 'LayoutTools',
+        isRadio: false,
+        primary: {
+          id: 'Layout',
+          type: 'action',
+          uiType: 'ohif.layoutSelector',
+          icon: "tool-layout",
+          label: "Grid Layout",
+          props: {
+            rows: 3,
+            columns: 3,
+            commands: [
+              {
+                commandName: 'setLayout',
+                commandOptions: {},
+                context: 'CORNERSTONE',
+              },
+            ],
+          },
+        },
+        secondary: {
+          icon: 'chevron-down',
+          label: '',
+          isActive: true,
+          tooltip: 'Hanging Protocols',
+        },
+        items: [
+          {
+            id: '2x2',
+            type: 'action',
+            label: '2x2',
+            commands: [
+              {
+                commandName: 'setHangingProtocol',
+                commandOptions: {
+                  protocolId: '@ohif/hp-extension.mn',
+                  stageId: '2x2',
+                },
+                context: 'DEFAULT',
+              },
+            ],
+          },
+          {
+            id: '3x1',
+            type: 'action',
+            label: '3x1',
+            commands: [
+              {
+                commandName: 'setHangingProtocol',
+                commandOptions: {
+                  protocolId: '@ohif/hp-extension.mn',              
+                  stageId: '3x1',
+                },
+                context: 'DEFAULT',
+              },
+            ],
+          },
+          {
+            id: '2x1',
+            type: 'action',
+            label: '2x1',
+            commands: [
+              {
+                commandName: 'setHangingProtocol',
+                commandOptions: {
+                  protocolId: '@ohif/hp-extension.mn',              
+                  stageId: '2x1',
+                },
+                context: 'DEFAULT',
+              },
+            ],
+          },
+          {
+            id: '1x1',
+            type: 'action',
+            label: '1x1',
+            commands: [
+              {
+                commandName: 'setHangingProtocol',
+                commandOptions: {
+                  protocolId: '@ohif/hp-extension.mn',              
+                  stageId: '1x1',
+                },
+                context: 'DEFAULT',
+              },
+            ],
+          },
+        ],
+      },
+    } :
+    {
+      id: 'Layout',
     type: 'ohif.layoutSelector',
     props: {
       rows: 3,
       columns: 3,
     },
   },
+  
   {
     id: 'MPR',
     type: 'ohif.action',
@@ -311,11 +474,12 @@ const toolbarButtons = [
       label: 'MPR',
       commands: [
         {
-          commandName: 'toggleMPR',
-          commandOptions: {},
-          context: 'CORNERSTONE',
-        },
-      ],
+          commandName: 'toggleHangingProtocol',
+          commandOptions: {
+            protocolId: 'mpr',
+          },
+          context: 'DEFAULT',
+        },      ],
     },
   },
   {
@@ -327,10 +491,9 @@ const toolbarButtons = [
       label: 'Crosshairs',
       commands: [
         {
-          commandName: 'setToolActive',
           commandOptions: {
-            toolGroupId: 'mpr',
             toolName: 'Crosshairs',
+            toolGroupId: 'mpr',
           },
           context: 'CORNERSTONE',
         },
@@ -478,21 +641,6 @@ const toolbarButtons = [
           'Cine'
         ),
         _createToolButton(
-          'Angle',
-          'tool-angle',
-          'Angle',
-          [
-            {
-              commandName: 'setToolActive',
-              commandOptions: {
-                toolName: 'Angle',
-              },
-              context: 'CORNERSTONE',
-            },
-          ],
-          'Angle'
-        ),
-        _createToolButton(
           'Magnify',
           'tool-magnify',
           'Magnify',
@@ -506,21 +654,6 @@ const toolbarButtons = [
             },
           ],
           'Magnify'
-        ),
-        _createToolButton(
-          'Rectangle',
-          'tool-rectangle',
-          'Rectangle',
-          [
-            {
-              commandName: 'setToolActive',
-              commandOptions: {
-                toolName: 'RectangleROI',
-              },
-              context: 'CORNERSTONE',
-            },
-          ],
-          'Rectangle'
         ),
         _createToolButton(
           'CalibrationLine',

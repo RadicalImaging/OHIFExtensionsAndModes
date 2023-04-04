@@ -27,7 +27,7 @@ const _getDisplaySetsFromSeries = (instances, servicesManager, extensionManager)
         SOPClassHandlerId,
         referencedImages: null,
         measurements: null,
-        others: [instance],
+        instances: [instance],
         isDerivedDisplaySet: true,
         isLoaded: false,
         sopClassUids,

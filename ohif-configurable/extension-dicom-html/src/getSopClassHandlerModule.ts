@@ -52,7 +52,7 @@ function _getDisplaySetsFromSeries(
     SOPClassUID,
     referencedImages: null,
     measurements: null,
-    others: [instance], // this line is important to avoid any duplicated generation of displaySets
+    instances: [instance], // this line is important to avoid any duplicated generation of displaySets
     isDerivedDisplaySet: true,
     isLoaded: false,
     sopClassUids,

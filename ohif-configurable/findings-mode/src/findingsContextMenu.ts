@@ -1,63 +1,56 @@
-import codingValues from "./codingValues";
-import { UIFindingMenuItemCustomization } from "./findingMenuItem";
-
 const findingsContextMenu = {
-  id: 'cornerstoneContextMenu',
+  id: 'measurementsContextMenu',
   customizationType: 'ohif.contextMenu',
-  refs: codingValues,
   menus: [
     {
       id: 'forExistingMeasurement',
+      // selector restricts context menu to when there is nearbyToolData
       selector: ({ nearbyToolData }) => !!nearbyToolData,
       items: [
         {
-          customizationType: "ohif.contextSubMenu",
+          customizationType: 'ohif.contextSubMenu',
           label: 'Site',
-          actionType: 'SubMenu',
+          actionType: 'ShowSubMenu',
           subMenu: 'siteSelectionSubMenu',
         },
         {
-          customizationType: "ohif.contextSubMenu",
+          customizationType: 'ohif.contextSubMenu',
           label: 'Finding',
-          actionType: 'SubMenu',
+          actionType: 'ShowSubMenu',
           subMenu: 'findingSelectionSubMenu',
         },
         {
           // customizationType is implicit here in the configuration setup
           label: 'Delete Measurement',
-          actionType: 'RunCommands',
           commands: [
             {
               commandName: 'deleteMeasurement',
-            }
+            },
           ],
         },
         {
           label: 'Add Label',
-          actionType: 'RunCommands',
           commands: [
             {
-              commandName: 'setLabel',
+              commandName: 'setMeasurementLabel',
             },
-          ]
+          ],
         },
       ],
     },
 
     {
       id: 'findingSelectionSubMenu',
-      selector: ({ nearbyToolData }) => !!nearbyToolData,
-      attribute: 'code', // This will no longer be required/used
+      selector: ({ nearbyToolData }) => false,
       items: [
-        <UIFindingMenuItemCustomization>{
-          customizationType: "contextMenu.findingMenuItem", 
-          commandName: 'setFinding', // Remove commandName, once customizationType implemented
+        {
+          label: 'fssm',
+          customizationType: '@ohif/contextMenuAnnotationCode',
           code: 'SCT:371861004',
         },
         {
-          customizationType: "contextMenu.findingMenuItem", 
-          commandName: 'setFinding', // Remove commandName, once customizationType implemented
-          code: 'SCT:194983005'
+          customizationType: '@ohif/contextMenuAnnotationCode',
+          code: 'SCT:194983005',
         },
       ],
     },
@@ -65,23 +58,18 @@ const findingsContextMenu = {
     {
       id: 'siteSelectionSubMenu',
       selector: ({ nearbyToolData }) => !!nearbyToolData,
-      attribute: 'code',
       items: [
         {
-          customizationType: "ohif.siteMenuItem",
-          // Remove actionType and commandName 
-          actionType: 'Default',
-          commandName: 'setSite',
-          code: 'SegmentationCardiac:4ch',
+          label: 'sssm',
+          customizationType: '@ohif/contextMenuAnnotationCode',
+          code: 'SCT:69536005',
         },
         {
-          customizationType: "ohif.siteMenuItem", 
-          commandName: 'setSite',
-          code: 'SegmentationCardiac:3ch',
+          customizationType: '@ohif/contextMenuAnnotationCode',
+          code: 'SCT:45048000',
         },
       ],
     },
-
   ],
 };
 

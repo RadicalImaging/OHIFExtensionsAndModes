@@ -5,6 +5,7 @@ const defaultExtensions = {
   '@ohif/extension-cornerstone-dicom-sr': '^3.0.0',
   '@ohif/extension-dicom-pdf': '^3.0.1',
   '@ohif/extension-dicom-video': '^3.0.1',
+  '@ohif/extension-test': '^3.0.0',
 };
 
 export default defaultExtensions;

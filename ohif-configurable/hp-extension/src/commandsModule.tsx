@@ -1,24 +1,17 @@
 const commandsModule = ({ servicesManager }) => {
   const {
-    DisplaySetService,
-    ViewportGridService,
-    HangingProtocolService,
+    displaySetService,
+    viewportGridService,
+    hangingProtocolService,
   } = servicesManager.services;
 
   const actions = {
-    nextStage: () => {
-      // next stage in hanging protocols
-      HangingProtocolService.nextProtocolStage();
-    },
-    previousStage: () => {
-      HangingProtocolService.previousProtocolStage();
-    },
 
     updateViewportDisplaySet: ({ direction, circular }) => {
       const {
         activeViewportIndex,
         viewports = [],
-      } = ViewportGridService.getState();
+      } = viewportGridService.getState();
 
       const viewport = viewports[activeViewportIndex];
       const activeDisplaySetInstanceUIDs = (viewport || {})
@@ -30,9 +23,9 @@ const commandsModule = ({ servicesManager }) => {
         );
       }
       
-      const activeDisplaySets = DisplaySetService.getActiveDisplaySets();
+      const activeDisplaySets = displaySetService.getActiveDisplaySets();
       const displaySetGroup = viewport.viewportOptions?.displaySetGroup;
-      const matchDetails = HangingProtocolService.getDisplaySetsMatchDetails().get(displaySetGroup)
+      const matchDetails = hangingProtocolService.getDisplaySetsMatchDetails().get(displaySetGroup)
       const matchingScores = matchDetails?.matchingScores;
       const displaySets = matchingScores || activeDisplaySets;
       const activeDisplaySetIndex = displaySets.findIndex(
@@ -59,7 +52,7 @@ const commandsModule = ({ servicesManager }) => {
         displaySets[indexToUpdate].displaySetInstanceUID;
 
       const viewportIndex = activeViewportIndex;
-      ViewportGridService.setDisplaySetsForViewport({
+      viewportGridService.setDisplaySetsForViewport({
         viewportIndex,
         displaySetInstanceUIDs: [displaySetInstanceUID],
       });
@@ -76,16 +69,6 @@ const commandsModule = ({ servicesManager }) => {
       commandFn: actions.updateViewportDisplaySet,
       storeContexts: [],
       options: { direction: -1, circular: false },
-    },
-    nextStage: {
-      commandFn: actions.nextStage,
-      storeContexts: [],
-      options: {},
-    },
-    previousStage: {
-      commandFn: actions.previousStage,
-      storeContexts: [],
-      options: {},
     },
   };
 

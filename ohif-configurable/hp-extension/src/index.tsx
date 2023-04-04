@@ -27,17 +27,16 @@ export default {
   preRegistration: ({
     servicesManager,
   }) => {
-    const { HangingProtocolService, SyncGroupService } = servicesManager.services;
-    HangingProtocolService.addCustomAttribute('ViewCode', 'View Code Designator:Value', viewCodeAttribute);
-    HangingProtocolService.addCustomAttribute('Laterality', 'Laterality of object', lateralityAttribute);
-    HangingProtocolService.addCustomAttribute('seriesDescriptions', 'Series Descriptions', seriesDescriptionsFromDisplaySets);
-    HangingProtocolService.addCustomAttribute('numberOfDisplaySets', 'Number of displays sets', numberOfDisplaySets);
-    HangingProtocolService.addCustomAttribute('numberOfDisplaySetsWithImages', 'Number of displays sets with images', numberOfDisplaySetsWithImages);
-    HangingProtocolService.addCustomAttribute('maxNumImageFrames', 'Maximum of number of image frames', maxNumImageFrames);
-    HangingProtocolService.addCustomAttribute('sameAs', 'Match an attribute in an existing display set', sameAs);
+    const { hangingProtocolService, syncGroupService } = servicesManager.services;
+    hangingProtocolService.addCustomAttribute('ViewCode', 'View Code Designator:Value', viewCodeAttribute);
+    hangingProtocolService.addCustomAttribute('Laterality', 'Laterality of object', lateralityAttribute);
+    hangingProtocolService.addCustomAttribute('seriesDescriptions', 'Series Descriptions', seriesDescriptionsFromDisplaySets);
+    hangingProtocolService.addCustomAttribute('numberOfDisplaySets', 'Number of displays sets', numberOfDisplaySets);
+    hangingProtocolService.addCustomAttribute('numberOfDisplaySetsWithImages', 'Number of displays sets with images', numberOfDisplaySetsWithImages);
+    hangingProtocolService.addCustomAttribute('maxNumImageFrames', 'Maximum of number of image frames', maxNumImageFrames);
+    hangingProtocolService.addCustomAttribute('sameAs', 'Match an attribute in an existing display set', sameAs);
     
-    console.log("About to create synchronizer initialzoompan");
-    SyncGroupService.setSynchronizer('initialzoompan', initialZoomPan);
+    syncGroupService.setSynchronizer('initialzoompan', initialZoomPan);
   },
 
   /**

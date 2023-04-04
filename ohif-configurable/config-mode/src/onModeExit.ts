@@ -3,19 +3,18 @@ const onModeExit = ({ servicesManager }) => {
   const {
     ToolGroupService,
     SyncGroupService,
-    MeasurementService,
+    measurementService,
     ToolBarService,
-    SegmentationService,
+    segmentationService,
     CornerstoneViewportService,
     customizationService,
   } = servicesManager.services;
 
   try {
-    ToolBarService.reset();
     customizationService.reset();
     ToolGroupService.destroy();
     SyncGroupService.destroy();
-    SegmentationService.destroy();
+    segmentationService.destroy();
     CornerstoneViewportService.destroy();
   } catch (e) {
     console.warn("* onModeExit failed", e);

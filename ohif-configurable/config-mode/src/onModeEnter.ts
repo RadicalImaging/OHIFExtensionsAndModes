@@ -1,14 +1,13 @@
 export default function onModeEnter({ servicesManager, extensionManager, commandsManager }) {
   const {
-    MeasurementService,
+    measurementService,
     ToolBarService,
     ToolGroupService,
     customizationService,
   } = servicesManager.services;
 
   // Clear a few things here.
-  MeasurementService.clearMeasurements();
-  ToolBarService.reset();
+  measurementService.clearMeasurements();
 
   // Init Default and SR ToolGroups
   this.initToolGroups(extensionManager, ToolGroupService, commandsManager);
