@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/hp-extension",
-  "version": "3.10.1",
+  "version": "3.11.0",
   "description": "Extension to define support for basic MPR",
   "author": "Bill Wallace",
   "license": "MIT",
