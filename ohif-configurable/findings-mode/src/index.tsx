@@ -33,7 +33,10 @@ const findingsCP = ConfigPoint.createConfiguration("@radicalimaging/mode-finding
 
   toolbarButtons,
 
-  modeCustomizations: [findingsContextMenu, codingValues, customMeasurementItem, findingMenuItem, siteMenuItem],
+  modeCustomizations: [
+    '@ohif/extension-test.customizationModule.custom-context-menu', 
+    findingsContextMenu, codingValues, customMeasurementItem, findingMenuItem, siteMenuItem,
+  ],
 
   defaultTool,
   toolBarSections: defaultToolBarSections,

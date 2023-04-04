@@ -4,16 +4,17 @@ const findingsContextMenu = {
   menus: [
     {
       id: 'forExistingMeasurement',
+      // selector restricts context menu to when there is nearbyToolData
       selector: ({ nearbyToolData }) => !!nearbyToolData,
       items: [
         {
-          customizationType: "ohif.contextSubMenu",
+          customizationType: 'ohif.contextSubMenu',
           label: 'Site',
           actionType: 'ShowSubMenu',
           subMenu: 'siteSelectionSubMenu',
         },
         {
-          customizationType: "ohif.contextSubMenu",
+          customizationType: 'ohif.contextSubMenu',
           label: 'Finding',
           actionType: 'ShowSubMenu',
           subMenu: 'findingSelectionSubMenu',
@@ -24,7 +25,7 @@ const findingsContextMenu = {
           commands: [
             {
               commandName: 'deleteMeasurement',
-            }
+            },
           ],
         },
         {
@@ -33,22 +34,23 @@ const findingsContextMenu = {
             {
               commandName: 'setMeasurementLabel',
             },
-          ]
+          ],
         },
       ],
     },
 
     {
       id: 'findingSelectionSubMenu',
-      selector: ({ nearbyToolData }) => !!nearbyToolData,
+      selector: ({ nearbyToolData }) => false,
       items: [
         {
-          customizationType: "contextMenu.findingMenuItem", 
+          label: 'fssm',
+          customizationType: '@ohif/contextMenuAnnotationCode',
           code: 'SCT:371861004',
         },
         {
-          customizationType: "contextMenu.findingMenuItem", 
-          code: 'SCT:194983005'
+          customizationType: '@ohif/contextMenuAnnotationCode',
+          code: 'SCT:194983005',
         },
       ],
     },
@@ -58,16 +60,16 @@ const findingsContextMenu = {
       selector: ({ nearbyToolData }) => !!nearbyToolData,
       items: [
         {
-          customizationType: "contextMenu.siteMenuItem",
-          code: 'SegmentationCardiac:4ch',
+          label: 'sssm',
+          customizationType: '@ohif/contextMenuAnnotationCode',
+          code: 'SCT:69536005',
         },
         {
-          customizationType: "contextMenu.siteMenuItem", 
-          code: 'SegmentationCardiac:3ch',
+          customizationType: '@ohif/contextMenuAnnotationCode',
+          code: 'SCT:45048000',
         },
       ],
     },
-
   ],
 };
 

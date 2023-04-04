@@ -655,9 +655,6 @@ const toolbarButtons = [
           ],
           'Magnify'
         ),
-          ],
-          'Rectangle'
-        ),
         _createToolButton(
           'CalibrationLine',
           'tool-calibration',

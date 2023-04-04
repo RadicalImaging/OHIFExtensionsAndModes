@@ -17,12 +17,8 @@ const hangingProtocols = ConfigPoint.createConfiguration("hpExtensionHangingProt
         protocol: hpHeart,
       },
       {
-        name: '@radicalimaging/hp-extension.mn',
+        name: hpMN.id,
         protocol: hpMN,
-      },
-      {
-        name: '@radicalimaging/hp-extension.volume',
-        protocol: hpVolume,
       },
       // Multi-study comparisons
       {

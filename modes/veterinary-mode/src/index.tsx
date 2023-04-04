@@ -39,9 +39,13 @@ function modeFactory({ modeConfiguration }) {
 
     toolbarButtons,
 
-    modeCustomizations: [findingsContextMenu, codingValues,
+    modeCustomizations: [
+      '@ohif/extension-test.customizationModule.custom-context-menu',
+      findingsContextMenu, 
+      codingValues,
       // List a mode customization by defining the package to include 
-      '@radicalimaging/overlays-extension.customizationModule.veterinary'],
+      '@radicalimaging/overlays-extension.customizationModule.veterinary',
+    ],
 
     defaultTool,
     toolBarSections: defaultToolBarSections,
