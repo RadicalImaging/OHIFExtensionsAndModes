@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/findings-mode",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "description": "Support context menu/command key findings",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
