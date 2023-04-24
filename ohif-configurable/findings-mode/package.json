@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/findings-mode",
-  "version": "3.12.1",
+  "version": "3.13.0",
   "description": "Support context menu/command key findings",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
@@ -33,11 +33,11 @@
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
-    "@ohif/core": "^3.0.0"
+    "@ohif/core": "^3.0.0",
+    "@radicalimaging/config-mode": "^3.13.0"
   },
   "dependencies": {
     "@babel/runtime": "7.17.9",
-    "@radicalimaging/config-mode": "^3.4.2",
     "config-point": "^0.6.1"
   }
 }
