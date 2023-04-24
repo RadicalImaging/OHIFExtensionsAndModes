@@ -50,12 +50,14 @@ const findingsCP = ConfigPoint.createConfiguration("@radicalimaging/mode-finding
 
   initToolGroups,
 
+  excludedModalities: { SM: true, ECG: true, SR: true, PR: true },
+
   /** Any modality but SM or ECG */
-  isValidMode: ({ modalities }) => {
+  isValidMode: function ({ modalities }) {
     const modalities_list = modalities.split('\\');
 
     // Slide Microscopy modality not supported by basic mode yet
-    return modalities_list.filter(it => it !== 'SM' && it !== 'ECG').length > 0;
+    return modalities_list.filter(it => !this.excludedModalities[it]).length > 0;
   },
 
   routes: defaultRoutes,

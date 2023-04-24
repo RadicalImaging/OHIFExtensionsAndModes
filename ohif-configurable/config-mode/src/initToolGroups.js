@@ -20,28 +20,31 @@ function initDefaultToolGroup(
     active: [
       {
         toolName: toolNames.WindowLevel,
-        bindings: [{ mouseButton: Enums.MouseBindings.Primary }],
+        bindings: [
+          { mouseButton: Enums.MouseBindings.Primary },
+          { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Meta },
+        ],
       },
       {
         toolName: toolNames.Pan,
         bindings: [
           { mouseButton: Enums.MouseBindings.Auxiliary },
-          { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Shift },
+          { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Ctrl },
         ],
       },
       {
         toolName: toolNames.Zoom,
         bindings: [
           { mouseButton: Enums.MouseBindings.Secondary },
-          { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Ctrl },
+          { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Shift },
           { numTouchPoints: 2 },
         ],
       },
-      { toolName: toolNames.StackScrollMouseWheel, bindings: [] },
       { toolName: toolNames.StackScroll, bindings: [
         { numTouchPoints: 3 },
         { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Alt },
       ]},
+      { toolName: toolNames.StackScrollMouseWheel, bindings: [] },
     ],
     passive: [
       { toolName: toolNames.Length },
