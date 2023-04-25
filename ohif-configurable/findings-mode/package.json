@@ -38,6 +38,6 @@
   },
   "dependencies": {
     "@babel/runtime": "7.17.9",
-    "config-point": "^0.6.1"
+    "config-point": "^0.6.2"
   }
 }
