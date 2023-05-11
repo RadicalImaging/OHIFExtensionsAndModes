@@ -16,6 +16,7 @@ import siteMenuItem from './siteMenuItem';
 const extensionDependencies = {
   ...defaultExtensions,
   '@radicalimaging/hp-extension': '^3.4.0',
+  '@ohif/extension-test': '^0.0.1',
 };
 
 const findingsCP = ConfigPoint.createConfiguration("@radicalimaging/mode-findings", {
