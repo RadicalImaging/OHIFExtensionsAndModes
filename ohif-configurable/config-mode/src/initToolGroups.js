@@ -213,7 +213,7 @@ function initMPRToolGroup(extensionManager, ToolGroupService, commandsManager) {
 
   const toolsConfig = {
     [toolNames.Crosshairs]: {
-      viewportIndicators: false,
+      viewportIndicators: true,
       autoPan: {
         enabled: false,
         panSize: 10,
