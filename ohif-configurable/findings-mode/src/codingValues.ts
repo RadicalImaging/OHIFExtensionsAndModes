@@ -133,6 +133,24 @@ const codingValues = ConfigPoint.createConfiguration('codingValues', {
     color: 'red',
     joinedOpenContour: true,
   },
+
+  'SCT:69536005': {
+    text: 'Head',
+    type: 'site',
+  },
+  'SCT:45048000': {
+    text: 'Neck',
+    type: 'site',
+  },
+  'SCT:818981001': {
+    text: 'Abdomen',
+    type: 'site',
+  },
+  'SCT:816092008': {
+    text: 'Pelvis',
+    type: 'site',
+  },
+
 });
 
 export default codingValues;

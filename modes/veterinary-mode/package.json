@@ -29,12 +29,12 @@
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
-    "@ohif/core": "^3.0.0"
-  },
-  "dependencies": {
-    "@babel/runtime": "7.17.9",
+    "@ohif/core": "^3.0.0",
     "@radicalimaging/config-mode": "^3.4.2",
     "@radicalimaging/findings-mode": "^3.4.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "7.17.9"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
