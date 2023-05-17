@@ -254,21 +254,21 @@ const toolbarButtons = [
           ],
           'CobbAngle'
         ),
-        _createToolButton(
-          'PlanarFreehandROI',
-          'tool-freehand',
-          'PlanarFreehandROI',
-          [
-            {
-              commandName: 'setToolActive',
-              commandOptions: {
-                toolName: 'PlanarFreehandROI',
-              },
-              context: 'CORNERSTONE',
-            },
-          ],
-          'PlanarFreehandROI'
-          ),
+        // _createToolButton(
+        //   'PlanarFreehandROI',
+        //   'tool-freehand',
+        //   'PlanarFreehandROI',
+        //   [
+        //     {
+        //       commandName: 'setToolActive',
+        //       commandOptions: {
+        //         toolName: 'PlanarFreehandROI',
+        //       },
+        //       context: 'CORNERSTONE',
+        //     },
+        //   ],
+        //   'PlanarFreehandROI'
+        //   ),
         _createToolButton(
           'Rectangle',
           'tool-rectangle',
@@ -424,7 +424,7 @@ const toolbarButtons = [
               {
                 commandName: 'setHangingProtocol',
                 commandOptions: {
-                  protocolId: '@ohif/mnGrid',
+                  protocolId: '@radicalimaging/hp-extension.mn',
                   stageId: '2x2',
                 },
                 context: 'DEFAULT',
@@ -439,7 +439,7 @@ const toolbarButtons = [
               {
                 commandName: 'setHangingProtocol',
                 commandOptions: {
-                  protocolId: '@ohif/mnGrid',
+                  protocolId: '@radicalimaging/hp-extension.mn',              
                   stageId: '3x1',
                 },
                 context: 'DEFAULT',
@@ -454,7 +454,7 @@ const toolbarButtons = [
               {
                 commandName: 'setHangingProtocol',
                 commandOptions: {
-                  protocolId: '@ohif/mnGrid',
+                  protocolId: '@radicalimaging/hp-extension.mn',              
                   stageId: '2x1',
                 },
                 context: 'DEFAULT',
@@ -469,7 +469,7 @@ const toolbarButtons = [
               {
                 commandName: 'setHangingProtocol',
                 commandOptions: {
-                  protocolId: '@ohif/mnGrid',
+                  protocolId: '@radicalimaging/hp-extension.mn',              
                   stageId: '1x1',
                 },
                 context: 'DEFAULT',

@@ -10,7 +10,7 @@ export default function onModeEnter({ servicesManager, extensionManager, command
   measurementService.clearMeasurements();
 
   // Init Default and SR ToolGroups
-  this.initToolGroups(extensionManager, ToolGroupService, commandsManager);
+  this.initToolGroups(extensionManager, servicesManager, commandsManager);
 
   let unsubscribe;
 

@@ -1,15 +1,22 @@
 const colours = {
-  "viewport-0": "#f00",
-  "viewport-1": "#0f0",
-  "viewport-2": "#00f",
+  'viewport-0': 'rgb(200, 0, 0)',
+  'viewport-1': 'rgb(200, 200, 0)',
+  'viewport-2': 'rgb(0, 200, 0)',
+};
+
+const colorsByOrientation = {
+  'axial': 'rgb(200, 0, 0)',
+  'sagittal': 'rgb(200, 200, 0)',
+  'coronal': 'rgb(0, 200, 0)',
 };
 
 function initDefaultToolGroup(
   extensionManager,
-  ToolGroupService,
+  servicesManager,
   commandsManager,
   toolGroupId
 ) {
+  const { toolGroupService } = servicesManager.services;
   const utilityModule = extensionManager.getModuleEntry(
     '@ohif/extension-cornerstone.utilityModule.tools'
   );
@@ -22,28 +29,43 @@ function initDefaultToolGroup(
         toolName: toolNames.WindowLevel,
         bindings: [
           { mouseButton: Enums.MouseBindings.Primary },
-          { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Meta },
+          {
+            mouseButton: Enums.MouseBindings.Primary,
+            modifierKey: Enums.KeyboardBindings.Meta,
+          },
         ],
       },
       {
         toolName: toolNames.Pan,
         bindings: [
           { mouseButton: Enums.MouseBindings.Auxiliary },
-          { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Ctrl },
+          {
+            mouseButton: Enums.MouseBindings.Primary,
+            modifierKey: Enums.KeyboardBindings.Ctrl,
+          },
         ],
       },
       {
         toolName: toolNames.Zoom,
         bindings: [
           { mouseButton: Enums.MouseBindings.Secondary },
-          { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Shift },
+          {
+            mouseButton: Enums.MouseBindings.Primary,
+            modifierKey: Enums.KeyboardBindings.Shift,
+          },
           { numTouchPoints: 2 },
         ],
       },
-      { toolName: toolNames.StackScroll, bindings: [
-        { numTouchPoints: 3 },
-        { mouseButton: Enums.MouseBindings.Primary, modifierKey: Enums.KeyboardBindings.Alt },
-      ]},
+      {
+        toolName: toolNames.StackScroll,
+        bindings: [
+          { numTouchPoints: 3 },
+          {
+            mouseButton: Enums.MouseBindings.Primary,
+            modifierKey: Enums.KeyboardBindings.Alt,
+          },
+        ],
+      },
       { toolName: toolNames.StackScrollMouseWheel, bindings: [] },
     ],
     passive: [
@@ -84,10 +106,11 @@ function initDefaultToolGroup(
     },
   };
 
-  ToolGroupService.createToolGroupAndAddTools(toolGroupId, tools, toolsConfig);
+  toolGroupService.createToolGroupAndAddTools(toolGroupId, tools, toolsConfig);
 }
 
-function initSRToolGroup(extensionManager, ToolGroupService, commandsManager) {
+function initSRToolGroup(extensionManager, servicesManager, commandsManager) {
+  const { toolGroupService } = servicesManager.services;
   const SRUtilityModule = extensionManager.getModuleEntry(
     '@ohif/extension-cornerstone-dicom-sr.utilityModule.tools'
   );
@@ -164,10 +187,12 @@ function initSRToolGroup(extensionManager, ToolGroupService, commandsManager) {
   };
 
   const toolGroupId = 'SRToolGroup';
-  ToolGroupService.createToolGroupAndAddTools(toolGroupId, tools, toolsConfig);
+  toolGroupService.createToolGroupAndAddTools(toolGroupId, tools, toolsConfig);
 }
 
-function initMPRToolGroup(extensionManager, ToolGroupService, commandsManager) {
+function initMPRToolGroup(extensionManager, servicesManager, commandsManager) {
+  const { toolGroupService, cornerstoneViewportService } =
+    servicesManager.services;
   const utilityModule = extensionManager.getModuleEntry(
     '@ohif/extension-cornerstone.utilityModule.tools'
   );
@@ -213,12 +238,26 @@ function initMPRToolGroup(extensionManager, ToolGroupService, commandsManager) {
 
   const toolsConfig = {
     [toolNames.Crosshairs]: {
-      viewportIndicators: false,
+      viewportIndicators: true,
       autoPan: {
         enabled: false,
         panSize: 10,
       },
-      getReferenceLineColor: (volumeId) => colours[volumeId] || '#0c0',
+      getReferenceLineColor: (viewportId) => {
+        const viewportInfo =
+          cornerstoneViewportService.getViewportInfo(viewportId);
+        const viewportOptions = viewportInfo?.viewportOptions;
+        if (viewportOptions) {
+          return (
+            colours[viewportOptions.id] ||
+            colorsByOrientation[viewportOptions.orientation] ||
+            '#0c0'
+          );
+        } else {
+          console.warn('missing viewport?', viewportId);
+          return '#0c0';
+        }
+      },
     },
     [toolNames.ArrowAnnotate]: {
       getTextCallback: (callback, eventDetails) =>
@@ -236,18 +275,18 @@ function initMPRToolGroup(extensionManager, ToolGroupService, commandsManager) {
     },
   };
 
-  ToolGroupService.createToolGroupAndAddTools('mpr', tools, toolsConfig);
+  toolGroupService.createToolGroupAndAddTools('mpr', tools, toolsConfig);
 }
 
-function initToolGroups(extensionManager, ToolGroupService, commandsManager) {
+function initToolGroups(extensionManager, servicesManager, commandsManager) {
   initDefaultToolGroup(
     extensionManager,
-    ToolGroupService,
+    servicesManager,
     commandsManager,
     'default'
   );
-  initSRToolGroup(extensionManager, ToolGroupService, commandsManager);
-  initMPRToolGroup(extensionManager, ToolGroupService, commandsManager);
+  initSRToolGroup(extensionManager, servicesManager, commandsManager);
+  initMPRToolGroup(extensionManager, servicesManager, commandsManager);
 }
 
 export default initToolGroups;
