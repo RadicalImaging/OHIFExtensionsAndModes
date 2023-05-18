@@ -1,4 +1,4 @@
-import {ohif, cornerstone, dicomsr, dicomvideo, dicompdf, dicomseg} from "./extensions";
+import {ohif, cornerstone, dicomsr, dicomvideo, dicompdf, dicomseg, dicomhtml} from "./extensions";
 
 /**
      * Mode Routes are used to define the mode's behavior. A list of Mode Route
@@ -41,6 +41,10 @@ const defaultRoutes = [
             namespace: dicomseg.viewport,
             displaySetsToDisplay: [dicomseg.sopClassHandler],
           },
+          // {
+          //   namespace: dicomhtml.viewport,
+          //   displaySetsToDisplay: [dicomhtml.sopClassHandler],
+          // },
         ],
       },
     },

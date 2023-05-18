@@ -1,4 +1,6 @@
-const findingsContextMenu = {
+import ConfigPoint from "config-point";
+
+const findingsContextMenu = ConfigPoint.createConfiguration('measurementsContextMenu', {
   id: 'measurementsContextMenu',
   customizationType: 'ohif.contextMenu',
   menus: [
@@ -44,7 +46,6 @@ const findingsContextMenu = {
       selector: ({ nearbyToolData }) => false,
       items: [
         {
-          label: 'fssm',
           customizationType: '@ohif/contextMenuAnnotationCode',
           code: 'SCT:371861004',
         },
@@ -60,7 +61,6 @@ const findingsContextMenu = {
       selector: ({ nearbyToolData }) => !!nearbyToolData,
       items: [
         {
-          label: 'sssm',
           customizationType: '@ohif/contextMenuAnnotationCode',
           code: 'SCT:69536005',
         },
@@ -71,6 +71,6 @@ const findingsContextMenu = {
       ],
     },
   ],
-};
+});
 
 export default findingsContextMenu;

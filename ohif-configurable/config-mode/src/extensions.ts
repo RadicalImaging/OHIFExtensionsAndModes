@@ -41,3 +41,9 @@ export const dicomseg = {
   viewport: '@ohif/extension-cornerstone-dicom-seg.viewportModule.dicom-seg',
   sopClassHandler: '@ohif/extension-cornerstone-dicom-seg.sopClassHandlerModule.dicom-seg',
 };
+
+export const dicomhtml = {
+  sopClassHandler:
+    '@radicalimaging/extension-dicom-html.sopClassHandlerModule.dicom-html',
+  viewport: '@radicalimaging/extension-dicom-html.viewportModule.dicom-html',
+};
