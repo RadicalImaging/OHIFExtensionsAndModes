@@ -31,7 +31,7 @@
   "peerDependencies": {
     "@ohif/core": "^3.0.0",
     "@radicalimaging/config-mode": "^3.4.2",
-    "@radicalimaging/findings-mode": "^3.4.2"
+    "@radicalimaging/findings-mode": "^3.13.4"
   },
   "dependencies": {
     "@babel/runtime": "7.17.9"
