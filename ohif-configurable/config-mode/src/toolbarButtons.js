@@ -28,18 +28,6 @@ function _createButton(type, id, icon, label, commands, tooltip) {
   };
 }
 
-function _createCommands(commandName, toolName, toolGroupIds) {
-  return toolGroupIds.map(toolGroupId => ({
-    /* It's a command that is being run when the button is clicked. */
-    commandName,
-    commandOptions: {
-      toolName,
-      toolGroupId,
-    },
-    context: 'CORNERSTONE',
-  }));
-}
-
 const _createActionButton = _createButton.bind(null, 'action');
 const _createToggleButton = _createButton.bind(null, 'toggle');
 const _createToolButton = _createButton.bind(null, 'tool');
@@ -384,7 +372,6 @@ const toolbarButtons = [
   // ************ New Layout Section
   
     // Measurement
-    isNewHP ? 
   {
     id: 'Layout',
       type: 'ohif.splitButton',
@@ -478,15 +465,7 @@ const toolbarButtons = [
           },
         ],
       },
-    } :
-    {
-      id: 'Layout',
-    type: 'ohif.layoutSelector',
-    props: {
-      rows: 3,
-      columns: 3,
     },
-  },
   
   {
     id: 'MPR',
@@ -698,4 +677,5 @@ const toolbarButtons = [
   },
 ];
 
+console.log("* config-mode toolbarButtons", toolbarButtons);
 export default toolbarButtons;
