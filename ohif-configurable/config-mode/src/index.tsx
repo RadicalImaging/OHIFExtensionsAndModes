@@ -9,6 +9,7 @@ import defaultTool from "./defaultTool";
 import defaultToolBarSections from "./defaultToolBarSections";
 import onModeEnter from "./onModeEnter";
 import volumeToolBarSections from './volumeToolBarSections';
+import isValidMode from './isValidMode';
 
 /** Load method for dynamic loading of modes and extensions. */
 const hotLoad = async () => {
@@ -28,4 +29,5 @@ export {
   defaultTool,
   defaultToolBarSections,
   volumeToolBarSections,
+  isValidMode,
 };

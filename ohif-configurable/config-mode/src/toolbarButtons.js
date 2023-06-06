@@ -384,7 +384,6 @@ const toolbarButtons = [
   // ************ New Layout Section
   
     // Measurement
-    isNewHP ? 
   {
     id: 'Layout',
       type: 'ohif.splitButton',
@@ -432,21 +431,6 @@ const toolbarButtons = [
             ],
           },
           {
-            id: '3x1',
-            type: 'action',
-            label: '3x1',
-            commands: [
-              {
-                commandName: 'setHangingProtocol',
-                commandOptions: {
-                  protocolId: '@radicalimaging/hp-extension.mn',              
-                  stageId: '3x1',
-                },
-                context: 'DEFAULT',
-              },
-            ],
-          },
-          {
             id: '2x1',
             type: 'action',
             label: '2x1',
@@ -478,15 +462,7 @@ const toolbarButtons = [
           },
         ],
       },
-    } :
-    {
-      id: 'Layout',
-    type: 'ohif.layoutSelector',
-    props: {
-      rows: 3,
-      columns: 3,
     },
-  },
   
   {
     id: 'MPR',
@@ -692,6 +668,19 @@ const toolbarButtons = [
             },
           ],
           'Calibration Line'
+        ),
+        _createActionButton(
+          'TagBrowser',
+          'list-bullets',
+          'Dicom Tag Browser',
+          [
+            {
+              commandName: 'openDICOMTagViewer',
+              commandOptions: {},
+              context: 'DEFAULT',
+            },
+          ],
+          'Dicom Tag Browser'
         ),
       ],
     },
