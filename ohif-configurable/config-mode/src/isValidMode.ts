@@ -6,7 +6,7 @@ export default function isValidMode({ modalities }) {
     return true;
   }
 
-  const invalidModalities = this.invalidModalities || ['SM', 'ECG'];
+  const invalidModalities = this.invalidModalities || ['SM', 'ECG', 'SR', 'SEG'];
 
   // Slide Microscopy modality not supported by basic mode yet
   return (
