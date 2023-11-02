@@ -6,8 +6,9 @@ import {
   WindowLevelMenuItem,
 } from '@ohif/ui';
 import { defaults } from '@ohif/core';
+import { EVENTS } from '@cornerstonejs/core';
 
-const isNewHP = window.config.isNewHP;
+console.log("EVENTS=", EVENTS);
 
 const { windowLevelPresets } = defaults;
 /**
@@ -17,7 +18,7 @@ const { windowLevelPresets } = defaults;
  * @param {*} icon
  * @param {*} label
  */
-function _createButton(type, id, icon, label, commands, tooltip) {
+function _createButton(type, id, icon, label, commands, tooltip, extraOptions) {
   return {
     id,
     icon,
@@ -25,12 +26,41 @@ function _createButton(type, id, icon, label, commands, tooltip) {
     type,
     commands,
     tooltip,
+    ...extraOptions,
   };
 }
 
 const _createActionButton = _createButton.bind(null, 'action');
 const _createToggleButton = _createButton.bind(null, 'toggle');
 const _createToolButton = _createButton.bind(null, 'tool');
+
+const ReferenceLinesCommands = [
+  {
+    commandName: 'setSourceViewportForReferenceLinesTool',
+    context: 'CORNERSTONE',
+  },
+  {
+    commandName: 'setToolActive',
+    commandOptions: {
+      toolName: 'ReferenceLines',
+    },
+    context: 'CORNERSTONE',
+  },
+];
+
+const ReferenceLines = _createToggleButton(
+  'ReferenceLines',
+  'tool-referenceLines', // change this with the new icon
+  'Reference Lines',
+  ReferenceLinesCommands,
+  'Show reference lines',
+  {
+    listeners: {
+      activeViewportIdChanged: ReferenceLinesCommands,
+      [EVENTS.STACK_VIEWPORT_NEW_STACK]: ReferenceLinesCommands,
+    },
+  }
+);
 
 /**
  *
@@ -575,6 +605,7 @@ const toolbarButtons = [
             context: 'CORNERSTONE',
           },
         ]),
+        ReferenceLines,
         _createToggleButton(
           'ReferenceLines',
           'tool-referenceLines', // change this with the new icon
