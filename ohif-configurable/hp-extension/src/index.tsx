@@ -35,8 +35,8 @@ export default {
     hangingProtocolService.addCustomAttribute('numberOfDisplaySetsWithImages', 'Number of displays sets with images', numberOfDisplaySetsWithImages);
     hangingProtocolService.addCustomAttribute('maxNumImageFrames', 'Maximum of number of image frames', maxNumImageFrames);
     hangingProtocolService.addCustomAttribute('sameAs', 'Match an attribute in an existing display set', sameAs);
-    
-    syncGroupService.setSynchronizer('initialzoompan', initialZoomPan);
+
+    syncGroupService.addSynchronizerType('initialzoompan', initialZoomPan);
   },
 
   /**
