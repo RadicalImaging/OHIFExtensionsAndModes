@@ -15,7 +15,6 @@ import siteMenuItem from './siteMenuItem';
 
 const extensionDependencies = {
   ...defaultExtensions,
-  '@radicalimaging/hp-extension': '^3.4.0',
   '@ohif/extension-test': '^0.0.1',
 };
 
@@ -35,7 +34,7 @@ const findingsCP = ConfigPoint.createConfiguration("@radicalimaging/mode-finding
   toolbarButtons,
 
   modeCustomizations: [
-    '@ohif/extension-test.customizationModule.custom-context-menu', 
+    '@ohif/extension-test.customizationModule.custom-context-menu',
     findingsContextMenu, codingValues, customMeasurementItem, findingMenuItem, siteMenuItem,
   ],
 
@@ -68,11 +67,9 @@ const findingsCP = ConfigPoint.createConfiguration("@radicalimaging/mode-finding
 
   /** HangingProtocols used by the mode */
   hangingProtocol: [
-    '@radicalimaging/hp-extension.heart',
-    '@radicalimaging/hp-extension.breast',
-    '@radicalimaging/hp-extension.mn',
-    // '@radicalimaging/hp-extension.mn1',
     'default',
+    '@ohif/mnGrid',
+    '@ohif/mnCompare'
   ],
 
   sopClassHandlers,
