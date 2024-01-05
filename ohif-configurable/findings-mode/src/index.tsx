@@ -69,7 +69,7 @@ const findingsCP = ConfigPoint.createConfiguration("@radicalimaging/mode-finding
   hangingProtocol: [
     'default',
     '@ohif/mnGrid',
-    '@ohif/mnCompare'
+    '@ohif/hpCompare'
   ],
 
   sopClassHandlers,
