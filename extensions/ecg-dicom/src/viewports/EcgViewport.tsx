@@ -79,15 +79,15 @@ const getChannelData = async (data, numberOfChannels, numberOfSamples, bits, typ
 
 function EcgViewport(props) {
   const { displaySets } = props;
-  const { others } = displaySets[0];
+  const { instances } = displaySets[0];
   const [channelData, setChannelData] = useState([]);
 
-  if (!others.length) {
+  if (!instances?.length) {
     return (<span className="text-red-700">No ECG in display set</span>)
   }
 
-  const waveform = others[0].WaveformSequence[0];
-  const {StudyInstanceUID: studyUID} = others[0];
+  const waveform = instances[0].WaveformSequence[0];
+  const {StudyInstanceUID: studyUID} = instances[0];
 
   if (!waveform) {
     return (
