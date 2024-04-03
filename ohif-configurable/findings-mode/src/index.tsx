@@ -57,7 +57,9 @@ const findingsCP = ConfigPoint.createConfiguration("@radicalimaging/mode-finding
     const modalities_list = modalities.split('\\');
 
     // Slide Microscopy modality not supported by basic mode yet
-    return modalities_list.filter(it => !this.excludedModalities[it]).length > 0;
+    const valid = modalities_list.filter(it => !this.excludedModalities[it]).length > 0;
+
+    return { valid, description: 'Modalities list must have a modality other than SM/SR'};
   },
 
   routes: defaultRoutes,

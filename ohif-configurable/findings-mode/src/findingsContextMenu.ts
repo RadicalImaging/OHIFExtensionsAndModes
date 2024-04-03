@@ -70,6 +70,21 @@ const findingsContextMenu = ConfigPoint.createConfiguration('measurementsContext
         },
       ],
     },
+
+    {
+      id: 'orientationSelectionSubMenu',
+      selector: ({ nearbyToolData }) => false,
+      items: [
+        {
+          customizationType: '@ohif/contextMenuAnnotationCode',
+          code: 'SCT:24422004',
+        },
+        {
+          customizationType: '@ohif/contextMenuAnnotationCode',
+          code: 'SCT:81654009',
+        },
+      ],
+    },
   ],
 });
 

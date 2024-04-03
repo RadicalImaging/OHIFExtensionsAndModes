@@ -1,4 +1,4 @@
-import {dicomseg, dicomvideo, ohif, dicompdf, dicomsr} from "./extensions";
+import {dicomSeg, dicomvideo, ohif, dicompdf, dicomsr} from "./extensions";
 
 /** SopClassHandlers used by the mode */
 const sopClassHandlers = [
@@ -6,7 +6,7 @@ const sopClassHandlers = [
   ohif.sopClassHandler,
   dicompdf.sopClassHandler,
   dicomsr.sopClassHandler,
-  dicomseg.sopClassHandler,
+  dicomSeg.sopClassHandler,
 ];
 
 export default sopClassHandlers;

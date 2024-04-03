@@ -36,7 +36,7 @@ export const dicompdf = {
   viewport: '@ohif/extension-dicom-pdf.viewportModule.dicom-pdf',
 };
 
-export const dicomseg = {
+export const dicomSeg = {
   panel: '@ohif/extension-cornerstone-dicom-seg.panelModule.panelSegmentation',
   viewport: '@ohif/extension-cornerstone-dicom-seg.viewportModule.dicom-seg',
   sopClassHandler: '@ohif/extension-cornerstone-dicom-seg.sopClassHandlerModule.dicom-seg',

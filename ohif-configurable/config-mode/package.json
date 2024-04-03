@@ -33,9 +33,9 @@
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
-    "@cornerstonejs/tools": "^1.1.6",
-    "@ohif/core": "^3.0.0",
-    "@ohif/ui": "^1.10.10",
+    "@cornerstonejs/tools": "^1.67.0",
+    "@ohif/core": "3.8.0-beta.69",
+    "@ohif/ui": "3.8.0-beta.69",
     "gl-matrix": "^3.4.3",
     "lodash.clonedeep": "^4.5.0",
     "lodash.get": "^4.4.2"
