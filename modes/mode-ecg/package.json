@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/mode-ecg",
-  "version": "3.16.1",
+  "version": "3.16.3",
   "description": "Display ECGs",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
@@ -34,7 +34,7 @@
   },
   "peerDependencies": {
     "@ohif/core": "3.8.0-beta.69",
-    "@radicalimaging/ecg-dicom": "^3.4.2"
+    "@radicalimaging/ecg-dicom": "^3.16.0"
   },
   "dependencies": {
     "@babel/runtime": "7.17.9"
