@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.17.9",
-    "@radicalimaging/config-mode": "^3.4.2",
+    "@radicalimaging/config-mode": ">=3.16.0",
     "config-point": "^0.6.2"
   },
   "devDependencies": {

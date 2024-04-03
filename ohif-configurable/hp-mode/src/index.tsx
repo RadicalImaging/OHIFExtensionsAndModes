@@ -59,7 +59,6 @@ function modeFactory({ modeConfiguration }) {
       '@radicalimaging/hp-extension.hangingProtocolModule.heart',
       '@radicalimaging/hp-extension.hangingProtocolModule.breast',
       '@radicalimaging/hp-extension.hangingProtocolModule.MN',
-      '@ohif/extension-default.hangingProtocolModule.default',
     ],
 
     hangingProtocol: [

@@ -5,7 +5,7 @@ import ConfigPoint from "config-point";
 const ohif = {
   layout: '@ohif/extension-default.layoutTemplateModule.viewerLayout',
   sopClassHandler: '@ohif/extension-default.sopClassHandlerModule.stack',
-  hangingProtocol: '@ohif/extension-default.hangingProtocolModule.default',
+  hangingProtocol: 'default',
 };
 
 const tracked = {
