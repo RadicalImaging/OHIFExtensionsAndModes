@@ -1,3 +1,5 @@
+import {getConfig} from 'config-point';
+
 const asArray = (v) => Array.isArray(v) ? v : [v];
 
 export default function onModeEnter({ servicesManager, extensionManager, commandsManager }) {
@@ -18,5 +20,7 @@ export default function onModeEnter({ servicesManager, extensionManager, command
     toolbarService.createButtonSection(section, this.toolBarSections[section]);
   });
 
-  customizationService?.addModeCustomizations?.(this.modeCustomizations);
+  const customizations = this.modeCustomizations?.map(it => (typeof it)==='string' && getConfig(it) || it )
+  
+  customizationService?.addModeCustomizations?.(customizations);
 }

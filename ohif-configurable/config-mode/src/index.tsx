@@ -1,4 +1,4 @@
-import ConfigPoint from "config-point";
+import { loadSearchConfigPoint } from "config-point";
 import initToolGroups from "./initToolGroups";
 import toolbarButtons from "./toolbarButtons";
 import sopClassHandlers from "./sopClassHandlers";
@@ -12,13 +12,15 @@ import volumeToolBarSections from './volumeToolBarSections';
 import isValidMode from './isValidMode';
 
 /** Load method for dynamic loading of modes and extensions. */
-const hotLoad = async () => {
+const hotLoad = async (defaultTheme='theme') => {
   // Load themes from the "theme" parameter on the URL before returning the modes
-  await ConfigPoint.loadSearchConfigPoint("theme", "/theme", "theme");
+  
 };
 
+const themeLoad = loadSearchConfigPoint((window as any).config.defaultTheme, '/theme', 'theme');
+
 export {
-  hotLoad, 
+  themeLoad,
   initToolGroups, 
   toolbarButtons, 
   sopClassHandlers, 

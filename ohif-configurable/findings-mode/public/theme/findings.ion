@@ -1,0 +1,24 @@
+{
+  measurementsContextMenu: {
+    extraValue: 'test1',
+    menus: {
+      siteSelectionSubMenu: {
+        id: 'siteSelectionSubMenu',
+        items: [
+          {
+            customizationType: '@ohif/contextMenuAnnotationCode',
+            code: 'SCT:45048000',
+          },
+          {
+            customizationType: '@ohif/contextMenuAnnotationCode',
+            code: 'SCT:103340004',
+          },
+          {
+            customizationType: '@ohif/contextMenuAnnotationCode',
+            code: 'SCT:91134007',
+          },
+        ],
+      },
+    }
+  }
+}
