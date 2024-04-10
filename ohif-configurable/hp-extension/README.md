@@ -24,7 +24,7 @@ can be used, specifying that the image point at the right center `1,0.5`, is to 
 That says, translate the image display so that the absolute image position `2560,2048` is located at canvas coordinates `1280,512`.  This results in displaying the image right aligned, with the vertical center corresponding to the middle of the canvas.
 
 ### Transalated and Zoomed Image
-Sometimes images should be translated/moved, because it is known that hte area of interest occurs in a certain part.  For example, a LAX 4 chamber heart view might use the scaling/translation:
+Sometimes images should be translated/moved, because it is known that the area of interest occurs in a certain part.  For example, a LAX 4 chamber heart view might use the scaling/translation:
 ```js
     syncGroups: [
               {
