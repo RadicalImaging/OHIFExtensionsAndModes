@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/config-mode",
-  "version": "3.17.0",
+  "version": "3.18.0",
   "description": "A configurable/themeable mode that allows runtime extensions to the mode.",
   "author": "Radical Imaging",
   "license": "MIT",
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.17.9",
-    "config-point": "^0.6.2"
+    "config-point": "^0.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",

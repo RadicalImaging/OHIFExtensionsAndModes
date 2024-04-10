@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/findings-mode",
-  "version": "3.17.0",
+  "version": "3.18.0",
   "description": "Support context menu/command key findings",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.17.9",
-    "@radicalimaging/config-mode": ">=3.16.0",
-    "config-point": "^0.6.2"
+    "@radicalimaging/config-mode": ">=3.18.0",
+    "config-point": "^0.7.0"
   }
 }
