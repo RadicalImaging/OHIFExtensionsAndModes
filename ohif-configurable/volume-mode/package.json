@@ -60,7 +60,7 @@
     "eslint": "^5.0.1",
     "eslint-loader": "^2.0.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
-    "webpack": "^5.50.0",
+    "webpack": "^5.88.2",
     "webpack-cli": "^3.0.8"
   }
 }

@@ -33,7 +33,7 @@
     "@ohif/i18n": "^1.0.0",
     "classnames": "^2.3.2",
     "cornerstone-wado-image-loader": "^4.10.2",
-    "dcmjs": "^0.29.6",
+    "dcmjs": "^0.29.8",
     "dicomweb-client": "^0.10.4",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
@@ -41,7 +41,7 @@
     "react-i18next": "^10.11.0",
     "react-router": "^6.11.2",
     "react-router-dom": "^6.8.1",
-    "webpack": "^5.50.0",
+    "webpack": "^5.88.2",
     "webpack-merge": "^5.7.3"
   },
   "dependencies": {
@@ -68,7 +68,7 @@
     "dotenv": "^14.1.0",
     "eslint": "^5.0.1",
     "eslint-loader": "^2.0.0",
-    "webpack": "^5.75.0",
+    "webpack": "^5.88.2",
     "webpack-cli": "^5.0.0",
     "webpack-merge": "^5.7.3"
   }
