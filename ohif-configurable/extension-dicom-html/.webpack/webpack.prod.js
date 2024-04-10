@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const rootDir = path.resolve(__dirname, '../');
 const outputFolder = path.join(__dirname, `../dist/${pkg.name}/`);
-const outputFile = 'index.umd.js';
+const outputFile = 'index.js';
 
 const config = {
   mode: 'production',

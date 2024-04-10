@@ -4,7 +4,7 @@
   "description": "Veterinary Mode",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
-  "main": "dist/umd/@radicalimaging/veterinary-mode/index.umd.js",
+  "main": "dist/@radicalimaging/veterinary-mode/index.js",
   "files": [
     "dist/**",
     "README.md"

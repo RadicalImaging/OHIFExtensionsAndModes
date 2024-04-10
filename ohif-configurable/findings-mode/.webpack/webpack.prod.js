@@ -2,8 +2,8 @@ const path = require('path');
 const pkg = require('../package.json');
 
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, `../dist/umd/${pkg.name}/`);
-const outputFile = 'index.umd.js';
+const outputFolder = path.join(__dirname, `../dist/${pkg.name}/`);
+const outputFile = 'index.js';
 
 const config = {
   mode: 'production',
@@ -20,23 +20,11 @@ const config = {
   },
   externals: [
     {
-      "cornerstone-wado-image-loader": {
-        root: 'cornerstone-wado-image-loader',
-        commonjs2: 'cornerstone-wado-image-loader',
-        commonjs: 'cornerstone-wado-image-loader',
-        amd: 'cornerstone-wado-image-loader',
-      },
       'react': {
         root: 'React',
         commonjs2: 'react',
         commonjs: 'react',
         amd: 'react',
-      },
-      'config-point': {
-        root: 'config-point',
-        commonjs2: 'config-point',
-        commonjs: 'config-point',
-        amd: 'config-point',
       },
       'classnames': {
         root: 'classnames',
@@ -73,6 +61,12 @@ const config = {
         commonjs: '@ohif/core',
         amd: '@ohif/core',
         root: '@ohif/core',
+      },
+      'config-point': {
+        commonjs2: 'config-point',
+        commonjs: 'config-point',
+        amd: 'config-point',
+        root: 'config-point',
       },
       '@ohif/ui': {
         commonjs2: '@ohif/ui',

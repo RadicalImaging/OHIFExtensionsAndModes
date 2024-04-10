@@ -2,8 +2,8 @@ const path = require('path');
 const pkg = require('../package.json');
 
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, `../dist/umd/${pkg.name}/`);
-const outputFile = 'index.umd.js';
+const outputFolder = path.join(__dirname, `../dist/${pkg.name}/`);
+const outputFile = 'index.js';
 
 const config = {
   mode: 'production',
@@ -20,11 +20,47 @@ const config = {
   },
   externals: [
     {
-      react: {
+      "cornerstone-wado-image-loader": {
+        root: 'cornerstone-wado-image-loader',
+        commonjs2: 'cornerstone-wado-image-loader',
+        commonjs: 'cornerstone-wado-image-loader',
+        amd: 'cornerstone-wado-image-loader',
+      },
+      'react': {
         root: 'React',
         commonjs2: 'react',
         commonjs: 'react',
         amd: 'react',
+      },
+      'config-point': {
+        root: 'config-point',
+        commonjs2: 'config-point',
+        commonjs: 'config-point',
+        amd: 'config-point',
+      },
+      'classnames': {
+        root: 'classnames',
+        commonjs2: 'classnames',
+        commonjs: 'classnames',
+        amd: 'classnames',
+      },
+      'react-router-dom': {
+        root: 'react-router-dom',
+        commonjs2: 'react-router-dom',
+        commonjs: 'react-router-dom',
+        amd: 'react-router-dom',
+      },
+      'dicomweb-client': {
+        root: 'dicomweb-client',
+        commonjs2: 'dicomweb-client',
+        commonjs: 'dicomweb-client',
+        amd: 'dicomweb-client',
+      },
+      dcmjs: {
+        root: 'dcmjs',
+        commonjs2: 'dcmjs',
+        commonjs: 'dcmjs',
+        amd: 'dcmjs',
       },
       '@ohif/core': {
         commonjs2: '@ohif/core',
@@ -37,36 +73,6 @@ const config = {
         commonjs: '@ohif/ui',
         amd: '@ohif/ui',
         root: '@ohif/ui',
-      },
-      '@cornerstonejs/core': {
-        commonjs2: '@cornerstonejs/core',
-        commonjs: '@cornerstonejs/core',
-        amd: '@cornerstonejs/core',
-        root: '@cornerstonejs/core',
-      },
-      '@cornerstonejs/tools': {
-        commonjs2: '@cornerstonejs/tools',
-        commonjs: '@cornerstonejs/tools',
-        amd: '@cornerstonejs/tools',
-        root: '@cornerstonejs/tools',
-      },
-      '@ohif/ui': {
-        commonjs2: '@ohif/ui',
-        commonjs: '@ohif/ui',
-        amd: '@ohif/ui',
-        root: '@ohif/ui',
-      },
-      '@ohif/mode-longitudinal': {
-        commonjs2: '@ohif/mode-longitudinal',
-        commonjs: '@ohif/mode-longitudinal',
-        amd: '@ohif/mode-longitudinal',
-        root: '@ohif/mode-longitudinal',
-      },
-      'config-point': {
-        commonjs2: 'config-point',
-        commonjs: 'config-point',
-        amd: 'config-point',
-        root: 'config-point',
       },
     },
   ],

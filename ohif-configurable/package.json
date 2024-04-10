@@ -4,13 +4,15 @@
   "workspaces": [
     "config-mode",
     "hp-extension",
-    "hp-mode",
-    "volume-mode",
     "findings-mode",
+    "ecg-dicom",
+    "mode-ecg",
     "extension-dicom-html"
   ],
   "scripts": {
     "build": "lerna run build --stream",
+    "clean": "rimraf */dist */*.tgz",
+    "pack:all": "yarn clean && yarn build && lerna run pack",
     "publishAll": "yarn build && lerna run publishItem --stream",
     "zzz": "End item"
   },
@@ -35,6 +37,7 @@
     "dotenv": "^14.1.0",
     "eslint": "^5.0.1",
     "eslint-loader": "^2.0.0",
+    "expose-loader": "^5.0.0",
     "husky": "^8.0.3",
     "lerna": "^5.4.2",
     "mini-css-extract-plugin": "^2.7.2",

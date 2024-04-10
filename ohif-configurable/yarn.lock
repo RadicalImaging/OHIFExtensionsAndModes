@@ -3351,23 +3351,10 @@ config-chain@^1.1.12:
     ini "^1.3.4"
     proto-list "~1.2.1"
 
-config-point@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/config-point/-/config-point-0.6.2.tgz#9c913330afa5060fe6ce489f9647a66a9045971b"
-  integrity sha512-T9MLxm7zOUsIFQh2X2p/CGp98ZUPNsdPJuKvP5hc1u6kRnJJIKey8V+P/bVTxXljQ12wfAG2E99ZiQ+B/j3rWg==
-  dependencies:
-    "@babel/runtime" "7.17.9"
-    "@rollup/plugin-babel" "^6.0.3"
-    "@rollup/plugin-commonjs" "^24.1.0"
-    "@rollup/plugin-node-resolve" "^15.0.2"
-    ion-js "^4.3.0"
-    jsbi "^4.3.0"
-    json5 "^2.2.2"
-
-config-point@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/config-point/-/config-point-0.7.0.tgz#ec9701d1040c02f43a6c598ac859265429e62c73"
-  integrity sha512-XaX7A8F8ZERnJn7qJqu76XMg39sE4sZ48fMJ2GUDfYHYopHZ6vcSRB+5oF/h8RtDelxhCW1Tan7wpGnICsd+wg==
+config-point@>=0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/config-point/-/config-point-0.8.0.tgz#e804b6893c1143492ee129e7d1e58b8a71df3633"
+  integrity sha512-+66gHfDFRhWrrLQzJ1SMIyrRICod4Afj2RJhXxWcdmF5/mRgIQoG76YnUeeGPyAn4aZR79TWnfd57yXiU3emEg==
   dependencies:
     "@babel/runtime" "7.17.9"
     "@rollup/plugin-babel" "^6.0.3"
@@ -4145,6 +4132,11 @@ expand-tilde@^2.0.0, expand-tilde@^2.0.2:
   integrity sha512-A5EmesHW6rfnZ9ysHQjPdJRni0SRar0tjtG5MNtm9n5TUvsYU8oozprtRD4AqHxcZWWlVuAmQo2nWKfN9oyjTw==
   dependencies:
     homedir-polyfill "^1.0.1"
+
+expose-loader@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/expose-loader/-/expose-loader-5.0.0.tgz#41368903eb1246b7c09fecf32c5cb3f67d0260e6"
+  integrity sha512-BtUqYRmvx1bEY5HN6eK2I9URUZgNmN0x5UANuocaNjXSgfoDlkXt+wyEMe7i5DzDNh2BKJHPc5F4rBwEdSQX6w==
 
 extend-shallow@^2.0.1:
   version "2.0.1"

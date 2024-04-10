@@ -4,7 +4,7 @@
   "description": "Various custom overlays",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
-  "main": "dist/umd/@radicalimaging/overlays-extension/index.umd.js",
+  "main": "dist/@radicalimaging/overlays-extension/index.js",
   "files": [
     "dist/**",
     "README.md"

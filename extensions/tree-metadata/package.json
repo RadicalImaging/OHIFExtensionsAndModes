@@ -4,7 +4,7 @@
   "description": "Support reading tree structured metadata",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
-  "main": "dist/umd/@radicalimaging/tree-metadata/index.umd.js",
+  "main": "dist/@radicalimaging/tree-metadata/index.js",
   "files": [
     "dist/**",
     "README.md"

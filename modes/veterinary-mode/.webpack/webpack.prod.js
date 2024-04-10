@@ -1,9 +1,9 @@
 const path = require('path');
 const pkg = require('../package.json');
 
-const outputFile = 'index.umd.js';
+const outputFile = 'index.js';
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, `../dist/umd/${pkg.name}/`);
+const outputFolder = path.join(__dirname, `../dist/${pkg.name}/`);
 
 // Todo: add ESM build for the mode in addition to umd build
 const config = {

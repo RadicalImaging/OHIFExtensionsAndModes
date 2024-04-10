@@ -1,21 +1,22 @@
 {
-  "name": "@radicalimaging/hp-extension",
-  "version": "3.15.0",
-  "description": "Extension to define support for basic MPR",
+  "name": "@radicalimaging/ecg-dicom",
+  "version": "3.19.0",
+  "description": "Basic DICOM ECG Viewer",
   "author": "Bill Wallace",
   "license": "MIT",
   "files": [
+    "public/**",
     "dist/**",
     "README.md"
   ],
-  "repository": "OHIF/Viewers",
   "publishConfig": {
     "access": "public"
   },
+  "repository": "OHIF/Viewers",
   "keywords": [
     "ohif-extension"
   ],
-  "main": "dist/@radicalimaging/hp-extension/index.js",
+  "main": "dist/@radicalimaging/ecg-dicom/index.js",
   "module": "src/index.tsx",
   "engines": {
     "node": ">=14",
@@ -25,17 +26,15 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --config .webpack/webpack.dev.js --watch --debug --output-pathinfo",
     "dev:dicom-pdf": "yarn run dev",
+    "pack": "npm pack",
     "build": "cross-env NODE_ENV=production webpack --config .webpack/webpack.prod.js",
     "build:package": "yarn run build",
     "start": "yarn run dev"
   },
   "peerDependencies": {
-    "@cornerstonejs/tools": ">=1.68.0",
     "@ohif/core": ">=3.8.0-beta.69",
     "@ohif/extension-cornerstone": ">=3.8.0-beta.69",
     "@ohif/extension-default": ">=3.8.0-beta.69",
-    "@ohif/i18n": ">=3.8.0-beta.69",
-    "config-point": "^0.7.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -44,7 +43,6 @@
     "react-router-dom": "^6.8.1"
   },
   "dependencies": {
-    "@babel/runtime": "7.17.9",
-    "lodash": "^4.17.21"
+    "@babel/runtime": "7.17.9"
   }
 }
