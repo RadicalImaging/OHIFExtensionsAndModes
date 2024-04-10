@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/ecg-dicom",
-  "version": "3.19.0",
+  "version": "3.19.1",
   "description": "Basic DICOM ECG Viewer",
   "author": "Bill Wallace",
   "license": "MIT",
