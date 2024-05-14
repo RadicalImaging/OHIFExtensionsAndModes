@@ -1,10 +1,12 @@
 {
-  "name": "@radicalimaging/config-mode",
-  "version": "3.19.0",
-  "description": "A configurable/themeable mode that allows runtime extensions to the mode.",
-  "author": "Radical Imaging",
+  "name": "@radicalimaging/mode-ecg",
+  "version": "3.19.1",
+  "description": "Display ECGs",
+  "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
+  "module": "src/index.tsx",
   "files": [
+    "public/**",
     "dist/**",
     "README.md"
   ],
@@ -15,8 +17,7 @@
   "keywords": [
     "ohif-mode"
   ],
-  "main": "dist/@radicalimaging/config-mode/index.js",
-  "module": "src/index.tsx",
+  "main": "dist/@radicalimaging/mode-ecg/index.js",
   "engines": {
     "node": ">=14",
     "npm": ">=6",
@@ -25,24 +26,18 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --config .webpack/webpack.dev.js --watch --debug --output-pathinfo",
     "dev:cornerstone": "yarn run dev",
-    "pack": "npm pack",
     "build": "cross-env NODE_ENV=production webpack --config .webpack/webpack.prod.js",
     "build:package": "yarn run build",
-    "publishItem": "yarn publish",
+    "pack": "npm pack",
     "start": "yarn run dev",
     "test:unit": "jest --watchAll",
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
   },
   "peerDependencies": {
-    "@cornerstonejs/tools": ">=1.67.0",
     "@ohif/core": ">=3.8.0-beta.69",
-    "@ohif/ui": ">=3.8.0-beta.69",
-    "gl-matrix": ">=3.4.3",
-    "lodash.clonedeep": ">=4.5.0",
-    "lodash.get": ">=4.4.2"
+    "@radicalimaging/ecg-dicom": ">=3.19.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.17.9",
-    "config-point": ">=0.8.0"
+    "@babel/runtime": "7.17.9"
   }
 }

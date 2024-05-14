@@ -4,7 +4,7 @@
   "description": "Volume Viewer Mode",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
-  "main": "dist/umd/@radicalimaging/volume-mode/index.umd.js",
+  "main": "dist/@radicalimaging/volume-mode/index.js",
   "files": [
     "dist/**",
     "README.md"
@@ -36,8 +36,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.17.9",
-    "@radicalimaging/config-mode": "^3.4.2",
-    "config-point": "^0.6.2"
+    "@radicalimaging/config-mode": ">=3.17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",

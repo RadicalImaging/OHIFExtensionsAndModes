@@ -3,9 +3,10 @@ const defaultExtensions = {
   '@ohif/extension-default': '^3.0.0',
   '@ohif/extension-cornerstone': '^3.0.0',
   '@ohif/extension-cornerstone-dicom-sr': '^3.0.0',
+  '@ohif/extension-cornerstone-dicom-seg': '^3.0.0',
   '@ohif/extension-dicom-pdf': '^3.0.1',
   '@ohif/extension-dicom-video': '^3.0.1',
-  '@ohif/extension-test': '^3.0.0',
+  '@ohif/extension-test': '^0.0.1',
 };
 
 export default defaultExtensions;

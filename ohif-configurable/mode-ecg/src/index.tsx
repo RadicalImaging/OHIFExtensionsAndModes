@@ -5,7 +5,7 @@ import ConfigPoint from "config-point";
 const ohif = {
   layout: '@ohif/extension-default.layoutTemplateModule.viewerLayout',
   sopClassHandler: '@ohif/extension-default.sopClassHandlerModule.stack',
-  hangingProtocol: '@ohif/extension-default.hangingProtocolModule.default',
+  hangingProtocol: 'default',
 };
 
 const tracked = {
@@ -75,7 +75,8 @@ function modeFactory({ modeConfiguration }) {
       const modalities_list = modalities.split('\\');
 
       // Slide Microscopy and ECG modality not supported by basic mode yet
-      return modalities_list.includes('ECG');
+      const valid = modalities_list.includes('ECG');
+      return { valid, desription: "Only for ECG"}
     },
     
     routes: [
@@ -88,9 +89,9 @@ function modeFactory({ modeConfiguration }) {
           return {
             id: ohif.layout,
             props: {
-              leftPanels: [tracked.thumbnailList],
+              leftPanels: [],
               // TODO: Should be optional, or required to pass empty array for slots?
-              rightPanels: [tracked.measurements],
+              rightPanels: [],
               viewports: [
                 {
                   namespace: tracked.viewport,
@@ -119,9 +120,7 @@ function modeFactory({ modeConfiguration }) {
       },
     ],
     extensions: extensionDependencies,
-    // For a while, include both forms
-    hangingProtocols: [ohif.hangingProtocol],
-    hangingProtocol: ohif.hangingProtocol,
+    hangingProtocol: ['default', '@ohif/mnGrid'],
     // Order is important in sop class handlers when two handlers both use
     // the same sop class under different situations.  In that case, the more
     // general handler needs to come last.  For this case, the dicomvideo must

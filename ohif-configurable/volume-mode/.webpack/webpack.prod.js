@@ -2,8 +2,8 @@ const path = require('path');
 const pkg = require('../package.json');
 
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, `../dist/umd/${pkg.name}/`);
-const outputFile = 'index.umd.js';
+const outputFolder = path.join(__dirname, `../dist/${pkg.name}/`);
+const outputFile = 'index.js';
 
 const config = {
   mode: 'production',
@@ -13,7 +13,7 @@ const config = {
     path: outputFolder,
     filename: outputFile,
     library: pkg.name,
-    publicPath: `/umd/${pkg.name}/`,
+    publicPath: `/${pkg.name}/`,
     libraryTarget: 'umd',
     chunkFilename: '[name].chunk.js',
     umdNamedDefine: true,

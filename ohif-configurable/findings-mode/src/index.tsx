@@ -5,13 +5,12 @@ import {
   sopClassHandlers, defaultExtensions, defaultRoutes,
   onModeExit, onModeEnter,
   defaultTool, defaultToolBarSections,
+  themeLoad,
 } from '@radicalimaging/config-mode';
 import ConfigPoint from 'config-point';
 import findingsContextMenu from './findingsContextMenu';
-import findingMenuItem from './findingMenuItem';
 import codingValues from './codingValues';
 import customMeasurementItem from './customMeasurementItem';
-import siteMenuItem from './siteMenuItem';
 
 const extensionDependencies = {
   ...defaultExtensions,
@@ -34,8 +33,12 @@ const findingsCP = ConfigPoint.createConfiguration("@radicalimaging/mode-finding
   toolbarButtons,
 
   modeCustomizations: [
-    '@ohif/extension-test.customizationModule.custom-context-menu',
-    findingsContextMenu, codingValues, customMeasurementItem, findingMenuItem, siteMenuItem,
+    '@ohif/extension-test.customizationModule.contextMenuCodeItem',
+    // Next two values are references to config values in the theme configuration, so leave them as strings.
+    'measurementsContextMenu',
+    'codingValues',
+    // This is a straight function, so just return it.
+    customMeasurementItem, 
   ],
 
   defaultTool,
@@ -57,7 +60,9 @@ const findingsCP = ConfigPoint.createConfiguration("@radicalimaging/mode-finding
     const modalities_list = modalities.split('\\');
 
     // Slide Microscopy modality not supported by basic mode yet
-    return modalities_list.filter(it => !this.excludedModalities[it]).length > 0;
+    const valid = modalities_list.filter(it => !this.excludedModalities[it]).length > 0;
+
+    return { valid, description: 'Modalities list must have a modality other than SM/SR'};
   },
 
   routes: defaultRoutes,
@@ -75,11 +80,13 @@ const findingsCP = ConfigPoint.createConfiguration("@radicalimaging/mode-finding
   sopClassHandlers,
 
   /** hotkeys for mode */
-  hotkeys: [...hotkeys.defaults.hotkeyBindings, ...(window.config.hotkeys || [])],
+  hotkeys: [...hotkeys.defaults.hotkeyBindings, ...((window as any).config.hotkeys || [])],
 }
 );
 
-function modeFactory({ modeConfiguration }) {
+async function modeFactory({ modeConfiguration }) {
+  // Ensure the themes have finished loading before continuing.
+  await themeLoad;
   return findingsCP;
 }
 

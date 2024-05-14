@@ -4,7 +4,7 @@
   "description": "Veterinary Mode",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
-  "main": "dist/umd/@radicalimaging/veterinary-mode/index.umd.js",
+  "main": "dist/@radicalimaging/veterinary-mode/index.js",
   "files": [
     "dist/**",
     "README.md"
@@ -30,8 +30,8 @@
   },
   "peerDependencies": {
     "@ohif/core": "^3.0.0",
-    "@radicalimaging/config-mode": "^3.4.2",
-    "@radicalimaging/findings-mode": "^3.13.4"
+    "@radicalimaging/config-mode": ">=3.16.0",
+    "@radicalimaging/findings-mode": ">=3.16.1"
   },
   "dependencies": {
     "@babel/runtime": "7.17.9"

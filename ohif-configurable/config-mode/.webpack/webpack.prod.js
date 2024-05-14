@@ -3,8 +3,8 @@ const pkg = require('../package.json');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const rootDir = path.resolve(__dirname, '../');
-const outputFolder = path.join(__dirname, `../dist/umd/${pkg.name}/`);
-const outputFile = 'index.umd.js';
+const outputFolder = path.join(__dirname, `../dist/${pkg.name}/`);
+const outputFile = 'index.js';
 
 const config = {
   mode: 'production',
@@ -17,7 +17,7 @@ const config = {
     path: outputFolder,
     filename: outputFile,
     library: pkg.name,
-    publicPath: `/umd/${pkg.name}/`,
+    publicPath: `/${pkg.name}/`,
     libraryTarget: 'umd',
     chunkFilename: '[name].chunk.js',
     umdNamedDefine: true,
@@ -66,13 +66,12 @@ const config = {
         commonjs: '@cornerstonejs/core',
         amd: '@cornerstonejs/core',
       },
-      // Do not include config-point in the externals as this is the module htat provides it.
-      // 'config-point': {
-      //   root: 'config-point',
-      //   commonjs2: 'config-point',
-      //   commonjs: 'config-point',
-      //   amd: 'config-point',
-      // },
+      'config-point': {
+        root: 'config-point',
+        commonjs2: 'config-point',
+        commonjs: 'config-point',
+        amd: 'config-point',
+      },
       'classnames': {
         root: 'classnames',
         commonjs2: 'classnames',
@@ -120,6 +119,13 @@ const config = {
         resolve: {
           extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
+      },
+      {
+        test: require.resolve('config-point'),
+        loader: "expose-loader",
+        options: {
+          exposes: 'modules.config-point',
+        }
       },
     ],
   },

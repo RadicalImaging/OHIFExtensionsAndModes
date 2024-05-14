@@ -1,7 +1,6 @@
 export const ohif = {
   layout: '@ohif/extension-default.layoutTemplateModule.viewerLayout',
   sopClassHandler: '@ohif/extension-default.sopClassHandlerModule.stack',
-  hangingProtocol: '@ohif/extension-default.hangingProtocolModule.default',
   leftPanel: '@ohif/extension-default.panelModule.seriesList',
   rightPanel: '@ohif/extension-default.panelModule.measure',
 };
@@ -36,7 +35,7 @@ export const dicompdf = {
   viewport: '@ohif/extension-dicom-pdf.viewportModule.dicom-pdf',
 };
 
-export const dicomseg = {
+export const dicomSeg = {
   panel: '@ohif/extension-cornerstone-dicom-seg.panelModule.panelSegmentation',
   viewport: '@ohif/extension-cornerstone-dicom-seg.viewportModule.dicom-seg',
   sopClassHandler: '@ohif/extension-cornerstone-dicom-seg.sopClassHandlerModule.dicom-seg',

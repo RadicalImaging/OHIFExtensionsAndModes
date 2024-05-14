@@ -1,4 +1,4 @@
-import {ohif, cornerstone, dicomsr, dicomvideo, dicompdf, dicomseg, dicomhtml} from "./extensions";
+import {ohif, cornerstone, dicomsr, dicomvideo, dicompdf, dicomSeg, dicomhtml} from "./extensions";
 
 /**
      * Mode Routes are used to define the mode's behavior. A list of Mode Route
@@ -19,7 +19,7 @@ const defaultRoutes = [
       id: ohif.layout,
       props: {
         leftPanels: [ohif.leftPanel],
-        rightPanels: [ohif.rightPanel, dicomseg.panel,],
+        rightPanels: [ohif.rightPanel, dicomSeg.panel,],
         viewports: [
           {
             namespace: cornerstone.viewport,
@@ -38,9 +38,9 @@ const defaultRoutes = [
             displaySetsToDisplay: [dicompdf.sopClassHandler],
           },
           {
-            namespace: dicomseg.viewport,
-            displaySetsToDisplay: [dicomseg.sopClassHandler],
-          },
+            namespace: dicomSeg.viewport,
+            displaySetsToDisplay: [dicomSeg.sopClassHandler],
+          }
           // {
           //   namespace: dicomhtml.viewport,
           //   displaySetsToDisplay: [dicomhtml.sopClassHandler],

@@ -1,24 +1,20 @@
 /** De-initialize the tool bar and measurement services when done. */
 const onModeExit = ({ servicesManager }) => {
   const {
-    ToolGroupService,
-    SyncGroupService,
-    measurementService,
-    ToolBarService,
+    toolGroupService,
+    syncGroupService,
     segmentationService,
-    CornerstoneViewportService,
-    customizationService,
+    cornerstoneViewportService,
+    uiDialogService,
+    uiModalService,
   } = servicesManager.services;
 
-  try {
-    customizationService.reset();
-    ToolGroupService.destroy();
-    SyncGroupService.destroy();
-    segmentationService.destroy();
-    CornerstoneViewportService.destroy();
-  } catch (e) {
-    console.warn("* onModeExit failed", e);
-  }
+  uiDialogService.dismissAll();
+  uiModalService.hide();
+  toolGroupService.destroy();
+  syncGroupService.destroy();
+  segmentationService.destroy();
+  cornerstoneViewportService.destroy();
 };
 
 export default onModeExit;
