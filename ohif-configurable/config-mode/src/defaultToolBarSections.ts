@@ -10,7 +10,6 @@ const defaultToolBarSections = {
     'Crosshairs',
     'MoreTools',
   ],
-
 };
 
 export default defaultToolBarSections;

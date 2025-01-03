@@ -5,23 +5,28 @@ const colours = {
 };
 
 const colorsByOrientation = {
-  'axial': 'rgb(200, 0, 0)',
-  'sagittal': 'rgb(200, 200, 0)',
-  'coronal': 'rgb(0, 200, 0)',
+  axial: 'rgb(200, 0, 0)',
+  sagittal: 'rgb(200, 200, 0)',
+  coronal: 'rgb(0, 200, 0)',
 };
 
 function initDefaultToolGroup(
   extensionManager,
-  servicesManager,
+  toolGroupService,
   commandsManager,
-  toolGroupId
+  toolGroupId,
+  modeLabelConfig
 ) {
-  const { toolGroupService } = servicesManager.services;
   const utilityModule = extensionManager.getModuleEntry(
     '@ohif/extension-cornerstone.utilityModule.tools'
   );
 
+  const SRUtilityModule = extensionManager.getModuleEntry(
+    '@ohif/extension-cornerstone-dicom-sr.utilityModule.tools'
+  );
+
   const { toolNames, Enums } = utilityModule.exports;
+  const { toolNames: SRToolNames } = SRUtilityModule.exports;
 
   const tools = {
     active: [
@@ -59,6 +64,7 @@ function initDefaultToolGroup(
       {
         toolName: toolNames.StackScroll,
         bindings: [
+          { mouseButton: Enums.MouseBindings.Wheel },
           { numTouchPoints: 3 },
           {
             mouseButton: Enums.MouseBindings.Primary,
@@ -66,47 +72,71 @@ function initDefaultToolGroup(
           },
         ],
       },
-      { toolName: toolNames.StackScrollMouseWheel, bindings: [] },
     ],
     passive: [
       { toolName: toolNames.Length },
-      { toolName: toolNames.ArrowAnnotate },
+      {
+        toolName: toolNames.ArrowAnnotate,
+        configuration: {
+          getTextCallback: (callback, eventDetails) => {
+            if (modeLabelConfig) {
+              callback(' ');
+            } else {
+              commandsManager.runCommand('arrowTextCallback', {
+                callback,
+                eventDetails,
+              });
+            }
+          },
+          changeTextCallback: (data, eventDetails, callback) => {
+            if (modeLabelConfig === undefined) {
+              commandsManager.runCommand('arrowTextCallback', {
+                callback,
+                data,
+                eventDetails,
+              });
+            }
+          },
+        },
+      },
       { toolName: toolNames.Bidirectional },
       { toolName: toolNames.DragProbe },
+      { toolName: toolNames.Probe },
       { toolName: toolNames.EllipticalROI },
-      { toolName: toolNames.RectangleROI },
-      { toolName: toolNames.Angle },
       { toolName: toolNames.CircleROI },
+      { toolName: toolNames.RectangleROI },
+      { toolName: toolNames.StackScroll },
+      { toolName: toolNames.Angle },
       { toolName: toolNames.CobbAngle },
-      { toolName: toolNames.PlanarFreehandROI },
       { toolName: toolNames.Magnify },
-      { toolName: toolNames.SegmentationDisplay },
       { toolName: toolNames.CalibrationLine },
+      {
+        toolName: toolNames.PlanarFreehandContourSegmentation,
+        configuration: {
+          displayOnePointAsCrosshairs: true,
+        },
+      },
+      { toolName: toolNames.UltrasoundDirectional },
+      { toolName: toolNames.PlanarFreehandROI },
+      { toolName: toolNames.SplineROI },
+      { toolName: toolNames.LivewireContour },
+      { toolName: toolNames.WindowLevelRegion },
     ],
-    // enabled
-    enabled: [{ toolName: toolNames.SegmentationDisplay }],
-    // disabled
-    disabled: [{ toolName: toolNames.ReferenceLines }],
+    enabled: [
+      { toolName: toolNames.ImageOverlayViewer },
+      { toolName: toolNames.ReferenceLines },
+      {
+        toolName: SRToolNames.SRSCOORD3DPoint,
+      },
+    ],
+    disabled: [
+      {
+        toolName: toolNames.AdvancedMagnify,
+      },
+    ],
   };
 
-  const toolsConfig = {
-    [toolNames.ArrowAnnotate]: {
-      getTextCallback: (callback, eventDetails) =>
-        commandsManager.runCommand('arrowTextCallback', {
-          callback,
-          eventDetails,
-        }),
-
-      changeTextCallback: (data, eventDetails, callback) =>
-        commandsManager.runCommand('arrowTextCallback', {
-          callback,
-          data,
-          eventDetails,
-        }),
-    },
-  };
-
-  toolGroupService.createToolGroupAndAddTools(toolGroupId, tools, toolsConfig);
+  toolGroupService.createToolGroupAndAddTools(toolGroupId, tools);
 }
 
 function initSRToolGroup(extensionManager, servicesManager, commandsManager) {

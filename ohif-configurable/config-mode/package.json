@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/config-mode",
-  "version": "3.19.0",
+  "version": "3.19.1",
   "description": "A configurable/themeable mode that allows runtime extensions to the mode.",
   "author": "Radical Imaging",
   "license": "MIT",
