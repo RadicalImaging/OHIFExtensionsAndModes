@@ -2,7 +2,7 @@ export const ohif = {
   layout: '@ohif/extension-default.layoutTemplateModule.viewerLayout',
   sopClassHandler: '@ohif/extension-default.sopClassHandlerModule.stack',
   leftPanel: '@ohif/extension-default.panelModule.seriesList',
-  rightPanel: '@ohif/extension-default.panelModule.measure',
+  rightPanel: '@ohif/extension-cornerstone.panelModule.panelMeasurement',
 };
 
 export const cornerstone = {
@@ -36,7 +36,7 @@ export const dicompdf = {
 };
 
 export const dicomSeg = {
-  panel: '@ohif/extension-cornerstone-dicom-seg.panelModule.panelSegmentation',
+  panel: '@ohif/extension-cornerstone.panelModule.panelSegmentation',
   viewport: '@ohif/extension-cornerstone-dicom-seg.viewportModule.dicom-seg',
   sopClassHandler: '@ohif/extension-cornerstone-dicom-seg.sopClassHandlerModule.dicom-seg',
 };
