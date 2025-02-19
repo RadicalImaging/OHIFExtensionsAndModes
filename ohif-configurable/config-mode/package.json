@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/config-mode",
-  "version": "3.19.0",
+  "version": "4.1.0",
   "description": "A configurable/themeable mode that allows runtime extensions to the mode.",
   "author": "Radical Imaging",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "pack": "npm pack",
     "build": "cross-env NODE_ENV=production webpack --config .webpack/webpack.prod.js",
     "build:package": "yarn run build",
-    "publishItem": "yarn publish",
+    "publishItem": "yarn publish  --no-git-tag-version",
     "start": "yarn run dev",
     "test:unit": "jest --watchAll",
     "test:unit:ci": "jest --ci --runInBand --collectCoverage --passWithNoTests"
