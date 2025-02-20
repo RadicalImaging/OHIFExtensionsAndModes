@@ -1,6 +1,6 @@
 {
   "name": "@radicalimaging/findings-mode",
-  "version": "3.19.0",
+  "version": "4.1.0",
   "description": "Support context menu/command key findings",
   "author": "Bill Wallace, Radical Imaging",
   "license": "MIT",
@@ -28,6 +28,7 @@
     "dev:cornerstone": "yarn run dev",
     "build": "cross-env NODE_ENV=production webpack --config .webpack/webpack.prod.js",
     "build:package": "yarn run build",
+    "publishItem": "yarn publish  --no-git-tag-version",
     "pack": "npm pack",
     "start": "yarn run dev",
     "test:unit": "jest --watchAll",

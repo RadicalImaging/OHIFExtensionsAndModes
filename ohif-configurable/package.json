@@ -13,7 +13,7 @@
     "build": "lerna run build --stream",
     "clean": "rimraf */dist */*.tgz",
     "pack:all": "yarn clean && yarn build && lerna run pack",
-    "publishAll": "yarn build && lerna run publishItem --stream",
+    "publishAll": "yarn build && lerna run publishItem --",
     "zzz": "End item"
   },
   "devDependencies": {
